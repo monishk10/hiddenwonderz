@@ -1,0 +1,29 @@
+{
+  "name": "hiddenwonderz",
+  "version": "1.0.0",
+  "description": "An amazing blog site to search or add a new beautiful and serene hidden location in India!!!!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monishk10/hiddenwonderz.git"
+  },
+  "keywords": [
+    "blog",
+    "places"
+  ],
+  "author": "Monish Kapadia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monishk10/hiddenwonderz/issues"
+  },
+  "homepage": "https://github.com/monishk10/hiddenwonderz#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "method-override": "^2.3.10"
+  }
+}
