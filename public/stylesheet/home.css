@@ -1,0 +1,50 @@
+body {
+  background: url(https://source.unsplash.com/s60kNHJCAao);
+  background-size: cover;
+  background-position: 50% 50%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+#logo-container {
+	margin-top: 7em;
+}
+
+#logo {
+	max-height: 150px;
+	margin-left: 6em;
+}
+
+.ui.secondary.pointing.menu {
+	max-width: 60%;
+	margin: 10px auto;
+	/*border-bottom: 2px solid rgba(255, 255, 255, 0.15);*/
+}
+/*
+.ui.secondary.pointing.menu .item {
+	color: white;
+}
+*/
+/* Hover */
+/*
+.ui.secondary.pointing.menu .dropdown.item:hover,
+.ui.secondary.pointing.menu .link.item:hover,
+.ui.secondary.pointing.menu a.item:hover {
+	font-weight: bold;
+	color: white;
+}
+*/
+/* Active */
+/*
+.ui.secondary.pointing.menu .active.item {
+	border-color: white;
+	font-weight: bold;
+	color: rgba(255, 255, 255, 0.95);
+}
+*/
+/* Active Hover */
+/*
+.ui.secondary.pointing.menu .active.item:hover {
+	border-color: white;
+	color: rgba(255, 255, 255, 0.95);
+}*/
