@@ -10,8 +10,8 @@ var express     = require("express"),
 
 // ********************************************************************
 // Setting up MongoDB
-mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/hidden_wonderz", {useMongoClient: true});
+// mongoose.Promise = global.Promise;
+// mongoose.connect("mongodb://localhost/hidden_wonderz", {useMongoClient: true});
 // ********************************************************************
 
 
