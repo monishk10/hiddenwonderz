@@ -89,6 +89,6 @@ app.get("/places/:id", function(req, res){
 
 // ********************************************************************
 // Listening to the server
-app.listen(3000 || process.env.PORT, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Hidden Wonderz server started!!!");
 });
