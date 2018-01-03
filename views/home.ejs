@@ -3,39 +3,71 @@
     <head>
         <title>Hidden Wonderz</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css">
+        <link href="/stylesheet/glide/glide.core.css" rel="stylesheet">
+        <link href="/stylesheet/glide/glide.theme.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Cabin|Josefin+Sans" rel="stylesheet">
         <link rel="stylesheet" href="/stylesheet/home.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
+		<script src="/js/glide.js"></script>
     </head>
     <body>
-    <div class="ui container">
-		    <div class="ui secondary pointing menu">
-				<a id="menu" class="active item">
-			    	Home
-				</a>
-				<a class="item">
-					ShowPage
-				</a>
-				<div class="right menu">
-					<a class="ui item">
-						Login
-			    	</a>
-			    	<a class="ui item">
-			    		Register
-			    	</a>
-				</div>
+	<div class="front">
+		<div class="home-header">
+			<h1>Welcome to Hidden Wonderz!!!</h1>
+			<div class="ui horizontal divider">Quote</div>
+			<div id="quotes" class="glide">
+			    <div class="glide__arrows">
+			        <button class="glide__arrow prev" data-glide-dir="<">&lt</button>
+			        <button class="glide__arrow next" data-glide-dir=">">&gt</button>
+			    </div>
+
+			    <div class="glide__wrapper">
+			        <ul class="glide__track">
+			            <li class="glide__slide">
+			            	<p>“Life is either a daring adventure or nothing at all.”</p>
+							<p id="bottom-space">- Helen Keller</p>
+			            </li>
+			            <li class="glide__slide">
+			            	<p>“To Travel is to Live”</p>
+							<p id="bottom-space">- Hans Christian Andersen</p>
+			            </li>
+			            <li class="glide__slide">
+			            	<p>“The most beautiful in the world is, of course, the world itself.”</p>
+							<p id="bottom-space">- Wallace Stevens</p>
+			            </li>
+			            <li class="glide__slide">
+			            	<p>“Eat Sleep Explore Repeat.”</p>
+							<p id="bottom-space">- Monish Kapadia</p>
+			            </li>
+			        </ul>
+			    </div>
+
+			    <div class="glide__bullets"></div>
+
+			</div>
+			<div class="ui divider"></div>
+			<div class="padded-button">
+				<button class="ui inverted black button">Enter Hidden Wonderz</button>
 			</div>
 		</div>
-	    <div id="logo-container">
-	    	<img id="logo" src="https://i.imgur.com/nra1eA5.png">
-	    	<script>
-	    		$('#logo').transition('scale').transition({
-	    			animation: 'scale',
-	    			duration: 2800
-	    		});	
-	    	</script>
-	    </div>
+	</div>
 
+	<ul class="slideshow">
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    	<li></li>
+    </ul>
+
+    <script>
+	    $("#quotes").glide({
+	        type: "carousel"
+	    });
+	</script>
 
 <% include partials/footer %>

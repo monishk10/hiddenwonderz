@@ -1,50 +1,166 @@
 body {
-  background: url(https://source.unsplash.com/s60kNHJCAao);
-  background-size: cover;
-  background-position: 50% 50%;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-color: #000;
 }
 
-#logo-container {
-	margin-top: 7em;
+p {
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 15px;
 }
 
-#logo {
-	max-height: 150px;
-	margin-left: 6em;
+.front {
+	z-index: 1;
+	position: relative;
 }
 
-.ui.secondary.pointing.menu {
-	max-width: 60%;
-	margin: 10px auto;
-	/*border-bottom: 2px solid rgba(255, 255, 255, 0.15);*/
+
+/* All Sizes */
+.home-header {
+	margin: 15% 30%;
+	padding: 10px 0;
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 5px;
+	text-align: center;
+	color: #303030;
 }
-/*
-.ui.secondary.pointing.menu .item {
-	color: white;
+
+.home-header h1{
+	padding-bottom: 10px;
 }
-*/
-/* Hover */
-/*
-.ui.secondary.pointing.menu .dropdown.item:hover,
-.ui.secondary.pointing.menu .link.item:hover,
-.ui.secondary.pointing.menu a.item:hover {
-	font-weight: bold;
-	color: white;
+
+.home-header .quotes {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
-*/
-/* Active */
-/*
-.ui.secondary.pointing.menu .active.item {
-	border-color: white;
-	font-weight: bold;
-	color: rgba(255, 255, 255, 0.95);
+
+.padded-button {
+	padding-top: 10px;
 }
-*/
-/* Active Hover */
-/*
-.ui.secondary.pointing.menu .active.item:hover {
-	border-color: white;
-	color: rgba(255, 255, 255, 0.95);
-}*/
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+	.home-header {
+		margin: 30% 10%;
+	}
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.home-header {
+		margin: 30% 10%;
+	}
+}
+
+/* Inverted */
+.ui.inverted.black.buttons .button,
+.ui.inverted.black.button {
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 2px #303030 inset !important;
+  color: #303030;
+}
+.ui.inverted.black.buttons .button:hover,
+.ui.inverted.black.button:hover,
+.ui.inverted.black.buttons .button:focus,
+.ui.inverted.black.button:focus,
+.ui.inverted.black.buttons .button.active,
+.ui.inverted.black.button.active,
+.ui.inverted.black.buttons .button:active,
+.ui.inverted.black.button:active {
+  color: #FFFFFF;
+}
+.ui.inverted.black.buttons .button:hover,
+.ui.inverted.black.button:hover {
+  background-color: #303030;
+}
+.ui.inverted.black.buttons .button:focus,
+.ui.inverted.black.button:focus {
+  background-color: #303030;
+}
+.ui.inverted.black.buttons .active.button,
+.ui.inverted.black.active.button {
+  background-color: #303030;
+}
+.ui.inverted.black.buttons .button:active,
+.ui.inverted.black.button:active {
+  background-color: #303030;
+}
+
+.slideshow { 
+  	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.slideshow li { 
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-size: cover;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		opacity: 0;
+		z-index: 0;
+		animation: imageAnimation 70s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+	background-image: url(http://source.unsplash.com/lRssALOk1fU) 
+}
+.slideshow li:nth-child(2) { 
+	background-image: url(http://source.unsplash.com/6Mxb_mZ_Q8E);
+	animation-delay: 10s; 
+}
+.slideshow li:nth-child(3) { 
+	background-image: url(http://source.unsplash.com/3CskPgvzhSk);
+	animation-delay: 20s; 
+}
+.slideshow li:nth-child(4) { 
+	background-image: url(http://source.unsplash.com/mqqbtiAGi2k);
+	animation-delay: 30s; 
+}
+.slideshow li:nth-child(5) { 
+	background-image: url(http://source.unsplash.com/VGOiY1gZZYg);
+	animation-delay: 40s; 
+}
+.slideshow li:nth-child(6) { 
+	background-image: url(http://source.unsplash.com/S_VbdMTsdiA);
+	animation-delay: 50s; 
+}
+.slideshow li:nth-child(7) { 
+	background-image: url(http://source.unsplash.com/6uii2WcaUAc);
+	animation-delay: 60s; 
+}
+
+@keyframes imageAnimation { 
+	0% { 
+  		opacity: 0; 
+  		animation-timing-function: ease-in;
+	}
+	10% {
+  		opacity: 1;
+  		animation-timing-function: ease-out;
+	}
+	20% {
+  		opacity: 1
+	}
+	30% {
+  		opacity: 0
+	}
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	opacity: 1;
+}
+
+#bottom-space {
+	padding-bottom: 15px;
+}
