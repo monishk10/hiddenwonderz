@@ -37,20 +37,6 @@ p {
 	padding-top: 10px;
 }
 
-/* Mobile */
-@media only screen and (max-width: 767px) {
-	.home-header {
-		margin: 30% 10%;
-	}
-}
-
-/* Tablet */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-	.home-header {
-		margin: 30% 10%;
-	}
-}
-
 /* Inverted */
 .ui.inverted.black.buttons .button,
 .ui.inverted.black.button {
@@ -161,6 +147,52 @@ p {
 	opacity: 1;
 }
 
+#glide {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 #bottom-space {
 	padding-bottom: 15px;
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+	p {
+		font-size: 30px;
+	}
+
+	.home-header {
+		margin: 30% 5%;
+		padding: 30px 0;
+	}
+
+	.home-header h1{
+		font-size: 45px;
+	}
+	.ui.inverted.black.buttons .button,
+	.ui.inverted.black.button {
+		font-size: 2rem;
+	}
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	p {
+		font-size: 30px;
+	}
+
+	.home-header {
+		margin: 30% 5%;
+		padding: 30px 0;
+	}
+
+	.home-header h1{
+		font-size: 45px;
+	}
+
+	.ui.inverted.black.buttons .button,
+	.ui.inverted.black.button {
+		font-size: 2rem;
+	}
 }
