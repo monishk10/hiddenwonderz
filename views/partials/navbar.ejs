@@ -1,16 +1,18 @@
 <div class="topnav" id="myTopnav">
-  <a class="static-brand" href="/">HW</a>
+  <a class="static-brand" href="/">
+    <img class="logo-image" src="https://i.imgur.com/A23M1TR.png">
+  </a>
   <div class="navbar-items">
     <a href="/places" class="active">Home</a>
     <a href="#">Contact</a>
     <a href="#">About</a>
     <div class="right">
       <% if(!currentUser){ %>
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          <a class="noextra-underline" href="/login">Login</a>
+          <a class="noextra-underline" href="/register">Register</a>
       <% } else { %>
-          <a href="#">Welcome, <%= currentUser.username %></a>
-          <a href="/logout">Logout</a>
+          <a class="noextra-underline" href="#">Welcome, <%= currentUser.username %></a>
+          <a class="noextra-underline" href="/logout">Logout</a>
       <% } %>
     </div>
   </div>

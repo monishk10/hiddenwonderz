@@ -10,7 +10,9 @@
     border-bottom: 8px solid #007791;
 }
 
-
+.topnav .static-brand {
+  padding: 4px 8px 0px 8px;
+}
 /* Style the links inside the navigation bar */
 .topnav a {
     float: left;
@@ -71,21 +73,63 @@
     display: block;
 }
 
+.logo-image {
+  height: 45px;
+}
+
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 991px) {
+  .topnav {
+    border-bottom: 15px solid #007791;
+    padding: 0;    
+  }
+
+  .topnav a:not(.static-brand) {
+    padding: 70px 16px;
+    font-size: 35px;
+  }
+
+  .topnav .static-brand {
+    padding: 35px 0;
+    left: 20px;
+  }
+
+  .logo-image {
+    height: 80px;
+  }
+
+  .topnav .active {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
   .topnav a:not(.static-brand) {display: none;}
   .topnav a.icon {
     float: right;
+    right: 20px;
     display: block;
+  }
+
+  .topnav .navbar-items a:not(.noextra-underline):before {
+    width: 30%;
+  }
+
+  .ui.cards > .card,
+  .ui.card {
+    width: 100%;
+  }
+
+  .ui.divider {
+    font-size: 2rem;
   }
 }
 
 /* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 991px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive a.icon {
     position: absolute;
-    right: 0;
+    right: 20px;
     top: 0;
   }
   .topnav.responsive a {
