@@ -1,17 +1,30 @@
 // ********************************************************************
 // Initializing environment variables
-var express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    Place  = require("./models/places");
+var express     	= require("express"),
+    app         	= express(),
+    bodyParser  	= require("body-parser"),
+    mongoose    	= require("mongoose"),
+    flash       	= require("connect-flash"),
+    passport    	= require("passport"),
+    LocalStrategy 	= require("passport-local"),
+    methodOverride 	= require("method-override"),
+    Place  			= require("./models/place"),
+    User        	= require("./models/user");
+// ********************************************************************
+
+
+// ********************************************************************
+//requiring routes
+var placeRoutes 	= require("./routes/places"),
+    indexRoutes     = require("./routes/index");
+
 // ********************************************************************
 
 
 // ********************************************************************
 // Setting up MongoDB
-// mongoose.Promise = global.Promise;
-// mongoose.connect("mongodb://localhost/hidden_wonderz", {useMongoClient: true});
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
 // ********************************************************************
 
 
@@ -20,70 +33,40 @@ var express     = require("express"),
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-//seedDB();
+app.use(methodOverride("_method"));
+app.use(flash());
 // ********************************************************************
+
+
+// ********************************************************************
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "Hidden Wonderz!",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+// ********************************************************************
+
+
+// ********************************************************************
+// Pass current user info
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
+});
+// ********************************************************************
+
 
 
 // ********************************************************************
 // Routes
-// ===================
-// HOME PAGE ROUTE
-// ===================
-app.get("/", function(req, res){
-    res.render("home");
-});
-
-// ===================
-// LOCATION ROUTES
-// ===================
-//INDEX - show all places
-app.get("/places", function(req, res){
-    // Get all places from DB
-    Place.find({}, function(err, allPlaces){
-       if(err){
-           console.log(err);
-       } else {
-          res.render("places/index",{places:allPlaces});
-       }
-    });
-});
-
-//CREATE - add new place to DB
-app.post("/places", function(req, res){
-    // get data from form and add to places array
-    var name = req.body.name;
-    var image = req.body.image;
-    var desc = req.body.description;
-    var newPlace = {name: name, image: image, description: desc}
-    // Create a new place and save to DB
-    Place.create(newPlace, function(err, newlyCreated){
-        if(err){
-            console.log(err);
-        } else {
-            //redirect back to places page
-            res.redirect("/places");
-        }
-    });
-});
-
-//NEW - show form to create new place
-app.get("/places/new", function(req, res){
-   res.render("places/new"); 
-});
-
-// SHOW - shows more info about one place
-app.get("/places/:id", function(req, res){
-    //find the place with provided ID
-    Place.findById(req.params.id, function(err, foundPlace){
-        if(err){
-            console.log(err);
-        } else {
-            console.log(foundPlace)
-            //render show template with that place
-            res.render("places/show", {place: foundPlace});
-        }
-    });
-});
+app.use("/", indexRoutes);
+app.use("/places", placeRoutes);
 // ********************************************************************
 
 

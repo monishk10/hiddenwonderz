@@ -1,0 +1,44 @@
+.footer {
+	background-color: #007791;
+	padding: 3em 2em 2px 2em;
+	color: #fff;
+}
+
+.footer .footer-center {
+	text-align: center;
+}
+
+/* Social media icon setting */
+.ui.circular.button {
+	margin: 0 5px 15px 5px;
+}
+
+.ui.instagram.button {
+	background-color: white;
+	color: #f4242f;
+}
+
+.ui.instagram.button:hover {
+	background-color: #f4242f;
+	color: white;
+}
+
+.ui.twitter.button {
+	background-color: white;
+	color: #35a2f4;
+}
+
+.ui.twitter.button:hover {
+	background-color: #35a2f4;
+	color: white;
+}
+
+.ui.facebook.button {
+	background-color: white;
+	color: #3B5998;
+}
+
+.ui.facebook.button:hover {
+	background-color: #3B5998;
+	color: white;
+}

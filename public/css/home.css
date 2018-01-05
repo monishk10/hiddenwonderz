@@ -15,7 +15,7 @@ p {
 }
 
 .home-header {
-	margin: 15% 30%;
+	margin: 10% 30%;
 	padding: 10px 0;
 	background-color: white;
 	border: 1px solid white;
@@ -99,30 +99,30 @@ p {
 }
 
 .slideshow li:nth-child(1) { 
-	background-image: url(http://source.unsplash.com/lRssALOk1fU) 
+	background-image: url(https://i.imgur.com/FE2gmt0.jpg) 
 }
 .slideshow li:nth-child(2) { 
-	background-image: url(http://source.unsplash.com/6Mxb_mZ_Q8E);
+	background-image: url(https://i.imgur.com/SrnAgbL.jpg);
 	animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-	background-image: url(http://source.unsplash.com/3CskPgvzhSk);
+	background-image: url(https://i.imgur.com/iaCnMXk.jpg);
 	animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-	background-image: url(http://source.unsplash.com/mqqbtiAGi2k);
+	background-image: url(https://i.imgur.com/2KAFTOP.jpg);
 	animation-delay: 30s; 
 }
 .slideshow li:nth-child(5) { 
-	background-image: url(http://source.unsplash.com/VGOiY1gZZYg);
+	background-image: url(https://i.imgur.com/YqB7TfE.jpg);
 	animation-delay: 40s; 
 }
 .slideshow li:nth-child(6) { 
-	background-image: url(http://source.unsplash.com/S_VbdMTsdiA);
+	background-image: url(https://i.imgur.com/ClxGHhq.jpg);
 	animation-delay: 50s; 
 }
 .slideshow li:nth-child(7) { 
-	background-image: url(http://source.unsplash.com/6uii2WcaUAc);
+	background-image: url(https://i.imgur.com/juALiRK.jpg);
 	animation-delay: 60s; 
 }
 
@@ -156,6 +156,7 @@ p {
 #bottom-space {
 	padding-bottom: 15px;
 }
+
 
 /* Mobile */
 @media only screen and (max-width: 767px) {

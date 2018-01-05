@@ -1,0 +1,118 @@
+body {
+	background-color: #FEFEFE;
+}
+
+/*******************************************/
+/* Navbar spacing */
+.main {
+	margin-top: 90px;
+	margin-bottom: 50px;
+}
+
+/*******************************************/
+/*Index page*/
+
+.index-header {
+	text-align: center;
+	margin: 1.5em 1.5em 3em 1.5em;
+}
+
+.index-header h2 {
+	margin: 20px 0 10px 0;
+}
+
+.image-header {
+	position: relative;
+
+}	
+.image-header h1 {
+	top: 30%;
+	position: absolute;
+	color: white;
+	z-index: 10;
+	text-align: center;
+	width: 100%;
+}
+.image-header img {
+	max-width: 100%;
+	border-radius: 10px;
+	transition: .3s linear;
+}
+
+.image-header:hover img{
+	filter: blur(5px) brightness(80%);
+	-webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+/****************************************/
+/* Masonry grid */
+.masonry {
+    margin: 4em 0;
+    padding: 0;
+    -moz-column-gap: 1.5em;
+    -webkit-column-gap: 1.5em;
+    column-gap: 1.5em;
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
+    font-size: .85em;
+}
+
+.item {
+    display: inline-block;
+    padding: 0;
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+/****************************************/
+/* Login form */
+
+.login-register-form {
+	padding: 1.5% 2%;
+	margin: 15% 25%;
+	background-color: #fff;
+	border: 1px solid #303030CC;
+	border-radius: 3px;
+	box-shadow: 0 0 3px 1px #30303033;
+}
+.ui.form input[type="text"],
+.ui.form input[type="password"]{
+	width: 70%;
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.image-header h1 {
+		font-size: 40px;
+	}
+
+	.masonry {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+    }
+
+    .login-register-form {
+    	margin: 15% 15%;
+    }
+}
+
+/* Mobile */
+@media only screen and (max-width: 767px) {
+	.image-header h1 {
+		font-size: 20px;
+	}
+
+	.masonry {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+
+    .login-register-form {
+    	margin: 15% 5%;
+    }
+}
+

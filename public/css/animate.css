@@ -1,0 +1,9 @@
+.animated-index-header {
+  font-weight: 900;
+  font-size: 3.5em;
+}
+
+.animated-index-header .letter {
+  display: inline-block;
+  line-height: 1em;
+}

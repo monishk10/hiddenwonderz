@@ -1,31 +1,42 @@
-<% include ../partials/header %> 
+<% include ../partials/header %>
+<% include ../partials/navbar %> 
+<div class="main">
+  <div class="ui container">
 
- <div class="container">
-     <header class="jumbotron">
-         <div class="container">
-             <h1>Welcome To Hidden Wonderz!</h1>
-             <p>View our hand-picked locations from all over India</p>
-             <p>
-                <a class="btn btn-primary btn-large" href="/places/new">Add New Place</a>
-             </p>
-         </div>
-     </header>
-     
-     <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <!-- Animating header and tag-line -->
+    <div class="index-header">
+      <div class="image-header">
+        <!-- Animating text -->
+        <h1 class="animated-index-header"></h1>
+        <img src="https://i.imgur.com/sEOODyW.jpg">
+      </div>
+      <h2 class="tag-line">Some attractive tag-line</h2>  
+    </div> 
+
+    <div class="ui horizontal divider">BLOG POSTS</div>
+
+    <div class="masonry">
         <% places.forEach(function(place){ %>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnail">
-                   <img src="<%= place.image %>">
-                   <div class="caption">
-                       <h4><%= place.name %></h4>
-                   </div>
-                   <p>
-                       <a href="/places/<%= place._id %>" class="btn btn-primary">More Info</a>
-                   </p>
+            <div class="item">
+              <div class="ui link cards">
+                <div class="card">
+                  <div class="image">
+                    <img src="<%= place.image %>">
+                  </div>
+                  <div class="content">
+                    <div class="header"><%= place.name %></div>
+                    <div class="description">
+                      <a href="/places/<%= place._id %>" class="ui button">More Info</a>
+                    </div>
+                  </div>
+                  <div class="extra content">
+                    <span><i class="user icon"></i>Created by: <%= place.author.username %></span>
+                  </div>
                 </div>
+              </div>
             </div>
         <% }); %>
     </div>
+  </div>
 </div>
-
 <% include ../partials/footer %>
