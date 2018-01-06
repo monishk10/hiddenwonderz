@@ -159,13 +159,17 @@ body {
 		margin: 3% 0.5%;
 	}
 
+	.ui.form {
+		font-size: 2.5rem;
+	}
+
+	.field label {
+		padding: 2% 0;
+	}
+
 	.ui.form .fields {
 	    -ms-flex-wrap: wrap;
 	    flex-wrap: wrap;
-	}
-
-	.ui.form {
-		font-size: 2.5rem;
 	}
 
 	.ui[class*="equal width"].form:not(.unstackable) .fields > .field,
