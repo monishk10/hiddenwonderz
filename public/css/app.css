@@ -148,12 +148,14 @@ body {
 
 	.login-register-form {
 		margin: 15% 3%;
+		border: 3px solid #303030CC;
 		border-radius: 6px;
+		box-shadow: 0 0 6px 2px #30303033;
 		max-width: 990px;
 	}
 
 	.login-register-form h1 {
-		font-size: 3rem;
+		font-size: 3.5rem;
 		margin: 3% 0.5%;
 	}
 
@@ -163,7 +165,7 @@ body {
 	}
 
 	.ui.form {
-		font-size: 1.8rem;
+		font-size: 2.5rem;
 	}
 
 	.ui[class*="equal width"].form:not(.unstackable) .fields > .field,
