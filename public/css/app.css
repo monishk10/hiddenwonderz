@@ -36,13 +36,19 @@ body {
 .image-header img {
 	max-width: 100%;
 	border-radius: 10px;
-	transition: .3s linear;
+	-webkit-transition: .3s linear;
+	   -moz-transition: .3s linear;
+	        transition: .3s linear;
 }
 
 .image-header:hover img{
-	filter: blur(5px) brightness(80%);
+	-webkit-filter: blur(5px) brightness(80%);
+	   -moz-filter: blur(5px) brightness(80%);
+	        filter: blur(5px) brightness(80%);
+	
 	-webkit-transform: scale(1.03);
-    transform: scale(1.03);
+       -moz-transform: scale(1.03);
+            transform: scale(1.03);
 }
 
 /****************************************/
@@ -50,12 +56,13 @@ body {
 .masonry {
     margin: 4em 0;
     padding: 0;
-    -moz-column-gap: 1.5em;
     -webkit-column-gap: 1.5em;
-    column-gap: 1.5em;
-    -moz-column-count: 4;
+       -moz-column-gap: 1.5em;
+            column-gap: 1.5em;
+    
     -webkit-column-count: 4;
-    column-count: 4;
+       -moz-column-count: 4;
+            column-count: 4;
     font-size: .85em;
 }
 
@@ -76,10 +83,12 @@ body {
 	border: 1px solid #303030CC;
 	border-radius: 3px;
 	box-shadow: 0 0 3px 1px #30303033;
+	max-width: 500px;
 }
-.ui.form input[type="text"],
-.ui.form input[type="password"]{
-	width: 70%;
+.ui.form input[type="text"].username,
+.ui.form input[type="password"],
+.ui.form input[type="email"]{
+	width: 100%;
 }
 
 /* Tablet */
@@ -103,10 +112,10 @@ body {
 	}
 
 	.masonry {
-		margin: 4em 4em;
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
+		-webkit-column-count: 1;
+           -moz-column-count: 1;
+                column-count: 1;
+    	margin: 4em 4em;
     }
 
     .login-register-form {
@@ -136,6 +145,50 @@ body {
 	.ui.divider:after {
 		font-size: 2rem;
 	}
+
+	.login-register-form {
+		margin: 15% 3%;
+		border-radius: 6px;
+		max-width: 990px;
+	}
+
+	.login-register-form h1 {
+		font-size: 3rem;
+		margin: 3% 0.5%;
+	}
+
+	.ui.form .fields {
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	}
+
+	.ui.form {
+		font-size: 1.8rem;
+	}
+
+	.ui[class*="equal width"].form:not(.unstackable) .fields > .field,
+	.ui.form:not(.unstackable) [class*="equal width"].fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .two.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .two.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .three.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .three.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .four.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .four.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .five.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .five.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .six.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .six.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .seven.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .seven.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .eight.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .eight.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .nine.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .nine.fields:not(.unstackable) > .field,
+	.ui.form:not(.unstackable) .ten.fields:not(.unstackable) > .fields,
+	.ui.form:not(.unstackable) .ten.fields:not(.unstackable) > .field {
+		width: 100% !important;
+		margin: 0em 0em 1em;
+	}
 }
 
 /* Mobile */
@@ -153,4 +206,8 @@ body {
     .login-register-form {
     	margin: 15% 5%;
     }
+}
+
+@media only screen and (max-width: 991px) {
+  
 }

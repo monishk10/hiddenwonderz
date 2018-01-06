@@ -15,13 +15,19 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({
+      name: req.body.name,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      username: req.body.username
+    });
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
-           res.redirect("/places"); 
+          console.log(user);
+          res.redirect("/places"); 
         });
     });
 });
