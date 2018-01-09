@@ -1,0 +1,117 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %> 
+<div class="main">
+	<!-- Side navigation -->
+	<div class="sidenav">
+		<div class="ui secondary vertical pointing menu">
+		  <a href="#1" class="item active">
+		    Home
+		  </a>
+		  <a href="#2" class="item">
+		    Image Gallery
+		  </a>
+		  <a href="#3" class="item">
+		    Description
+		  </a>
+		  <a href="#4" class="item">
+		    Something very big to fit in the space
+		  </a>
+		</div>
+	</div>
+	<!-- Show page content -->
+	<div class="show-content">
+		<div class="ui segment">
+			<div class="sections">
+				<section id="1">
+					<img style="width: 100%; border-radius: 5px;" src="<%= place.image %>">
+					<div style="margin:calc(2rem -  0.14285714em ) 0em 1rem" class="right floated">
+						<p style="font-weight: bold">Created on:</p>
+						<p style="margin: 0"><%= place.createdAtDate %></p>
+						<p><%= place.createdAtTime %></p>
+					</div>
+					<h1><%= place.name %></h1>
+					<p><i class="user icon"></i>Created by: <%= place.author.username %></p>
+				</section>
+				<div class="ui divider"></div>
+				<section id="2">
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+					<p>Image gallery</p>
+				</section>
+				<div class="ui divider"></div>
+				<section id="3">
+					<p><%= place.description %></p>
+					<p><%= place.description %></p>
+					<p><%= place.description %></p>
+					<p><%= place.description %></p>
+					<p><%= place.description %></p>
+					<p><%= place.description %></p>
+					<p><%= place.description %></p>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+	    $(this).scrollTop(0);
+	});
+	var sections = $('section')
+	  , nav = $('.sidenav')
+	  , nav_height = $('.topnav').outerHeight()
+	  , more_offset = 20;
+
+	$(window).on('scroll', function () {
+	  var cur_pos = $(this).scrollTop();
+	  
+	  sections.each(function() {
+	    var top = $(this).offset().top - nav_height - more_offset,
+	        bottom = top + $(this).outerHeight() ;
+	    
+	    if (cur_pos >= (top - more_offset) && cur_pos <= (bottom - more_offset)) {
+	      nav.find('a').removeClass('active');
+	      sections.removeClass('active');
+	      
+	      $(this).addClass('active');
+	      nav.find('a[href="#'+$(this).attr('id')+'"]').addClass('active');
+	    }
+	  });
+	});
+
+	nav.find('a').on('click', function () {
+	  var $el = $(this)
+	    , id = $el.attr('href');
+	  
+	  $('html, body').animate({
+	    scrollTop: $(id).offset().top - nav_height - more_offset
+	  }, 500);
+	  
+	  return false;
+	});
+</script>
+
+<% include ../partials/footer %>

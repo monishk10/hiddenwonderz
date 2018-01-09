@@ -13,30 +13,39 @@
       <h2 class="tag-line">Some attractive tag-line</h2>  
     </div> 
 
+    <div class="ui horizontal divider">USER CONTROL</div>
+    <div class="user-control-buttons">
+      <a class="ui labeled icon button" href="/places/new">
+        <i class="plus icon"></i>
+          <span class="add-button">Add new place</span>
+      </a>
+    </div>
     <div class="ui horizontal divider">BLOG POSTS</div>
-    <a href="/places/new">Add new place</a>
-    <div class="masonry">
+    <div class="grid-structure">
+      <div class="masonry">
         <% places.forEach(function(place){ %>
-            <div class="item">
-              <div class="ui link cards">
-                <div class="card">
-                  <div class="image">
-                    <img src="<%= place.image %>">
+          <div class="item">
+            <div class="ui cards">
+              <div class="card">
+                <div class="image">
+                  <img src="<%= place.image %>">
+                </div>
+                <div class="content">
+                  <div class="header"><%= place.name %></div>
+                  <div class="description">
+                    <a href="/places/<%= place._id %>" class="ui button">More Info</a>
                   </div>
-                  <div class="content">
-                    <div class="header"><%= place.name %></div>
-                    <div class="description">
-                      <a href="/places/<%= place._id %>" class="ui button">More Info</a>
-                    </div>
-                  </div>
-                  <div class="extra content">
-                    <span><i class="user icon"></i>Created by: <%= place.author.username %></span>
-                  </div>
+                </div>
+                <div class="extra content">
+                  <span><i class="user icon"></i>Created by: <%= place.author.username %></span>
                 </div>
               </div>
             </div>
+          </div>
         <% }); %>
+      </div>
     </div>
   </div>
 </div>
+
 <% include ../partials/footer %>

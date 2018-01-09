@@ -1,6 +1,7 @@
 var express = require("express");
 var router  = express.Router();
 var Place = require("../models/place");
+var moment = require("moment");
 var middleware = require("../middleware");
 
 
@@ -22,11 +23,22 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var name = req.body.name;
     var image = req.body.image;
     var desc = req.body.description;
+    var date = new Date();
+    var createdAtDate = moment().format("Do MMM YY");
+    var createdAtTime = moment().format("hh:mm:ss a (Z)");
     var author = {
         id: req.user._id,
         username: req.user.username
     }
-    var newPlace = {name: name, image: image, description: desc, author:author}
+    var newPlace = {
+      name: name, 
+      image: image,
+      createdAtDate: createdAtDate, 
+      createdAtTime: createdAtTime, 
+      description: desc, 
+      author:author
+    }
+    
     // Create a new place and save to DB
     Place.create(newPlace, function(err, newlyCreated){
         if(err){

@@ -10,6 +10,26 @@ body {
 }
 
 /*******************************************/
+/* The sidebar menu */
+.sidenav {
+	margin-top: 90px;
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 250px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+
+/* Style page content */
+.show-content {
+    margin-left: 250px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+/*******************************************/
 /*Index page*/
 
 .index-header {
@@ -97,6 +117,22 @@ body {
 		margin-top: 200px;
 	}
 
+	/* The sidebar menu */
+	.sidenav {
+		margin-top: 200px;
+	    width: 140px; /* Set the width of the sidebar */
+	}
+
+
+	/* Style page content */
+	.show-content {
+	    margin-left: 150px; /* Same as the width of the sidebar */
+	    padding: 0px 10px;
+	}
+
+	.ui.vertical.menu {
+		width: 137px
+	}
 	.ui.container {
 	    width: 100%;
 	    margin-left: 0;
@@ -215,5 +251,5 @@ body {
 }
 
 @media only screen and (max-width: 991px) {
-  
+ 
 }
