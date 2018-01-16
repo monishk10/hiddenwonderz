@@ -22,7 +22,6 @@ body {
     overflow-x: hidden; /* Disable horizontal scroll */
 }
 
-
 /* Style page content */
 .show-content {
     margin-left: 250px; /* Same as the width of the sidebar */
@@ -113,39 +112,59 @@ body {
 
 /* Tablet */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+	/* Font sizes */
+	h1 {
+		font-size: 40px;
+	}
+
+	h2 {
+		font-size: 30px;
+	}
+	p {
+		font-size: 20px;
+	}
 	.main {
 		margin-top: 200px;
 	}
 
 	/* The sidebar menu */
-	.sidenav {
-		margin-top: 200px;
-	    width: 140px; /* Set the width of the sidebar */
+	.mobile-sidenav {
+	  width: 100%;
+	  height: 70px; 
+	  position: fixed; 
+	  top: 174px;
+	  background: #fff;
+	  text-align: center;
+	  border-bottom: 1.5px solid #30303010;
 	}
 
+	.mobile-sidenav a {
+		color: #303030;
+	}
+
+	.mobile-item {
+	    display: inline-block;
+	    padding: 20px 10px;
+	    font-size: 20px;
+	}
+
+	a.active {
+		border-bottom: 3px solid #303030;
+		font-weight: bold;
+	}
 
 	/* Style page content */
 	.show-content {
-	    margin-left: 150px; /* Same as the width of the sidebar */
+	    margin: 250px 15px; /* Same as the width of the sidebar */
 	    padding: 0px 10px;
 	}
 
-	.ui.vertical.menu {
-		width: 137px
-	}
 	.ui.container {
 	    width: 100%;
 	    margin-left: 0;
 	    margin-right: 0;
 	}
 
-	.image-header h1 {
-		font-size: 40px;
-	}
-
-	.index-header h2 {
-		font-size: 30px;
-	}
 
 	.masonry {
 		-webkit-column-count: 1;
@@ -170,6 +189,7 @@ body {
 	.ui.buttons .or,
 	.ui.button {
 	  font-size: 2rem;
+	  width: 100%;
 	}
 
 	.ui.cards > .card > .extra,
@@ -207,6 +227,7 @@ body {
 	    -ms-flex-wrap: wrap;
 	    flex-wrap: wrap;
 	}
+
 
 	.ui[class*="equal width"].form:not(.unstackable) .fields > .field,
 	.ui.form:not(.unstackable) [class*="equal width"].fields:not(.unstackable) > .field,

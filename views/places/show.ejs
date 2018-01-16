@@ -3,7 +3,7 @@
 <div class="main">
 	<!-- Side navigation -->
 	<div class="sidenav">
-		<div class="ui secondary vertical pointing menu">
+		<div id="sidenav" class="ui secondary vertical pointing menu">
 		  <a href="#1" class="item active">
 		    Home
 		  </a>
@@ -12,9 +12,6 @@
 		  </a>
 		  <a href="#3" class="item">
 		    Description
-		  </a>
-		  <a href="#4" class="item">
-		    Something very big to fit in the space
 		  </a>
 		</div>
 	</div>
@@ -80,19 +77,25 @@
 	$(document).ready(function(){
 	    $(this).scrollTop(0);
 	});
+
 	var sections = $('section')
 	  , nav = $('.sidenav')
 	  , nav_height = $('.topnav').outerHeight()
-	  , more_offset = 20;
+	  , look_offset = 20
+	  , mobile_offset = 20;
+	
+	if ($(window).width() < 991) {
+		var mobile_offset = 80;
+	}
 
 	$(window).on('scroll', function () {
 	  var cur_pos = $(this).scrollTop();
 	  
 	  sections.each(function() {
-	    var top = $(this).offset().top - nav_height - more_offset,
+	    var top = $(this).offset().top - nav_height - look_offset,
 	        bottom = top + $(this).outerHeight() ;
 	    
-	    if (cur_pos >= (top - more_offset) && cur_pos <= (bottom - more_offset)) {
+	    if (cur_pos >= (top - look_offset - mobile_offset) && cur_pos <= (bottom - look_offset - mobile_offset)) {
 	      nav.find('a').removeClass('active');
 	      sections.removeClass('active');
 	      
@@ -107,11 +110,16 @@
 	    , id = $el.attr('href');
 	  
 	  $('html, body').animate({
-	    scrollTop: $(id).offset().top - nav_height - more_offset
+	    scrollTop: $(id).offset().top - nav_height - look_offset - mobile_offset
 	  }, 500);
 	  
 	  return false;
 	});
+
+	if ($(window).width() < 991) {
+		$("#sidenav").removeClass("ui secondary vertical pointing menu").addClass("mobile-sidenav");
+		$("#sidenav a").removeClass("item").addClass("mobile-item");
+	}
 </script>
 
 <% include ../partials/footer %>
