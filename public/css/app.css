@@ -121,7 +121,7 @@ body {
 		font-size: 30px;
 	}
 	p {
-		font-size: 20px;
+		font-size: 30px;
 	}
 	.main {
 		margin-top: 200px;
@@ -189,7 +189,10 @@ body {
 	.ui.buttons .or,
 	.ui.button {
 	  font-size: 2rem;
-	  width: 100%;
+	}
+
+	.ui.button.full-width {
+		width: 100%;
 	}
 
 	.ui.cards > .card > .extra,
