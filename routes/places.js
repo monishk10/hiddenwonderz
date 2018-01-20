@@ -50,7 +50,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
     }
     // add time
     req.body.place.createdAtDate = moment().format("Do MMM YY");
-    req.body.place.createdAtTime = moment().format("hh:mm:ss a (Z)");
+    req.body.place.createdAtTime = moment().format("hh:mm:ss a");
     // Create a new place and save to DB
     Place.create(req.body.place, function(err, newlyCreated){
         if(err){

@@ -21,13 +21,27 @@
 			<div class="sections">
 				<section id="1">
 					<img style="width: 100%; border-radius: 5px;" src="<%= place.image %>">
-					<div style="margin:calc(2rem -  0.14285714em ) 0em 1rem" class="right floated">
-						<p style="font-weight: bold">Created on:</p>
-						<p style="margin: 0"><%= place.createdAtDate %></p>
-						<p><%= place.createdAtTime %></p>
+					<div style="margin: 1% 0" class="ui grid">
+						<div class="twelve wide column">
+							<h1><%= place.name %></h1>
+							<p><i class="user icon"></i>Created by: <%= place.author.username %></p>
+							<% if(currentUser && place.author.id.equals(currentUser._id)){ %>
+								<a class="ui circular twitter icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
+									<i class="edit icon"></i>
+								</a>
+								<form style="display: inline-block;" action="/places/<%= place._id %>?_method=DELETE" method="POST">
+				                    <button class="ui circular instagram icon button" data-tooltip="Permanently delete your post">
+				                    	<i class="ban icon"></i>
+				                	</button>
+				                </form>
+			                <% } %>
+						</div>
+						<div class="four wide column">
+							<p style="font-weight: bold">Created on:</p>
+							<p style="margin: 0"><%= place.createdAtDate %></p>
+							<p><%= place.createdAtTime %></p>
+						</div>
 					</div>
-					<h1><%= place.name %></h1>
-					<p><i class="user icon"></i>Created by: <%= place.author.username %></p>
 				</section>
 				<div class="ui divider"></div>
 				<section id="2">
@@ -79,10 +93,6 @@
 					<p><%= place.description %></p>
 					<p><%= place.description %></p>
 				</section>
-				<a class="ui orange button" href="/places/<%= place._id %>/edit">Edit</a>
-				<form id="delete-form" action="/places/<%= place._id %>?_method=DELETE" method="POST">
-                            <button class="ui red button">Delete</button>
-                </form>
 			</div>
 		</div>
 	</div>
