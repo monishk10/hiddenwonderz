@@ -31,32 +31,43 @@
 				</section>
 				<div class="ui divider"></div>
 				<section id="2">
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
-					<p>Image gallery</p>
+					<!-- ****************************************************** -->
+					<div class="demo-gallery">
+					    <ul id="lightgallery">
+					      <li data-src="https://source.unsplash.com/czVtGYACOMg">
+					        <a href="">
+					          <img class="img-responsive" src="https://source.unsplash.com/czVtGYACOMg">
+					          <div class="demo-gallery-poster">
+					            <img src="https://i.imgur.com/twH1lI6.png">
+					          </div>
+					        </a>
+					      </li>
+					      <li data-src="https://source.unsplash.com/MjkEiMBOEw8">
+					        <a href="">
+					          <img class="img-responsive" src="https://source.unsplash.com/MjkEiMBOEw8">
+					          <div class="demo-gallery-poster">
+					            <img src="https://i.imgur.com/twH1lI6.png">
+					          </div>
+					        </a>
+					      </li>
+					      <li data-src="https://source.unsplash.com/czVtGYACOMg">
+					        <a href="">
+					          <img class="img-responsive" src="https://source.unsplash.com/czVtGYACOMg">
+					          <div class="demo-gallery-poster">
+					            <img src="https://i.imgur.com/twH1lI6.png">
+					          </div>
+					        </a>
+					      </li>
+					      <li data-src="https://source.unsplash.com/MjkEiMBOEw8">
+					        <a href="">
+					          <img class="img-responsive" src="https://source.unsplash.com/MjkEiMBOEw8">
+					          <div class="demo-gallery-poster">
+					            <img src="https://i.imgur.com/twH1lI6.png">
+					          </div>
+					        </a>
+					      </li>
+					    </ul>
+					<!-- ****************************************************** -->
 				</section>
 				<div class="ui divider"></div>
 				<section id="3">
@@ -68,11 +79,18 @@
 					<p><%= place.description %></p>
 					<p><%= place.description %></p>
 				</section>
+				<a class="ui orange button" href="/places/<%= place._id %>/edit">Edit</a>
+				<form id="delete-form" action="/places/<%= place._id %>?_method=DELETE" method="POST">
+                            <button class="ui red button">Delete</button>
+                </form>
 			</div>
 		</div>
 	</div>
 </div>
-
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/css/lightgallery.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/js/lightgallery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.1.0/lg-thumbnail.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.0.1/lg-fullscreen.min.js"></script>
 <script>
 	$(document).ready(function(){
 	    $(this).scrollTop(0);
@@ -120,6 +138,12 @@
 		$("#sidenav").removeClass("ui secondary vertical pointing menu").addClass("mobile-sidenav");
 		$("#sidenav a").removeClass("item").addClass("mobile-item");
 	}
+
+	/* ********************** */
+	$(document).ready(function() {
+        $("#lightgallery").lightGallery(); 
+    });
+	/* ********************** */
 </script>
 
 <% include ../partials/footer %>

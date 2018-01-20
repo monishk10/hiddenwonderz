@@ -4,15 +4,18 @@
 <div class="main">
     <div class="ui container">
         <h1>Create a New Place</h1>
-            <form class="ui form" action="/places" method="POST">
+            <form class="ui form" action="/places" method="POST" enctype="multipart/form-data">
                 <div class="field">
-                    <input type="text" name="name" placeholder="name">
+                    <input type="text" name="place[name]" placeholder="name">
+                </div>
+                <div id="image-type-selector" class="field">
+                    <label for="image" class="custom-image-upload">
+                        <span style="font-weight: 700;">Image Upload:</span> <span class="ui blue button">Upload</span> <span class="upload-text"> Upload a file</span>
+                    </label>
+                    <input type="file" id="image" name="image" accept="image/*" required>
                 </div>
                 <div class="field">
-                    <input type="text" name="image" placeholder="image url">
-                </div>
-                <div class="field">
-                    <textarea name="description" placeholder="description"></textarea>
+                    <textarea name="place[description]" placeholder="description"></textarea>
                 </div>
                 <div class="field">
                     <button class="ui button">Submit!</button>
@@ -22,4 +25,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $(".upload-text").css({
+            "margin-left" : "2%"
+        });
+
+        $(".ui.blue.button").css({
+            "margin-left" : "1%"
+        });
+
+        $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            $(".upload-text").html(fileName + " has been uploaded");
+        });
+    });
+</script>
 <% include ../partials/footer %>
