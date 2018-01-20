@@ -5,7 +5,7 @@ body {
 /*******************************************/
 /* Navbar spacing */
 .main {
-	margin-top: 90px;
+	margin-top: 66px;
 	margin-bottom: 50px;
 }
 
@@ -30,44 +30,31 @@ body {
 
 /*******************************************/
 /*Index page*/
-
 .index-header {
 	text-align: center;
-	margin: 1.5em 1.5em 3em 1.5em;
-}
-
-.index-header h2 {
-	margin: 20px 0 10px 0;
-}
-
-.image-header {
-	position: relative;
-
-}	
-.image-header h1 {
-	top: 30%;
-	position: absolute;
+	background: #007791;
 	color: white;
-	z-index: 10;
-	text-align: center;
-	width: 100%;
-}
-.image-header img {
-	max-width: 100%;
-	border-radius: 10px;
-	-webkit-transition: .3s linear;
-	   -moz-transition: .3s linear;
-	        transition: .3s linear;
+	padding: 30px 0;
 }
 
-.image-header:hover img{
-	-webkit-filter: blur(5px) brightness(80%);
-	   -moz-filter: blur(5px) brightness(80%);
-	        filter: blur(5px) brightness(80%);
-	
-	-webkit-transform: scale(1.03);
-       -moz-transform: scale(1.03);
-            transform: scale(1.03);
+.anime-text {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.anime-text .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.anime-text .letter {
+  display: inline-block;
+  line-height: 1em;
 }
 
 /****************************************/
@@ -265,7 +252,7 @@ input[type="file"] {
 
 /* Tablet */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-	body {
+	.ui .container {
 		margin-left: 10px;
 		margin-right: 10px;
 	}
@@ -281,7 +268,7 @@ input[type="file"] {
 		font-size: 30px;
 	}
 	.main {
-		margin-top: 200px;
+		margin-top: 174px;
 	}
 
 	/* The sidebar menu */
