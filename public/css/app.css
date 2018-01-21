@@ -5,7 +5,7 @@ body {
 /*******************************************/
 /* Navbar spacing */
 .main {
-	margin-top: 66px;
+	margin-top: 90px;
 	margin-bottom: 50px;
 }
 
@@ -32,8 +32,7 @@ body {
 /*Index page*/
 .index-header {
 	text-align: center;
-	background: #007791;
-	color: white;
+	color: #007791;
 	padding: 30px 0;
 }
 
@@ -252,10 +251,6 @@ input[type="file"] {
 
 /* Tablet */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-	.ui .container {
-		margin-left: 10px;
-		margin-right: 10px;
-	}
 	/* Font sizes */
 	h1 {
 		font-size: 40px;
@@ -268,7 +263,7 @@ input[type="file"] {
 		font-size: 30px;
 	}
 	.main {
-		margin-top: 174px;
+		margin-top: 200px;
 	}
 
 	/* The sidebar menu */
