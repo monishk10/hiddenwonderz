@@ -9,6 +9,7 @@ var express     	= require("express"),
     LocalStrategy 	= require("passport-local"),
     methodOverride 	= require("method-override"),
     Place  			= require("./models/place"),
+    Comment         = require("./models/comment"),
     User        	= require("./models/user");
 // ********************************************************************
 
@@ -16,6 +17,7 @@ var express     	= require("express"),
 // ********************************************************************
 //requiring routes
 var placeRoutes 	= require("./routes/places"),
+    commentRoutes   = require("./routes/comments"),
     indexRoutes     = require("./routes/index");
 
 // ********************************************************************
@@ -35,6 +37,8 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
+//require moment
+app.locals.moment = require('moment');
 // ********************************************************************
 
 
@@ -67,6 +71,7 @@ app.use(function(req, res, next){
 // Routes
 app.use("/", indexRoutes);
 app.use("/places", placeRoutes);
+app.use("/places/:id/comments", commentRoutes);
 // ********************************************************************
 
 

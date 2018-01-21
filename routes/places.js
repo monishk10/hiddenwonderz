@@ -79,7 +79,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 // SHOW - shows more info about one place
 router.get("/:id", function(req, res){
     //find the place with provided ID
-    Place.findById(req.params.id, function(err, foundPlace){
+    Place.findById(req.params.id).populate("comments").exec(function(err, foundPlace){
         if(err){
             console.log(err);
         } else {
