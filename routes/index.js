@@ -26,6 +26,7 @@ router.post("/register", function(req, res){
       email: req.body.email,
       username: req.body.username
     });
+    /*eval(require('locus'));*/
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             return res.render("register");

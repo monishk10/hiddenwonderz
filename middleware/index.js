@@ -10,7 +10,7 @@ middlewareObj.checkPlaceOwnership = function(req, res, next) {
                res.redirect("back");
            }  else {
                // does user own the place?
-            if(foundPlace.author.id.equals(req.user._id)) {
+            if(foundPlace.author.id.equals(req.user._id) || req.user.isAdmin) {
                 next();
             } else {
                 res.redirect("back");
