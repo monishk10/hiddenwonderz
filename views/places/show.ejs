@@ -27,7 +27,7 @@
 					<div style="margin: 1% 0" class="ui grid">
 						<div class="twelve wide column">
 							<h1><%= place.name %></h1>
-							<p><i class="user icon"></i>Created by: <%= place.author.username %></p>
+							<p><i class="user icon"></i>Created by: <a href="/user/<%= place.author.id %>"><%= place.author.username %></a></p>
 							<% if(currentUser && place.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
 								<a class="ui circular twitter icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
 									<i class="edit icon"></i>

@@ -21,8 +21,9 @@ router.get("/register", function(req, res){
 //handle sign up logic
 router.post("/register", function(req, res){
     var newUser = new User({
-      name: req.body.name,
+      firstName: req.body.firstName,
       lastName: req.body.lastName,
+      avatar: req.body.avatar,
       email: req.body.email,
       username: req.body.username
     });
@@ -55,6 +56,15 @@ router.post("/login", passport.authenticate("local",
 router.get("/logout", function(req, res){
    req.logout();
    res.redirect("/places");
+});
+
+router.get("/user/:id", function(req, res){
+  User.findById(req.params.id, function(err, foundUser){
+    if(err){
+      console.log(err);
+    }
+    res.render("users/show", {user: foundUser});
+  });
 });
 
 
