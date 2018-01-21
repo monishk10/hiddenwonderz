@@ -13,6 +13,9 @@
 		  <a href="#3" class="item">
 		    Description
 		  </a>
+		  <a href="#4" class="item">
+		    Maps
+		  </a>
 		</div>
 	</div>
 	<!-- Show page content -->
@@ -93,6 +96,10 @@
 					<p><%= place.description %></p>
 					<p><%= place.description %></p>
 				</section>
+				<div class="ui divider"></div>
+				<section id="4">
+					<div id="map"></div>
+				</section>
 			</div>
 		</div>
 	</div>
@@ -155,5 +162,30 @@
     });
 	/* ********************** */
 </script>
-
-<% include ../partials/footer %>
+<script>
+  function initMap() {
+    var lat = <%= place.lat %>;
+    var lng = <%= place.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= place.name %><br />
+      <%= place.location %></strong>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('mouseover', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQobcx-8jUUZqhJp5ffqSLfAbAIVxm-Y&callback=initMap"></script>
