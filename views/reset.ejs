@@ -1,0 +1,23 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+
+<div class="main">
+	<div class="ui container">
+		<div class="login-register-form">
+			<h1>Reset Password</h1>
+			<form class="ui form" action="/reset/<%= token %>" method="POST">
+				<div class="field">
+				    <label>New Password</label>
+				    <input type="password" name="password" value="" placeholder="New password" autofocus="autofocus">
+				</div>
+				<div class="field">
+				    <label>Confirm Password</label>
+				    <input type="password" name="confirm" value="" placeholder="Confirm password">
+				</div>
+			    <button class="ui positive button" type="submit">Reset Password</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<% include ./partials/footer %>

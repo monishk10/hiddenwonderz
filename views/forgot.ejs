@@ -1,0 +1,19 @@
+<% include ./partials/header %>
+<% include ./partials/navbar %>
+
+<div class="main">
+	<div class="ui container">
+		<div class="login-register-form">
+			<h1>Forgot Password</h1>
+			<form class="ui form" action="/forgot" method="POST">
+				<div class="field">
+				    <label>Email</label>
+				    <input type="email" name="email" autofocus>
+				</div>
+			    <button class="ui positive button" type="submit">Reset Password</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<% include ./partials/footer %>
