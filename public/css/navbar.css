@@ -77,6 +77,24 @@
   height: 45px;
 }
 
+.ui.message {
+  color: rgba(255, 255, 255, 1);
+  border-radius: 0.28571429rem;
+  box-shadow: none;
+}
+
+.ui.message p {
+  opacity: 1;
+}
+
+.ui.message.correct {
+  background: #00C853;
+}
+
+.ui.message.wrong {
+  background: #e53935;
+}
+
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 991px) {
   .topnav {

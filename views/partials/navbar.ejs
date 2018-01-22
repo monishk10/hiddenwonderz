@@ -17,6 +17,23 @@
   </div>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 </div>
+<div>
+      <% if(error && error.length > 0) { %>
+        <div style="position: absolute;top: 0px;left: 40%; z-index: 100;" class="ui compact message wrong">
+          <div class="header">
+            <p><%= error %></p>
+          </div>
+        </div>
+      <% } %>
+       
+      <% if(success && success.length > 0) { %>
+        <div style="position: absolute;top: 0px;left: 40%; z-index: 100;" class="ui compact message correct">
+          <div class="header">
+            <p><%= success %></p>
+          </div>
+        </div>
+      <% } %>
+</div>
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
@@ -32,5 +49,7 @@ $(document).ready( function(){
   var location = window.location.pathname;
   $("a[href='"+location+"']").addClass("active");
 });
+
+$('.message').delay(4000).fadeOut( 400 );
 
 </script>

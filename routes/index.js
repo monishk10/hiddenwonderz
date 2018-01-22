@@ -33,10 +33,12 @@ router.post("/register", function(req, res){
     /*eval(require('locus'));*/
     User.register(newUser, req.body.password, function(err, user){
         if(err){
+            req.flash("error", "Something went wrong!! Try again!");
             return res.render("register");
         }
         passport.authenticate("local")(req, res, function(){
           console.log(user);
+          req.flash("error", "Successfully registered as: " + newUser.username);
           res.redirect("/places"); 
         });
     });
@@ -51,13 +53,16 @@ router.get("/login", function(req, res){
 router.post("/login", passport.authenticate("local", 
     {
         successRedirect: "/places",
-        failureRedirect: "/login"
+        successFlash: 'Welcome!',
+        failureRedirect: "/login",
+        failureFlash: "Please try again"
     }), function(req, res){
 });
 
 // logout route
 router.get("/logout", function(req, res){
    req.logout();
+   req.flash("success", "Successfully logged you out!!")
    res.redirect("/places");
 });
 
@@ -108,6 +113,7 @@ router.post('/forgot', function(req, res, next) {
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         console.log('mail sent');
+        req.flash("success", "Sent a password reset mail to: " + user.email);
         done(err, 'done');
       });
     }
@@ -131,6 +137,7 @@ router.post('/reset/:token', function(req, res) {
     function(done) {
       User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
+          req.flash("error", "Something went wrong!! Try again!");
           return res.redirect('back');
         }
         if(req.body.password === req.body.confirm) {
@@ -140,6 +147,7 @@ router.post('/reset/:token', function(req, res) {
 
             user.save(function(err) {
               req.logIn(user, function(err) {
+                req.flash("success", "Successfully changed the password");
                 done(err, user);
               });
             });
@@ -177,6 +185,7 @@ router.post('/reset/:token', function(req, res) {
 router.get("/user/:id", function(req, res){
   User.findById(req.params.id, function(err, foundUser){
     if(err){
+      req.flash("error", "User not found!!");
       console.log(err);
     }
     res.render("users/show", {user: foundUser});

@@ -60,8 +60,10 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
       // Create a new place and save to DB
       Place.create(req.body.place, function(err, newlyCreated){
           if(err){
+              req.flash("error", err.message);
               console.log(err);
           } else {
+              req.flash("success", "Added a new place");
               //redirect back to places page
               console.log(newlyCreated);
               res.redirect("/places");
@@ -101,11 +103,13 @@ router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
     // find and update the correct place
     Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
        if(err){
-           res.redirect("/places");
+          req.flash("error", err.message);
+          res.redirect("/places");
        } else {
-           //redirect somewhere(show page)
-           console.log(req.body.place);
-           res.redirect("/places/" + req.params.id);
+          //redirect somewhere(show page)
+          req.flash("success", "Updated!!");
+          console.log(req.body.place);
+          res.redirect("/places/" + req.params.id);
        }
     });
 });
@@ -114,8 +118,10 @@ router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
 router.delete("/:id",middleware.checkPlaceOwnership, function(req, res){
    Place.findByIdAndRemove(req.params.id, function(err){
       if(err){
+          req.flash("error", err.message);
           res.redirect("/places");
       } else {
+          req.flash("success", "Deleted the place successfully");
           res.redirect("/places");
       }
    });
