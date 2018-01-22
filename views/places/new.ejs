@@ -9,10 +9,10 @@
                     <input type="text" name="place[name]" placeholder="name">
                 </div>
                 <div id="image-type-selector" class="field">
-                    <label for="image" class="custom-image-upload">
+                    <label for="images" class="custom-image-upload">
                         <span style="font-weight: 700;">Image Upload:</span> <span class="ui blue button">Upload</span> <span class="upload-text"> Upload a file</span>
                     </label>
-                    <input type="file" id="image" name="image" accept="image/*" required>
+                    <input type="file" id="images" name="images" accept="image/*" required multiple>
                 </div>
                 <div class="field">
                     <input type="text" name="place[location]" id="location" placeholder="Yosemite National Park, CA">
@@ -24,7 +24,7 @@
                     <button class="ui button">Submit!</button>
                 </div>
             </form>
-            <a href="/places">Go Back</a>
+            <p><a href="/places">Go Back</a></p>
         </div>
     </div>
 </div>
@@ -41,7 +41,7 @@
 
         $('input[type="file"]').change(function(e){
             var fileName = e.target.files[0].name;
-            $(".upload-text").html(fileName + " has been uploaded");
+            $(".upload-text").html("Files are ready for upload");
         });
     });
 </script>

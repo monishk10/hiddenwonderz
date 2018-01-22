@@ -40,36 +40,53 @@ router.get("/", function(req, res){
 });
 
 //CREATE - add new place to DB
-router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res){
+router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, res){
   geocoder.geocode(req.body.place.location, function (err, data) {
     req.body.place.lat = data.results[0].geometry.location.lat;
     req.body.place.lng = data.results[0].geometry.location.lng;
     req.body.place.location = data.results[0].formatted_address;
 
-    cloudinary.uploader.upload(req.file.path, function(result) {
-      // add cloudinary url for the image to the place object under image property
-      req.body.place.image = result.secure_url;
-      // add author to place
-      req.body.place.author = {
-        id: req.user._id,
-        username: req.user.username
-      }
-      // add time
-      req.body.place.createdAtDate = moment().format("Do MMM YY");
-      req.body.place.createdAtTime = moment().format("hh:mm:ss a");
-      // Create a new place and save to DB
-      Place.create(req.body.place, function(err, newlyCreated){
-          if(err){
-              req.flash("error", err.message);
-              console.log(err);
-          } else {
-              req.flash("success", "Added a new place");
-              //redirect back to places page
-              console.log(newlyCreated);
-              res.redirect("/places");
-          }
+    // start with an empty array to store image urls
+    req.body.place.images = [];
+
+    // loop through the no of images to upload one by one
+    for(var i=0; i<req.files.length; i++) {
+      cloudinary.uploader.upload(req.files[i].path, function(result) {
+        // add cloudinary url for the image to the place object under image property
+        console.log(result);
+        req.body.place.images.push(result.secure_url);
       });
-    });
+    }
+
+    // A function that checks if the images are uploaded in a 500 msec interval and creates the place
+    main();
+    function main(){
+      if (req.body.place.images.length == req.files.length) {
+        // add author to place
+        req.body.place.author = {
+          id: req.user._id,
+          username: req.user.username
+        }
+        // add time
+        req.body.place.createdAtDate = moment().format("Do MMM YY");
+        req.body.place.createdAtTime = moment().format("hh:mm:ss a");
+        if(req.body.place.images.length)
+        // Create a new place and save to DB
+        Place.create(req.body.place, function(err, newlyCreated){
+            if(err){
+                req.flash("error", err.message);
+                console.log(err);
+            } else {
+                req.flash("success", "Added a new place");
+                //redirect back to places page
+                console.log(newlyCreated);
+                res.redirect("/places");
+            }
+        });
+      } else {
+        setTimeout(main, 500);
+      }
+    }
   });
 });
 

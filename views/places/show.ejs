@@ -25,8 +25,9 @@
 	<div class="show-content">
 		<div class="ui segment">
 			<div class="sections">
+				<h1><% place.images %></h1>
 				<section id="1">
-					<img style="width: 100%; border-radius: 5px;" src="<%= place.image %>">
+					<img style="width: 100%; border-radius: 5px;" src="<%= place.images[0] %>">
 					<div style="margin: 1% 0" class="ui grid">
 						<div class="twelve wide column">
 							<h1><%= place.name %></h1>
@@ -54,39 +55,18 @@
 					<!-- ****************************************************** -->
 					<div class="demo-gallery">
 					    <ul id="lightgallery">
-					      <li data-src="https://source.unsplash.com/czVtGYACOMg">
+					    	<% place.images.forEach(function(image) { %>
+					      	<li data-src=<%= image %>>
 					        <a href="">
-					          <img class="img-responsive" src="https://source.unsplash.com/czVtGYACOMg">
+					          <img class="img-responsive" src=<%= image %>>
 					          <div class="demo-gallery-poster">
 					            <img src="https://i.imgur.com/twH1lI6.png">
 					          </div>
 					        </a>
-					      </li>
-					      <li data-src="https://source.unsplash.com/MjkEiMBOEw8">
-					        <a href="">
-					          <img class="img-responsive" src="https://source.unsplash.com/MjkEiMBOEw8">
-					          <div class="demo-gallery-poster">
-					            <img src="https://i.imgur.com/twH1lI6.png">
-					          </div>
-					        </a>
-					      </li>
-					      <li data-src="https://source.unsplash.com/czVtGYACOMg">
-					        <a href="">
-					          <img class="img-responsive" src="https://source.unsplash.com/czVtGYACOMg">
-					          <div class="demo-gallery-poster">
-					            <img src="https://i.imgur.com/twH1lI6.png">
-					          </div>
-					        </a>
-					      </li>
-					      <li data-src="https://source.unsplash.com/MjkEiMBOEw8">
-					        <a href="">
-					          <img class="img-responsive" src="https://source.unsplash.com/MjkEiMBOEw8">
-					          <div class="demo-gallery-poster">
-					            <img src="https://i.imgur.com/twH1lI6.png">
-					          </div>
-					        </a>
-					      </li>
+					      	</li>
+					      <% }) %>
 					    </ul>
+					</div>
 					<!-- ****************************************************** -->
 				</section>
 				<div class="ui divider"></div>
