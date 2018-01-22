@@ -50,13 +50,14 @@ router.get("/login", function(req, res){
 });
 
 //handling login logic
-router.post("/login", passport.authenticate("local", 
+router.post("/login", function (req, res, next) {
+  passport.authenticate("local", 
     {
         successRedirect: "/places",
-        successFlash: 'Welcome!',
+        successFlash: 'Welcome back, ' + req.body.username + '!',
         failureRedirect: "/login",
         failureFlash: "Please try again"
-    }), function(req, res){
+    })(req, res);
 });
 
 // logout route
