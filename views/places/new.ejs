@@ -42,7 +42,10 @@
 
         $('input[type="file"]').change(function(e){
             var fileName = e.target.files[0].name;
-            $(".upload-text").html(fileName + " is ready for upload");
+            $(".upload-text").html("Files are ready for upload");
+        });
+        $('.ui.form').submit(function() {
+            $('#upload-loading').css('visibility', 'visible');
         });
     });
 

@@ -10,6 +10,31 @@ body {
 }
 
 /*******************************************/
+/* loading animation */
+#upload-loading:before {
+  position: fixed;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #d63635;
+  top: 24%;
+  left: 43%;
+  content: "Uploading images... ";
+}
+#upload-loading {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url(../assets/loaders/upload-loading.gif) center no-repeat #fff;
+  visibility: hidden;
+}
+
+/*******************************************/
+
+
+/*******************************************/
 /* The sidebar menu */
 .sidenav {
 	margin-top: 90px;
