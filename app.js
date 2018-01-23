@@ -18,6 +18,7 @@ var express     	= require("express"),
 //requiring routes
 var placeRoutes 	= require("./routes/places"),
     commentRoutes   = require("./routes/comments"),
+    userRoutes    = require("./routes/users"),
     indexRoutes     = require("./routes/index");
 
 // ********************************************************************
@@ -78,6 +79,7 @@ app.use(function(req, res, next){
 // ********************************************************************
 // Routes
 app.use("/", indexRoutes);
+app.use("/", userRoutes);
 app.use("/places", placeRoutes);
 app.use("/places/:id/comments", commentRoutes);
 // ********************************************************************

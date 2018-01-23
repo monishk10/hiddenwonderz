@@ -10,7 +10,7 @@
         <a class="noextra-underline" href="/login">Login</a>
         <a class="noextra-underline" href="/register">Register</a>
       <% } else { %>
-        <a class="noextra-underline" href="#">Welcome, <%= currentUser.username %></a>
+        <a class="noextra-underline" href="/user/<%= currentUser._id %>"><%= currentUser.username %> </a>
         <a class="noextra-underline" href="/logout">Logout</a>
       <% } %>
     </div>

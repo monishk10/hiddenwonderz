@@ -5,6 +5,27 @@ var async=  require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
 var User = require("../models/user");
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'hiddenwonderz', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 //root route
 router.get("/", function(req, res){
@@ -18,11 +39,15 @@ router.get("/aboutme", function(req, res){
 
 // show register form
 router.get("/register", function(req, res){
-   res.render("register"); 
+   res.render("users/register"); 
 });
 
 //handle sign up logic
-router.post("/register", function(req, res){
+router.post("/register", upload.single('avatar'), function(req, res){
+  cloudinary.uploader.upload(req.file.path, function(result) {
+
+    req.body.avatar = result.secure_url;
+
     var newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -34,7 +59,7 @@ router.post("/register", function(req, res){
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error", "Something went wrong!! Try again!");
-            return res.render("register");
+            return res.render("users/register");
         }
         passport.authenticate("local")(req, res, function(){
           console.log(user);
@@ -42,11 +67,12 @@ router.post("/register", function(req, res){
           res.redirect("/places"); 
         });
     });
+  });
 });
 
 //show login form
 router.get("/login", function(req, res){
-   res.render("login"); 
+   res.render("users/login"); 
 });
 
 //handling login logic
@@ -69,7 +95,7 @@ router.get("/logout", function(req, res){
 
 // forgot password
 router.get('/forgot', function(req, res) {
-  res.render('forgot');
+  res.render('users/forgot');
 });
 
 router.post('/forgot', function(req, res, next) {
@@ -83,7 +109,7 @@ router.post('/forgot', function(req, res, next) {
     function(token, done) {
       User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
-          return res.redirect('/forgot');
+          return res.redirect('users/forgot');
         }
 
         user.resetPasswordToken = token;
@@ -120,16 +146,16 @@ router.post('/forgot', function(req, res, next) {
     }
   ], function(err) {
     if (err) return next(err);
-    res.redirect('/forgot');
+    res.redirect('users/forgot');
   });
 });
 
 router.get('/reset/:token', function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
-      return res.redirect('/forgot');
+      return res.redirect('users/forgot');
     }
-    res.render('reset', {token: req.params.token});
+    res.render('users/reset', {token: req.params.token});
   });
 });
 
@@ -181,18 +207,5 @@ router.post('/reset/:token', function(req, res) {
     res.redirect('/places');
   });
 });
-
-// Get user profile
-router.get("/user/:id", function(req, res){
-  User.findById(req.params.id, function(err, foundUser){
-    if(err){
-      req.flash("error", "User not found!!");
-      console.log(err);
-    }
-    res.render("users/show", {user: foundUser});
-  });
-});
-
-
 
 module.exports = router;

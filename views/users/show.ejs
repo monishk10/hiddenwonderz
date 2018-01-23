@@ -4,6 +4,7 @@
 	<div class="ui container">
 		<img class="ui small image" src="<%= user.avatar %>">	
 		<h1><%= user.firstName %> <%= user.lastName %></h1>	
+		<p>Email id: <a href="mailto:<%= user.email %>"><%= user.email %></a></p>
 	</div>
 </div>
 <% include ../partials/footer %>
