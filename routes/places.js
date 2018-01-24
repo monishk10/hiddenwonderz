@@ -77,7 +77,7 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
                 req.flash("error", err.message);
                 console.log(err);
             } else {
-                req.flash("success", "Added a new place");
+                req.flash("success", "Added a new place, " + newlyCreated.name);
                 //redirect back to places page
                 console.log(newlyCreated);
                 res.redirect("/places");

@@ -1,5 +1,8 @@
 <% include ../partials/header %> 
 <% include ../partials/navbar %> 
+<div class="upload-loading">
+    <div id="registeration-loading" ></div>
+</div>
 
 <div class="main">
 	<div class="ui container">
@@ -91,6 +94,9 @@ $('.ui.form')
 $('input[type="file"]').change(function(e){
   var fileName = e.target.files[0].name;
   $(".upload-text").html(fileName + " is ready for upload");
+});
+$('.ui.form').submit(function() {
+    $('.upload-loading').css('visibility', 'visible');
 });
 </script>
 

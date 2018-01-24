@@ -72,12 +72,6 @@
 				<div class="ui divider"></div>
 				<section id="3">
 					<p><%= place.description %></p>
-					<p><%= place.description %></p>
-					<p><%= place.description %></p>
-					<p><%= place.description %></p>
-					<p><%= place.description %></p>
-					<p><%= place.description %></p>
-					<p><%= place.description %></p>
 				</section>
 				<div class="ui divider"></div>
 				<section id="4">
@@ -118,11 +112,11 @@
 						<% place.comments.forEach(function(comment) { %>
 						<div class="event">
 							<div class="label">
-						      <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
+						      <img src="<%= comment.author.avatar %>">
 						    </div>
 						    <div class="content">
 						    	<div class="summary">
-									<a><%= comment.author.username %></a> commented
+									<a href="/user/<%= comment.author.id %>"><%= comment.author.username %></a> commented
 									<div class="date">
 										<%= moment(comment.createdAt).fromNow() %>
 									</div>

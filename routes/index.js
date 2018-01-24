@@ -63,7 +63,7 @@ router.post("/register", upload.single('avatar'), function(req, res){
         }
         passport.authenticate("local")(req, res, function(){
           console.log(user);
-          req.flash("error", "Successfully registered as: " + newUser.username);
+          req.flash("success", "Successfully registered as: " + newUser.username);
           res.redirect("/places"); 
         });
     });

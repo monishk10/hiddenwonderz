@@ -11,7 +11,17 @@ body {
 
 /*******************************************/
 /* loading animation */
-#upload-loading:before {
+#registeration-loading:before {
+  position: fixed;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #d63635;
+  top: 24%;
+  left: 43%;
+  content: "Registering user... ";
+}
+
+#gallery-images:before {
   position: fixed;
   font-size: 1.5em;
   font-weight: bold;
@@ -20,7 +30,7 @@ body {
   left: 43%;
   content: "Uploading images... ";
 }
-#upload-loading {
+.upload-loading {
   position: fixed;
   left: 0px;
   top: 0px;
@@ -32,6 +42,11 @@ body {
 }
 
 /*******************************************/
+/* avatar image */
+.ui.feed > .event > .label img {
+  margin-top: 10px;
+  width: 30px;
+}
 
 
 /*******************************************/
