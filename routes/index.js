@@ -146,7 +146,7 @@ router.post('/forgot', function(req, res, next) {
     }
   ], function(err) {
     if (err) return next(err);
-    res.redirect('users/forgot');
+    res.redirect('places');
   });
 });
 
