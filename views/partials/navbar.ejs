@@ -1,5 +1,7 @@
 <div class="topnav" id="myTopnav">
-  <p id="currentUser" style="display: none;"><%= currentUser._id %></p>
+  <% if(currentUser){ %>
+    <p id="currentUser" style="display: none;"><%= currentUser._id %></p>
+  <% } %>
   <a class="static-brand" href="/">
     <img class="logo-image" src="https://i.imgur.com/A23M1TR.png">
   </a>
