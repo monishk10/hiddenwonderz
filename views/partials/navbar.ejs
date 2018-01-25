@@ -31,21 +31,21 @@
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 </div>
 <div>
-      <% if(error && error.length > 0) { %>
-        <div style="position: absolute;top: 0px;left: 40%; z-index: 100;" class="ui compact message wrong">
-          <div class="header">
-            <p><%= error %></p>
-          </div>
-        </div>
-      <% } %>
-       
-      <% if(success && success.length > 0) { %>
-        <div style="position: absolute;top: 0px;left: 40%; z-index: 100;" class="ui compact message correct">
-          <div class="header">
-            <p><%= success %></p>
-          </div>
-        </div>
-      <% } %>
+  <% if(error && error.length > 0) { %>
+    <div class="ui compact message wrong">
+      <div class="header">
+        <p><%= error %></p>
+      </div>
+    </div>
+  <% } %>
+   
+  <% if(success && success.length > 0) { %>
+    <div class="ui compact message correct">
+      <div class="header">
+        <p><%= success %></p>
+      </div>
+    </div>
+  <% } %>
 </div>
 <script>
 /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
@@ -64,10 +64,9 @@ $(document).ready( function(){
 });
 
 $('.message').transition('fly down', '5s');
+
 $('.ui.dropdown').dropdown();
-
 var currentUserId = $('#currentUser').text();
-
 if(window.innerWidth < 990){
   $('.mobileNavbarUser').html('<a class="noextra-underline" href="/user/' + currentUserId + '">My Profile</a><a class="noextra-underline" href="/logout">Logout</a>');
 }

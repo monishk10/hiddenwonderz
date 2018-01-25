@@ -125,6 +125,16 @@
   height: 45px;
 }
 
+.ui.compact.message {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  width: 500px;
+  margin-left: -250px;
+  text-align: center;
+  z-index: 100;
+}
+
 .ui.message {
   color: rgba(255, 255, 255, 1);
   border-radius: 0.28571429rem;
@@ -188,6 +198,11 @@
 
   .ui.divider {
     font-size: 2rem;
+  }
+
+  .ui.compact.message {
+    width: 100%;
+    margin-left: -50%;
   }
 }
 
