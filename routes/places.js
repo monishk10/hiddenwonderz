@@ -117,6 +117,10 @@ router.get("/:id/edit",middleware.checkPlaceOwnership, function(req, res){
 
 // UPDATE PLACE ROUTE
 router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
+  geocoder.geocode(req.body.place.location, function (err, data) {
+    req.body.place.lat = data.results[0].geometry.location.lat;
+    req.body.place.lng = data.results[0].geometry.location.lng;
+    req.body.place.location = data.results[0].formatted_address;
     // find and update the correct place
     Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
        if(err){
@@ -129,6 +133,7 @@ router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
           res.redirect("/places/" + req.params.id);
        }
     });
+  });
 });
 
 // DESTROY PLACE ROUTE

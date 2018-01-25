@@ -9,11 +9,12 @@
                     <input type="text" name="place[name]" value="<%= place.name %>">
                 </div>
                 <div class="field">
-                    <input type="text" name="place[image]" value="<%= place.image %>">
+                    <input type="text" name="place[location]" id="location" value="<%= place.location %>">
                 </div>
                 <div class="field">
                     <textarea name="place[description]"><%= place.description %></textarea>
                 </div>
+                <div id="autocomplete-map"></div>
                 <div class="field">
                     <button class="ui button">Submit!</button>
                 </div>
@@ -22,5 +23,27 @@
         </div>
     </div>
 </div>
+<script>
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
+      zoom: 13
+    });
+    var input = document.getElementById('location');
+
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input:");
+        return;
+      }
+    });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQobcx-8jUUZqhJp5ffqSLfAbAIVxm-Y&&libraries=places&callback=initMap" async defer>
+</script>
 
 <% include ../partials/footer %>
