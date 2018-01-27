@@ -31,6 +31,7 @@
                 <div class="content">
                   <div class="header"><%= place.name %></div>
                   <div class="description">
+                    <p><%- place.description.substring(0, 100) %>...</p>
                     <a href="/places/<%= place._id %>" class="ui button full-width" data-tooltip="Click here for more info on <%= place.name %>" data-position="top left" data-inverted="">More Info</a>
                   </div>
                 </div>

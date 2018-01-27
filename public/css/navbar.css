@@ -4,13 +4,23 @@
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
-    padding: 5px 0 0 0;
+    padding: 15px 0 0 0;
     z-index: 100;
-    border-bottom: 8px solid #007791;
+    font-size: 17px;
+    border-bottom: 8px solid #303031;
+    height: 100px;
+    -webkit-transition: height .5s, line-height .5s; /* Safari */
+    transition: height .5s, line-height .5s;
+}
+.scrolled-nav{
+  height: 69px !important;
 }
 
 .topnav .static-brand {
   padding: 4px 8px 0px 8px;
+  left: 50%;
+  width: 226px;
+  margin-left: -113px;
 }
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -20,7 +30,7 @@
     text-align: center;
     padding: 17px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 20px;
     position: relative;
     margin: 0 5px;
 }
@@ -28,7 +38,7 @@
 /* Change the color of links on hover */
 .topnav .navbar-items a:hover {
     background-color: #fff;
-    color: #007791;
+    color: #303031;
     font-weight: bold;
 }
 
@@ -39,7 +49,7 @@
   height: 2px;
   bottom: 4px;
   left: 0;
-  background-color: #007791;
+  background-color: #303031;
   visibility: hidden;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
@@ -83,7 +93,7 @@
 
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  color: #007791;
+  color: #303031;
 }
 
 /* Dropdown content (hidden by default) */
@@ -156,7 +166,7 @@
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 991px) {
   .topnav {
-    border-bottom: 15px solid #007791;
+    border-bottom: 15px solid #303031;
     padding: 0;
     overflow: hidden;    
   }
