@@ -25,7 +25,6 @@
 	<div class="show-content">
 		<div class="ui segment">
 			<div class="sections">
-				<h1><% place.images %></h1>
 				<section id="1">
 					<img style="width: 100%; border-radius: 5px;" src="<%= place.images[0] %>">
 					<div style="margin: 1% 0" class="ui grid">
@@ -36,11 +35,21 @@
 								<a class="ui circular twitter icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
 									<i class="edit icon"></i>
 								</a>
-								<form style="display: inline-block;" action="/places/<%= place._id %>?_method=DELETE" method="POST">
-				                    <button class="ui circular instagram icon button" data-tooltip="Permanently delete your post">
+								<form id="delete-place-form" style="display: inline-block;" action="/places/<%= place._id %>?_method=DELETE" method="POST">
+				                    <a id="delete-place-form-submit" class="ui circular instagram icon button" data-tooltip="Permanently delete your post">
 				                    	<i class="ban icon"></i>
-				                	</button>
+				                	</a>
 				                </form>
+				                <div class="ui mini modal delete-place">
+						              <div class="header">Confirm delete</div>
+						              <div class="content">
+						                <p>Are you sure you want to delete the post?</p>
+						              </div>
+						              <div class="actions">
+						                <div class="ui approve green button">Confirm</div>
+						                <div class="ui cancel red button">Cancel</div>
+						              </div>
+						        </div>
 			                <% } %>
 						</div>
 						<div class="four wide column">
@@ -71,7 +80,7 @@
 				</section>
 				<div class="ui divider"></div>
 				<section id="3">
-					<p><%= place.description %></p>
+					<p><%- place.description %></p>
 				</section>
 				<div class="ui divider"></div>
 				<section id="4">
@@ -137,11 +146,21 @@
 										<i class="edit icon"></i>
 										Edit your comment
 									</a>
-									<form action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline-block;">
-					        			<button style="margin: 0;" class="ui circular instagram icon button" data-tooltip="Permanently delete your comment">
+									<form id="delete-comment-form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+					        			<a id="delete-comment-form-submit" style="margin: 0;" class="ui circular instagram icon button" data-tooltip="Permanently delete your comment">
 				                    	<i class="ban icon"></i> Delete your comment
-					                	</button>
+					                	</a>
 					        		</form>
+					        		<div class="ui mini modal delete-comment">
+						              <div class="header">Confirm delete</div>
+						              <div class="content">
+						                <p>Are you sure you want to delete the comment?</p>
+						              </div>
+						              <div class="actions">
+						                <div class="ui approve green button">Confirm</div>
+						                <div class="ui cancel red button">Cancel</div>
+						              </div>
+						            </div>
 								</div>
 								<div class="content">
 									<form class="ui form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
@@ -181,6 +200,42 @@
     	$("#accordion").accordion();
   	});
 
+	$(function() {
+       $("#delete-comment-form-submit").click(function(){
+          	$('.mini.modal.delete-comment')
+              .modal({
+                onDeny    : function(){
+                    var e = jQuery.Event("keyup"); // or keypress/keydown
+                    e.keyCode = 27; // for Esc
+                    $(document).trigger(e); // trigger it on document  
+                },
+                onApprove : function() {
+                    $('form#delete-comment-form').submit();
+                },
+                approve  : '.positive, .approve, .ok',
+                deny     : '.negative, .deny, .cancel',
+              }).modal('setting', 'transition', 'scale')
+              .modal('show')
+            ;
+       	});
+       $("#delete-place-form-submit").click(function(){
+          	$('.mini.modal.delete-place')
+              .modal({
+                onDeny    : function(){
+                    var e = jQuery.Event("keyup"); // or keypress/keydown
+                    e.keyCode = 27; // for Esc
+                    $(document).trigger(e); // trigger it on document  
+                },
+                onApprove : function() {
+                    $('form#delete-place-form').submit();
+                },
+                approve  : '.positive, .approve, .ok',
+                deny     : '.negative, .deny, .cancel',
+              }).modal('setting', 'transition', 'scale')
+              .modal('show')
+            ;
+       	});
+    });
 
 	var sections = $('section')
 	  , nav = $('.sidenav')

@@ -7,7 +7,7 @@
 <div class="main">
     <div class="ui container">
         <h1>Create a New Place</h1>
-            <form class="ui form" action="/places" method="POST" enctype="multipart/form-data">
+            <form id="new-place-form" class="ui form" action="/places" method="POST" enctype="multipart/form-data">
                 <div class="field">
                     <input type="text" name="place[name]" placeholder="name">
                 </div>
@@ -25,10 +25,20 @@
                     <textarea name="place[description]" placeholder="description"></textarea>
                 </div>
                 <div class="field">
-                    <button class="ui button">Submit!</button>
+                    <a id="new-place-form-submit" class="ui button">Submit!</a>
                 </div>
             </form>
             <p><a href="/places">Go Back</a></p>
+            <div class="ui mini modal">
+              <div class="header">Confirm post</div>
+              <div class="content">
+                <p>Are you sure you want to post?</p>
+              </div>
+              <div class="actions">
+                <div class="ui approve green button">Confirm</div>
+                <div class="ui cancel red button">Cancel</div>
+              </div>
+            </div>
         </div>
     </div>
 </div>
@@ -49,6 +59,26 @@
         });
         $('.ui.form').submit(function() {
             $('.upload-loading').css('visibility', 'visible');
+        });
+
+        $(function() {
+           $("#new-place-form-submit").click(function(){
+              $('.mini.modal')
+                  .modal({
+                    onDeny    : function(){
+                        var e = jQuery.Event("keyup"); // or keypress/keydown
+                        e.keyCode = 27; // for Esc
+                        $(document).trigger(e); // trigger it on document  
+                    },
+                    onApprove : function() {
+                        $('form#new-place-form').submit();
+                    },
+                    approve  : '.positive, .approve, .ok',
+                    deny     : '.negative, .deny, .cancel',
+                  }).modal('setting', 'transition', 'scale')
+                  .modal('show')
+                ;
+           });
         });
     });
 

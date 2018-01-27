@@ -1,10 +1,9 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
-
 <div class="main">
     <div class="ui container">
         <h1>Edit <%= place.name %></h1>
-            <form class="ui form" action="/places/<%= place._id %>?_method=PUT" method="POST">
+            <form id="edit-place-form" class="ui form" action="/places/<%= place._id %>?_method=PUT" method="POST">
                 <div class="field">
                     <input type="text" name="place[name]" value="<%= place.name %>">
                 </div>
@@ -16,14 +15,46 @@
                 </div>
                 <div id="autocomplete-map"></div>
                 <div class="field">
-                    <button class="ui button">Submit!</button>
+                    <a id="edit-place-form-submit" class="ui button">Submit!</a>
                 </div>
             </form>
             <a href="/places">Go Back</a>
+            <div class="ui mini modal">
+              <div class="header">Confirm edit</div>
+              <div class="content">
+                <p>Are you sure you want to edit this post?</p>
+              </div>
+              <div class="actions">
+                <div class="ui approve green button">Confirm</div>
+                <div class="ui cancel red button">Cancel</div>
+              </div>
+            </div>
         </div>
     </div>
 </div>
 <script>
+    $(document).ready(function(){
+        $(function() {
+           $("#edit-place-form-submit").click(function(){
+              $('.mini.modal')
+                  .modal({
+                    onDeny    : function(){
+                        var e = jQuery.Event("keyup"); // or keypress/keydown
+                        e.keyCode = 27; // for Esc
+                        $(document).trigger(e); // trigger it on document  
+                    },
+                    onApprove : function() {
+                        $('form#edit-place-form').submit();
+                    },
+                    approve  : '.positive, .approve, .ok',
+                    deny     : '.negative, .deny, .cancel',
+                  }).modal('setting', 'transition', 'scale')
+                  .modal('show')
+                ;
+           });
+        });
+    });
+
 function initMap() {
     var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
       zoom: 13
