@@ -8,11 +8,11 @@
 			<form id="reset-form" class="ui form" action="/reset/<%= token %>" method="POST">
 				<div class="field">
 				    <label>New Password</label>
-				    <input type="password" name="password" value="" placeholder="New password" autofocus="autofocus">
+				    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
 				</div>
 				<div class="field">
 				    <label>Confirm Password</label>
-				    <input type="password" name="confirm" value="" placeholder="Confirm password">
+				    <input type="password" name="confirm" placeholder="Confirm password">
 				</div>
 			    <a id="reset-form-submit" class="ui green button" type="submit">Reset Password</a>
 			</form>
@@ -52,6 +52,36 @@
            });
         });
     });
+  $('.ui.form')
+  .form({
+    inline : true,
+    on: 'blur',
+    fields: {
+      password: {
+        identifier: 'password',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter a password'
+          },
+          {
+            type   : 'minLength[6]',
+            prompt : 'Your password must be at least {ruleValue} characters'
+          }
+        ]
+      },
+      match: {
+        identifier  : 'confirm',
+        rules: [
+          {
+            type   : 'match[password]',
+            prompt : "Password doesn't match"
+          }
+        ]
+      }
+    }
+  })
+;
 </script>
 
 <% include ../partials/footer %>

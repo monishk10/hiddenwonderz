@@ -33,10 +33,14 @@
 				    <label>Username</label>
 				    <input class="username" type="text" name="username" placeholder="username">
 				</div>
-			    <div class="field">
+			  <div class="field">
 				    <label>Password</label>
 				    <input type="password" name="password" placeholder="password">
 				</div>
+        <div class="field">
+            <label>Confirm Password</label>
+            <input type="password" name="confirm" placeholder="confirm password">
+        </div>
 			    <button class="ui primary button" type="submit">Submit</button>
 			</form>
 		</div>
@@ -46,6 +50,8 @@
 <script>
 $('.ui.form')
   .form({
+    inline : true,
+    on: 'blur',
     fields: {
       firstName: {
         identifier: 'firstName',
@@ -60,7 +66,7 @@ $('.ui.form')
         identifier: 'email',
         rules: [
           {
-            type   : 'empty',
+            type   : 'email',
             prompt : 'Please enter a valid email'
           }
         ]
@@ -84,6 +90,15 @@ $('.ui.form')
           {
             type   : 'minLength[6]',
             prompt : 'Your password must be at least {ruleValue} characters'
+          }
+        ]
+      },
+      match: {
+        identifier  : 'confirm',
+        rules: [
+          {
+            type   : 'match[password]',
+            prompt : "Password doesn't match"
           }
         ]
       }

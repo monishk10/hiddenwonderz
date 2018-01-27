@@ -22,5 +22,26 @@
 		</div>
 	</div>
 </div>
-
+<script>
+	$('form').form({
+        inline : true,
+        on: 'blur',
+        fields: {
+            username: {
+                identifier: 'username',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter a username'
+                }]
+            },
+            password: {
+                identifier: 'password',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter a password'
+                }]
+            }
+        }
+    });
+</script>
 <% include ../partials/footer %> 
