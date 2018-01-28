@@ -67,6 +67,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
         req.flash("error", "Something went wrong!! Try again!");
         res.redirect("back");
       } else {
+        console.log(updatedComment);
         req.flash("success", "Successfully updated the comment!");
         res.redirect("/places/" + req.params.id );
       }

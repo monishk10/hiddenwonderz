@@ -103,6 +103,29 @@
 					            <div class="field">
 					              <input type="text" disabled value="<%= currentUser.username %>">
 					            </div>
+					            <div class="rating-widget">
+					            	<!-- Rating Stars Box -->
+									<div class='rating-stars text-center'>
+									    <ul style="font-size: 7px;" id='stars'>
+									      <li class='star' title='Poor' data-value='1'>
+									        <i class='fa fa-star fa-fw'></i>
+									      </li>
+									      <li class='star' title='Fair' data-value='2'>
+									        <i class='fa fa-star fa-fw'></i>
+									      </li>
+									      <li class='star' title='Good' data-value='3'>
+									        <i class='fa fa-star fa-fw'></i>
+									      </li>
+									      <li class='star' title='Excellent' data-value='4'>
+									        <i class='fa fa-star fa-fw'></i>
+									      </li>
+									      <li class='star' title='WOW!!!' data-value='5'>
+									        <i class='fa fa-star fa-fw'></i>
+									      </li>
+									    </ul>
+									</div>
+					            </div>
+					            <textarea style="display: none;" id="rating-value" name="comment[rating]"></textarea>
 					            <div class="field">
 					              <textarea name="comment[text]" placeholder="Write your comment..." rows="5" cols="70"></textarea>
 					            </div>
@@ -134,6 +157,21 @@
 					        		<% } %>
 								</div>
 								<div class="extra text">
+									<!-- Rating Stars Box -->
+									<div class='rating-stars text-center'>
+									    <ul style="font-size: 5px;">
+									    	<% for (var i=1; i<= comment.rating; i++) { %>
+									    		<li class='star selected' data-value='<%= i %>'>
+									        		<i class='fa fa-star fa-fw'></i>
+									      		</li>
+									    	<% } %>
+									    	<% for (var i=5; i> comment.rating; i--) { %>
+									    		<li class='star' data-value='<%= i %>'>
+									        		<i class='fa fa-star fa-fw'></i>
+									      		</li>
+									    	<% } %>
+									    </ul>
+									</div>
 									<%= comment.text %>
 								</div>
 							</div>
@@ -167,6 +205,29 @@
 						                <div class="field">
 						                  <input type="text" disabled value="<%= currentUser.username %>">
 						                </div>
+						                <div class="rating-widget">
+							            	<!-- Rating Stars Box -->
+											<div class='rating-stars text-center'>
+											    <ul style="font-size: 7px;" id='update-stars'>
+											      <li class='star' title='Poor' data-value='1'>
+											        <i class='fa fa-star fa-fw'></i>
+											      </li>
+											      <li class='star' title='Fair' data-value='2'>
+											        <i class='fa fa-star fa-fw'></i>
+											      </li>
+											      <li class='star' title='Good' data-value='3'>
+											        <i class='fa fa-star fa-fw'></i>
+											      </li>
+											      <li class='star' title='Excellent' data-value='4'>
+											        <i class='fa fa-star fa-fw'></i>
+											      </li>
+											      <li class='star' title='WOW!!!' data-value='5'>
+											        <i class='fa fa-star fa-fw'></i>
+											      </li>
+											    </ul>
+											</div>
+							            </div>
+					                	<textarea style="display: none;" id="update-rating-value" name="comment[rating]"></textarea>
 						                <div class="field">
 						                  <textarea name="comment[text]" rows="5" cols="70"><%= comment.text %></textarea>
 						                </div>
@@ -185,6 +246,8 @@
 		</div>
 	</div>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/css/lightgallery.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/js/lightgallery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.1.0/lg-thumbnail.min.js"></script>
@@ -192,6 +255,75 @@
 <script>
 	$(document).ready(function(){
 	    $(this).scrollTop(0);
+	    /* 1. Visualizing things on Hover - See next part for action on click */
+		$('#stars li').on('mouseover', function(){
+		    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+		   
+		    // Now highlight all the stars that's not after the current hovered star
+		    $(this).parent().children('li.star').each(function(e){
+		      if (e < onStar) {
+		        $(this).addClass('hover');
+		      }
+		      else {
+		        $(this).removeClass('hover');
+		      }
+		    });
+		    
+		}).on('mouseout', function(){
+		    $(this).parent().children('li.star').each(function(e){
+		      $(this).removeClass('hover');
+		    });
+		});
+		  
+		  
+		/* 2. Action to perform on click */
+		$('#stars li').on('click', function(){
+		    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+		    var stars = $(this).parent().children('li.star');
+		    $('#rating-value').text(onStar);
+		    for (i = 0; i < stars.length; i++) {
+		      $(stars[i]).removeClass('selected');
+		    }
+		    
+		    for (i = 0; i < onStar; i++) {
+		      $(stars[i]).addClass('selected');
+		    }
+		});
+		/* 1. Visualizing things on Hover - See next part for action on click */
+		$('#update').text('4');
+		$('#update-stars li').on('mouseover', function(){
+		    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+		   
+		    // Now highlight all the stars that's not after the current hovered star
+		    $(this).parent().children('li.star').each(function(e){
+		      if (e < onStar) {
+		        $(this).addClass('hover');
+		      }
+		      else {
+		        $(this).removeClass('hover');
+		      }
+		    });
+		    
+		}).on('mouseout', function(){
+		    $(this).parent().children('li.star').each(function(e){
+		      $(this).removeClass('hover');
+		    });
+		});
+		  
+		/* 2. Action to perform on click */
+		$('#update-stars li').on('click', function(){
+		    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+		    var stars = $(this).parent().children('li.star');
+		    $('#update-rating-value').text(onStar);
+
+		    for (i = 0; i < stars.length; i++) {
+		      $(stars[i]).removeClass('selected');
+		    }
+		    
+		    for (i = 0; i < onStar; i++) {
+		      $(stars[i]).addClass('selected');
+		    }
+		});
 	});
 
 	$('.ui.accordion').accordion();
