@@ -1,0 +1,122 @@
+<section id="1">
+	<img style="width: 100%; border-radius: 5px;" src="<%= place.images[0] %>">
+	<div style="margin: 1% 0" class="ui grid">
+		<div class="twelve wide column">
+			<h1><%= place.name %></h1>
+			<p>
+				<i class="user icon"></i>
+				Created by:
+				<a href="/user/<%= place.author.id %>">
+					<%= place.author.username %>
+				</a>
+			</p>
+			<% if(currentUser && place.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+				<a class="ui circular twitter icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
+					<i class="edit icon"></i>
+				</a>
+				<form id="delete-place-form" style="display: inline-block;" action="/places/<%= place._id %>?_method=DELETE" method="POST">
+          <a id="delete-place-form-submit" class="ui circular instagram icon button" data-tooltip="Permanently delete your post">
+          	<i class="ban icon"></i>
+        	</a>
+        </form>
+        <div class="ui mini modal delete-place">
+          <div class="header">Confirm delete</div>
+          <div class="content">
+            <p>Are you sure you want to delete the post?</p>
+          </div>
+          <div class="actions">
+            <div class="ui approve green button">Confirm</div>
+            <div class="ui cancel red button">Cancel</div>
+          </div>
+		    </div>
+      <% } %>
+		</div>
+		<div class="four wide column">
+			<p style="font-weight: bold">Created on:</p>
+			<p style="margin: 0"><%= place.createdAtDate %></p>
+			<p><%= place.createdAtTime %></p>
+		</div>
+	</div>
+</section>
+<!-- ****************************************************** -->
+<div class="ui divider"></div>
+<section id="2">
+	<div class="demo-gallery">
+    <ul id="lightgallery">
+    	<% place.images.forEach(function(image) { %>
+      	<li data-src=<%= image %>>
+        <a href="">
+          <img class="img-responsive" src="<%= image %>">
+          <div class="demo-gallery-poster">
+            <img src="https://i.imgur.com/twH1lI6.png">
+          </div>
+        </a>
+      	</li>
+      <% }) %>
+    </ul>
+	</div>
+</section>
+<!-- ****************************************************** -->
+<div class="ui divider"></div>
+<section id="3">
+	<p><%- place.description %></p>
+</section>
+<!-- ****************************************************** -->
+<div class="ui divider"></div>
+<section id="4">
+	<div id="map"></div>
+</section>
+<!-- ****************************************************** -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/css/lightgallery.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/js/lightgallery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.1.0/lg-thumbnail.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.0.1/lg-fullscreen.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#lightgallery").lightGallery(); 
+
+		$("#delete-place-form-submit").click(function(){
+    	$('.mini.modal.delete-place')
+        .modal({
+          onDeny    : function(){
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document  
+          },
+          onApprove : function() {
+              $('form#delete-place-form').submit();
+          },
+          approve  : '.positive, .approve, .ok',
+          deny     : '.negative, .deny, .cancel',
+        }).modal('setting', 'transition', 'scale')
+        .modal('show');
+    });
+	});
+</script>
+<script>
+  function initMap() {
+    var lat = <%= place.lat %>;
+    var lng = <%= place.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= place.name %><br />
+      <%= place.location %></strong>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('mouseover', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQobcx-8jUUZqhJp5ffqSLfAbAIVxm-Y&callback=initMap"></script>

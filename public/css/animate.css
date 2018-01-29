@@ -1,9 +1,25 @@
-.animated-index-header {
-  font-weight: 900;
-  font-size: 3.5em;
+.index-header {
+	text-align: center;
+	color: #303031;
+	padding: 30px 0;
 }
 
-.animated-index-header .letter {
+.anime-text {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.anime-text .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.anime-text .letter {
   display: inline-block;
   line-height: 1em;
 }

@@ -7,51 +7,50 @@
 			<h1>Reset Password</h1>
 			<form id="reset-form" class="ui form" action="/reset/<%= token %>" method="POST">
 				<div class="field">
-				    <label>New Password</label>
-				    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
+			    <label>New Password</label>
+			    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
 				</div>
 				<div class="field">
-				    <label>Confirm Password</label>
-				    <input type="password" name="confirm" placeholder="Confirm password">
+			    <label>Confirm Password</label>
+			    <input type="password" name="confirm" placeholder="Confirm password">
 				</div>
-			    <a id="reset-form-submit" class="ui green button" type="submit">Reset Password</a>
+        <a id="reset-form-submit" class="ui green button" type="submit">Reset Password</a>
 			</form>
 			<div class="ui mini modal">
-              <div class="header">Confirm reset</div>
-              <div class="content">
-                <p>Are you sure you want to reset the password?</p>
-              </div>
-              <div class="actions">
-                <div class="ui approve green button">Confirm</div>
-                <div class="ui cancel red button">Cancel</div>
-              </div>
-            </div>
+        <div class="header">Confirm reset</div>
+        <div class="content">
+          <p>Are you sure you want to reset the password?</p>
+        </div>
+        <div class="actions">
+          <div class="ui approve green button">Confirm</div>
+          <div class="ui cancel red button">Cancel</div>
+        </div>
+      </div>
 		</div>
 	</div>
 </div>
 
 <script>
 	$(document).ready(function(){
-        $(function() {
-           $("#reset-form-submit").click(function(){
-              $('.mini.modal')
-                  .modal({
-                    onDeny    : function(){
-                        var e = jQuery.Event("keyup"); // or keypress/keydown
-                        e.keyCode = 27; // for Esc
-                        $(document).trigger(e); // trigger it on document  
-                    },
-                    onApprove : function() {
-                        $('form#reset-form').submit();
-                    },
-                    approve  : '.positive, .approve, .ok',
-                    deny     : '.negative, .deny, .cancel',
-                  }).modal('setting', 'transition', 'scale')
-                  .modal('show')
-                ;
-           });
-        });
+    $(function() {
+      $("#reset-form-submit").click(function(){
+        $('.mini.modal')
+          .modal({
+            onDeny    : function(){
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document  
+            },
+            onApprove : function() {
+              $('form#reset-form').submit();
+            },
+            approve  : '.positive, .approve, .ok',
+            deny     : '.negative, .deny, .cancel',
+          }).modal('setting', 'transition', 'scale')
+          .modal('show');
+      });
     });
+  });
   $('.ui.form')
   .form({
     inline : true,
@@ -80,8 +79,7 @@
         ]
       }
     }
-  })
-;
+  });
 </script>
 
 <% include ../partials/footer %>

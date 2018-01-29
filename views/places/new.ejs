@@ -1,105 +1,106 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 <div class="upload-loading">
-    <div id="gallery-images" ></div>
+  <div id="gallery-images" ></div>
 </div>
 
 <div class="main">
-    <div class="ui container">
-        <h1>Create a New Place</h1>
-            <form id="new-place-form" class="ui form" action="/places" method="POST" enctype="multipart/form-data">
-                <div class="field">
-                    <input type="text" name="place[name]" placeholder="name">
-                </div>
-                <div id="image-type-selector" class="field">
-                    <label for="images" class="custom-image-upload">
-                        <span style="font-weight: 700;">Image Upload:</span> <span class="ui blue button">Upload</span> <span class="upload-text"> Upload a file</span>
-                    </label>
-                    <input type="file" id="images" name="images" accept="image/*" required multiple>
-                </div>
-                <div class="field">
-                    <input type="text" name="place[location]" id="location" placeholder="Yosemite National Park, CA">
-                </div>
-                <div id="autocomplete-map"></div>
-                <div class="field">
-                    <textarea name="place[description]" placeholder="description"></textarea>
-                </div>
-                <div class="field">
-                    <a id="new-place-form-submit" class="ui button">Submit!</a>
-                </div>
-            </form>
-            <p><a href="/places">Go Back</a></p>
-            <div class="ui mini modal">
-              <div class="header">Confirm post</div>
-              <div class="content">
-                <p>Are you sure you want to post?</p>
-              </div>
-              <div class="actions">
-                <div class="ui approve green button">Confirm</div>
-                <div class="ui cancel red button">Cancel</div>
-              </div>
-            </div>
-        </div>
+  <div class="ui container">
+    <h1>Create a New Place</h1>
+    <form id="new-place-form" class="ui form" action="/places" method="POST" enctype="multipart/form-data">
+      <div class="field">
+        <input type="text" name="place[name]" placeholder="name">
+      </div>
+      <div id="image-type-selector" class="field">
+        <label for="images" class="custom-image-upload">
+            <span style="font-weight: 700;">Image Upload:</span> <span class="ui blue button">Upload</span> <span class="upload-text"> Upload a file</span>
+        </label>
+        <input type="file" id="images" name="images" accept="image/*" required multiple>
+      </div>
+      <div class="field">
+        <input type="text" name="place[location]" id="location" placeholder="Alibaug">
+      </div>
+      <div id="autocomplete-map"></div>
+      <div class="field">
+        <textarea name="place[description]" placeholder="description"></textarea>
+      </div>
+      <div class="field">
+        <a id="new-place-form-submit" class="ui button">Submit!</a>
+      </div>
+    </form>
+    <p>
+      <a href="/places">Go Back</a>
+    </p>
+    <div class="ui mini modal">
+      <div class="header">Confirm post</div>
+      <div class="content">
+        <p>Are you sure you want to post?</p>
+      </div>
+      <div class="actions">
+        <div class="ui approve green button">Confirm</div>
+        <div class="ui cancel red button">Cancel</div>
+      </div>
     </div>
+  </div>
+</div>
 </div>
 
 <script>
-    $(document).ready(function(){
-        $(".upload-text").css({
-            "margin-left" : "2%"
-        });
-
-        $(".ui.blue.button").css({
-            "margin-left" : "1%"
-        });
-
-        $('input[type="file"]').change(function(e){
-            var fileName = e.target.files[0].name;
-            $(".upload-text").html("Files are ready for upload");
-        });
-        $('.ui.form').submit(function() {
-            $('.upload-loading').css('visibility', 'visible');
-        });
-
-        $(function() {
-           $("#new-place-form-submit").click(function(){
-              $('.mini.modal')
-                  .modal({
-                    onDeny    : function(){
-                        var e = jQuery.Event("keyup"); // or keypress/keydown
-                        e.keyCode = 27; // for Esc
-                        $(document).trigger(e); // trigger it on document  
-                    },
-                    onApprove : function() {
-                        $('form#new-place-form').submit();
-                    },
-                    approve  : '.positive, .approve, .ok',
-                    deny     : '.negative, .deny, .cancel',
-                  }).modal('setting', 'transition', 'scale')
-                  .modal('show')
-                ;
-           });
-        });
+  $(document).ready(function(){
+    $(".upload-text").css({
+      "margin-left" : "2%"
     });
 
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
-          zoom: 13
-        });
-        var input = document.getElementById('location');
+    $(".ui.blue.button").css({
+      "margin-left" : "1%"
+    });
 
-        var autocomplete = new google.maps.places.Autocomplete(input);
+    $('input[type="file"]').change(function(e){
+      var fileName = e.target.files[0].name;
+      $(".upload-text").html("Files are ready for upload");
+    });
+    $('.ui.form').submit(function() {
+      $('.upload-loading').css('visibility', 'visible');
+    });
 
-        autocomplete.addListener('place_changed', function() {
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input:");
-            return;
-          }
-        });
+    $(function() {
+      $("#new-place-form-submit").click(function(){
+        $('.mini.modal')
+          .modal({
+            onDeny    : function(){
+                var e = jQuery.Event("keyup"); // or keypress/keydown
+                e.keyCode = 27; // for Esc
+                $(document).trigger(e); // trigger it on document  
+            },
+            onApprove : function() {
+                $('form#new-place-form').submit();
+            },
+            approve  : '.positive, .approve, .ok',
+            deny     : '.negative, .deny, .cancel',
+          }).modal('setting', 'transition', 'scale')
+          .modal('show');
+      });
+    });
+  });
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
+    zoom: 13
+  });
+  var input = document.getElementById('location');
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      window.alert("No details available for input:");
+      return;
     }
+  });
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQobcx-8jUUZqhJp5ffqSLfAbAIVxm-Y&&libraries=places&callback=initMap" async defer>
 </script>

@@ -11,11 +11,11 @@ var storage = multer.diskStorage({
   }
 });
 var imageFilter = function (req, file, cb) {
-    // accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error('Only image files are allowed!'), false);
-    }
-    cb(null, true);
+  // accept image files only
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+      return cb(new Error('Only image files are allowed!'), false);
+  }
+  cb(null, true);
 };
 var upload = multer({ storage: storage, fileFilter: imageFilter})
 
@@ -29,14 +29,15 @@ cloudinary.config({
 
 //INDEX - show all places
 router.get("/", function(req, res){
-    // Get all places from DB
-    Place.find({}, function(err, allPlaces){
-       if(err){
-           console.log(err);
-       } else {
-          res.render("places/index",{places:allPlaces});
-       }
-    });
+  // Get all places from DB
+  Place.find({}, function(err, allPlaces){
+     if(err){
+        req.flash("error", "Something went wrong!! Try again!");
+        res.redirect("/places");
+     } else {
+        res.render("places/index",{places:allPlaces});
+     }
+  });
 });
 
 //CREATE - add new place to DB
@@ -53,7 +54,6 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
     for(var i=0; i<req.files.length; i++) {
       cloudinary.uploader.upload(req.files[i].path, function(result) {
         // add cloudinary url for the image to the place object under image property
-        console.log(result);
         req.body.place.images.push(result.secure_url);
       });
     }
@@ -73,15 +73,13 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
         if(req.body.place.images.length)
         // Create a new place and save to DB
         Place.create(req.body.place, function(err, newlyCreated){
-            if(err){
-                req.flash("error", err.message);
-                console.log(err);
-            } else {
-                req.flash("success", "Added a new place, " + newlyCreated.name);
-                //redirect back to places page
-                console.log(newlyCreated);
-                res.redirect("/places");
-            }
+          if(err){
+            req.flash("error", "Something went wrong!! Try again!");
+            res.redirect("/places");
+          } else {
+            req.flash("success", "Added a new place, " + newlyCreated.name);
+            res.redirect("/places");
+          }
         });
       } else {
         setTimeout(main, 500);
@@ -97,22 +95,28 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 
 // SHOW - shows more info about one place
 router.get("/:id", function(req, res){
-    //find the place with provided ID
-    Place.findById(req.params.id).populate("comments").exec(function(err, foundPlace){
-        if(err){
-            console.log(err);
-        } else {
-            //render show template with that place
-            res.render("places/show", {place: foundPlace});
-        }
-    });
+  //find the place with provided ID
+  Place.findById(req.params.id).populate("comments").exec(function(err, foundPlace){
+    if(err){
+      req.flash("error", "Something went wrong!! Try again!");
+      res.redirect("/places");
+    } else {
+      //render show template with that place
+      res.render("places/show", {place: foundPlace});
+    }
+  });
 });
 
 // EDIT PLACE ROUTE
 router.get("/:id/edit",middleware.checkPlaceOwnership, function(req, res){
-    Place.findById(req.params.id, function(err, foundPlace){
-        res.render("places/edit", {place: foundPlace});
-    });
+  Place.findById(req.params.id, function(err, foundPlace){
+    if(err){
+      req.flash("error", "Something went wrong!! Try again!");
+      res.redirect(("/places/" + req.params.id) || "/places");
+    } else {
+      res.render("places/edit", {place: foundPlace});
+    }
+  });
 });
 
 // UPDATE PLACE ROUTE
@@ -123,30 +127,29 @@ router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
     req.body.place.location = data.results[0].formatted_address;
     // find and update the correct place
     Place.findByIdAndUpdate(req.params.id, req.body.place, function(err, updatedPlace){
-       if(err){
-          req.flash("error", err.message);
-          res.redirect("/places");
-       } else {
-          //redirect somewhere(show page)
-          req.flash("success", "Updated!!");
-          console.log(req.body.place);
-          res.redirect("/places/" + req.params.id);
-       }
+      if(err){
+        req.flash("error", "Something went wrong!! Try again!");
+        res.redirect(("/places/" + req.params.id) || "/places");
+      } else {
+        //redirect somewhere(show page)
+        req.flash("success", "Updated!!");
+        res.redirect("/places/" + req.params.id);
+      }
     });
   });
 });
 
 // DESTROY PLACE ROUTE
 router.delete("/:id",middleware.checkPlaceOwnership, function(req, res){
-   Place.findByIdAndRemove(req.params.id, function(err){
-      if(err){
-          req.flash("error", err.message);
-          res.redirect("/places");
-      } else {
-          req.flash("success", "Deleted the place successfully");
-          res.redirect("/places");
-      }
-   });
+  Place.findByIdAndRemove(req.params.id, function(err){
+    if(err){
+      req.flash("error", "Something went wrong!! Try again!");
+      res.redirect("/places");
+    } else {
+      req.flash("success", "Deleted the place successfully");
+      res.redirect("/places");
+    }
+  });
 });
 
 

@@ -79,10 +79,10 @@ router.get("/login", function(req, res){
 router.post("/login", function (req, res, next) {
   passport.authenticate("local", 
     {
-        successRedirect: "/places",
-        successFlash: 'Welcome back, ' + req.body.username + '!',
-        failureRedirect: "/login",
-        failureFlash: "Please try again"
+      successRedirect: '/places',
+      successFlash: 'Welcome back, ' + req.body.username + '!',
+      failureRedirect: "/login",
+      failureFlash: "Please try again"
     })(req, res);
 });
 

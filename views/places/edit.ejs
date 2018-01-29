@@ -1,77 +1,76 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
-<div class="main">
+  <div class="main">
     <div class="ui container">
-        <h1>Edit <%= place.name %></h1>
-            <form id="edit-place-form" class="ui form" action="/places/<%= place._id %>?_method=PUT" method="POST">
-                <div class="field">
-                    <input type="text" name="place[name]" value="<%= place.name %>">
-                </div>
-                <div class="field">
-                    <input type="text" name="place[location]" id="location" value="<%= place.location %>">
-                </div>
-                <div class="field">
-                    <textarea name="place[description]"><%= place.description %></textarea>
-                </div>
-                <div id="autocomplete-map"></div>
-                <div class="field">
-                    <a id="edit-place-form-submit" class="ui button">Submit!</a>
-                </div>
-            </form>
-            <a href="/places">Go Back</a>
-            <div class="ui mini modal">
-              <div class="header">Confirm edit</div>
-              <div class="content">
-                <p>Are you sure you want to edit this post?</p>
-              </div>
-              <div class="actions">
-                <div class="ui approve green button">Confirm</div>
-                <div class="ui cancel red button">Cancel</div>
-              </div>
-            </div>
+      <h1>Edit <%= place.name %></h1>
+      <form id="edit-place-form" class="ui form" action="/places/<%= place._id %>?_method=PUT" method="POST">
+        <div class="field">
+            <input type="text" name="place[name]" value="<%= place.name %>">
         </div>
+        <div class="field">
+            <input type="text" name="place[location]" id="location" value="<%= place.location %>">
+        </div>
+        <div class="field">
+            <textarea name="place[description]"><%= place.description %></textarea>
+        </div>
+        <div id="autocomplete-map"></div>
+        <div class="field">
+            <a id="edit-place-form-submit" class="ui button">Submit!</a>
+        </div>
+      </form>
+      <a href="/places">Go Back</a>
+      <div class="ui mini modal">
+        <div class="header">Confirm edit</div>
+        <div class="content">
+          <p>Are you sure you want to edit this post?</p>
+        </div>
+        <div class="actions">
+          <div class="ui approve green button">Confirm</div>
+          <div class="ui cancel red button">Cancel</div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 <script>
-    $(document).ready(function(){
-        $(function() {
-           $("#edit-place-form-submit").click(function(){
-              $('.mini.modal')
-                  .modal({
-                    onDeny    : function(){
-                        var e = jQuery.Event("keyup"); // or keypress/keydown
-                        e.keyCode = 27; // for Esc
-                        $(document).trigger(e); // trigger it on document  
-                    },
-                    onApprove : function() {
-                        $('form#edit-place-form').submit();
-                    },
-                    approve  : '.positive, .approve, .ok',
-                    deny     : '.negative, .deny, .cancel',
-                  }).modal('setting', 'transition', 'scale')
-                  .modal('show')
-                ;
-           });
-        });
+  $(document).ready(function(){
+    $(function() {
+      $("#edit-place-form-submit").click(function(){
+        $('.mini.modal')
+          .modal({
+            onDeny    : function(){
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document  
+            },
+            onApprove : function() {
+              $('form#edit-place-form').submit();
+            },
+            approve  : '.positive, .approve, .ok',
+            deny     : '.negative, .deny, .cancel',
+          }).modal('setting', 'transition', 'scale')
+          .modal('show');
+      });
     });
+  });
 
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
-      zoom: 13
-    });
-    var input = document.getElementById('location');
+  var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
+    zoom: 13
+  });
+  var input = document.getElementById('location');
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
+  var autocomplete = new google.maps.places.Autocomplete(input);
 
-    autocomplete.addListener('place_changed', function() {
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input:");
-        return;
-      }
-    });
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      window.alert("No details available for input:");
+      return;
+    }
+  });
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQobcx-8jUUZqhJp5ffqSLfAbAIVxm-Y&&libraries=places&callback=initMap" async defer>

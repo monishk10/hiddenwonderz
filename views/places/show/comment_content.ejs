@@ -1,0 +1,165 @@
+<div class="ui divider"></div>
+	<section id="5">
+		<h1>Comments</h1>
+		<div class="ui accordion">
+			<div class="title">
+				<span class="ui green button">Add Comment</span>
+			</div>
+			<div class="content">
+				<% if(!currentUser) { %>
+          <!--If the user is not logged in, direct him to the login page-->
+          <h5>You need to login before you can comment. <a href="/login">Click here</a> to go to the login page.</h5>
+		    <% } %>
+		    <% if(currentUser) { %>
+					<form class="ui form" action="/places/<%= place._id %>/comments" method="POST">
+            <div class="field">
+              <input type="text" disabled value="<%= currentUser.username %>">
+            </div>
+            <div class="rating-widget">
+	          	<!-- Rating Stars Box -->
+							<div class='rating-stars text-center'>
+						    <ul style="font-size: 7px;" id='stars'>
+						      <li class='star' title='Poor' data-value='1'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='Fair' data-value='2'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='Good' data-value='3'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='Excellent' data-value='4'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='WOW!!!' data-value='5'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						    </ul>
+							</div>
+		        </div>
+		        <!-- To store star rating value -->
+		        <textarea style="display: none;" id="rating-value" name="comment[rating]"></textarea>
+            <div class="field">
+              <textarea name="comment[text]" placeholder="Write your comment..." rows="5" cols="70"></textarea>
+            </div>
+            <div class="field">
+              <button class="ui green button">Comment</button>
+            </div>
+					</form>
+				<% } %>
+			</div>
+		</div>
+		<!--Check if there are comments, if there are none say no comments.-->
+    <% if (place.comments.length === 0) { %>
+  		<em style="color: grey;">No comments yet.</em>
+    <% } %>
+    <!-- If comments are there -->
+    <div class="ui feed">
+			<% place.comments.forEach(function(comment) { %>
+				<div class="event">
+					<div class="label">
+			      <img src="<%= comment.author.avatar %>">
+			    </div>
+			    <div class="content">
+			    	<div class="summary">
+							<a href="/user/<%= comment.author.id %>"><%= comment.author.username %></a> commented
+							<div class="date">
+								<%= moment(comment.createdAt).fromNow() %>
+							</div>
+						</div>
+						<!-- Rating Stars Box -->
+						<div class='rating-stars text-center'>
+					    <ul style="font-size: 5px;">
+					    	<% for (var i=1; i<= comment.rating; i++) { %>
+					    		<li class='star selected' data-value='<%= i %>'>
+					        		<i class='fa fa-star fa-fw'></i>
+					      	</li>
+					    	<% } %>
+					    	<% for (var i=5; i> comment.rating; i--) { %>
+					    		<li class='star' data-value='<%= i %>'>
+					        		<i class='fa fa-star fa-fw'></i>
+					      	</li>
+					    	<% } %>
+					    </ul>
+						</div>
+						<div class="extra text">
+							<%= comment.text %>
+						</div>
+					</div>
+				</div>
+				<p>
+				<% if (currentUser && currentUser._id.equals(comment.author.id) || currentUser && currentUser.isAdmin) { %>
+					<div class="ui accordion">
+						<div class="title">
+							<a style="margin: 0;" class="ui circular twitter icon button" data-tooltip="Edit your comment">
+								<i class="edit icon"></i>
+								Edit your comment
+							</a>
+							<form class="delete-comment-form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+			    			<button style="margin: 0;" class="ui circular instagram icon button" data-tooltip="Permanently delete your comment">
+		            	<i class="ban icon"></i> Delete your comment
+		          	</button>
+			    		</form>
+						</div>
+						<div class="content">
+							<form class="ui form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+                <div class="field">
+                  <input type="text" disabled value="<%= currentUser.username %>">
+                </div>
+                <div class="field">
+                  <textarea name="comment[text]" rows="5" cols="70"><%= comment.text %></textarea>
+                </div>
+        				<div class="field">
+		              <button class="ui blue button">Edit Comment</button>
+		            </div>
+	  					</form>
+						</div>
+					</div>
+				<% } %>
+				</p>
+			<% }); %>
+		</div>
+	</section>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+<script>
+	$(document).ready(function(){
+		/* 1. Visualizing things on Hover - See next part for action on click */
+		$('#stars li').on('mouseover', function(){
+	    var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+	   
+	    // Now highlight all the stars that's not after the current hovered star
+	    $(this).parent().children('li.star').each(function(e){
+	      if (e < onStar) {
+	        $(this).addClass('hover');
+	      } else {
+	        $(this).removeClass('hover');
+	      }
+	    });
+		    
+		}).on('mouseout', function(){
+	    $(this).parent().children('li.star').each(function(e){
+	      $(this).removeClass('hover');
+	    });
+		});
+		  
+		/* 2. Action to perform on click */
+		$('#stars li').on('click', function(){
+	    var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+	    var stars = $(this).parent().children('li.star');
+	    $('#rating-value').text(onStar);
+	    for (i = 0; i < stars.length; i++) {
+	      $(stars[i]).removeClass('selected');
+	    }
+	    
+	    for (i = 0; i < onStar; i++) {
+	      $(stars[i]).addClass('selected');
+	    }
+		});
+
+		/* Edit Accordion */		
+		$('.ui.accordion').accordion();
+		$(function() {
+	    	$("#accordion").accordion();
+	  	});
+	});
+</script>

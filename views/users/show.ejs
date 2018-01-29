@@ -13,36 +13,35 @@
 				<% if (user.username == currentUser.username) { %>
 					<p style="color: grey;">Post something exciting</p>
 					<a class="ui labeled icon button" href="/places/new">
-				        <i class="plus icon"></i>
-				        <span class="add-button">Add new place</span>
-				    </a>
+		        <i class="plus icon"></i>
+		        <span class="add-button">Add new place</span>
+				  </a>
 				<% } %>
 			<% } %>
 		<% } %>
-			<div class="ui special cards">
-				<% places.forEach(function(place){ %>
-					<div class="card">
-						<div class="blurring dimmable image">
-							<div class="ui dimmer">
-								<div class="content">
-						          <div class="center">
-						          	<a class="ui inverted button" href="/places/<%= place.id %>"><%= place.name %></a>
-						          </div>
-						        </div>
-						    </div>
-							<img src="<%= place.images[0] %>">
-						</div>
-						<div style="display: none;" id="place-header" class="content">
-							<h1 style="text-align: center;" class="header">
-								<%= place.name %>
-							</h1>
-						</div>
+		<div class="ui special cards">
+			<% places.forEach(function(place){ %>
+				<div class="card">
+					<div class="blurring dimmable image">
+						<div class="ui dimmer">
+							<div class="content">
+			          <div class="center">
+			          	<a class="ui inverted button" href="/places/<%= place.id %>"><%= place.name %></a>
+			          </div>
+			        </div>
+				    </div>
+						<img src="<%= place.images[0] %>">
 					</div>
-				<% }); %>
-			</div>
+					<div style="display: none;" id="place-header" class="content">
+						<h1 style="text-align: center;" class="header">
+							<%= place.name %>
+						</h1>
+					</div>
+				</div>
+			<% }); %>
+		</div>
 	</div>
 </div>
-<% include ../partials/footer %>
 <script>
 	$('.special.cards .image').dimmer({
 	  on: 'hover'
@@ -60,3 +59,4 @@
 		}
 	);
 </script>
+<% include ../partials/footer %>
