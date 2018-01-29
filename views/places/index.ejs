@@ -11,13 +11,26 @@
     <h2 class="tag-line">Some attractive tag-line</h2>  
   </div> 
   <div class="ui container">
-    <div class="user-control-buttons">
-      <a class="ui labeled icon button" href="/places/new">
-        <i class="plus icon"></i>
-          <span class="add-button">Add new place</span>
-      </a>
+    <div class="ui grid">
+      <div class="ten wide column">
+        <form class="ui form" action="/places" method="GET">
+          <div class="inline field">
+            <input style="width: 50%;" type="text" name="search" placeholder="Search using location...">
+            <button class="ui blue button">Search</button>
+          </div>
+        </form>
+      </div>
+      <div class="right aligned six wide column">
+        <a class="ui labeled icon button" href="/places/new">
+          <i class="plus icon"></i>
+            <span class="add-button">Add new place</span>
+        </a>
+      </div>
     </div>
     <div class="ui horizontal divider">BLOG POSTS</div>
+    <% if(noMatch !== undefined) { %>
+      <h3><%= noMatch %></h3>
+    <% } %>
     <div class="grid-structure">
       <div class="masonry">
         <% places.forEach(function(place){ %>
@@ -28,14 +41,17 @@
                   <img src="<%= place.images[0] %>">
                 </div>
                 <div class="content">
-                  <div class="header"><%= place.name %></div>
+                  <div class="header">
+                    <%= place.name %> <br>
+                    (<%= place.location %>)
+                  </div>
                   <div class="description">
                     <p><%- place.description.substring(0, 100) %>...</p>
                     <a href="/places/<%= place._id %>" class="ui button full-width" data-tooltip="Click here for more info on <%= place.name %>" data-position="top left" data-inverted="">More Info</a>
                   </div>
                 </div>
                 <div class="extra content">
-                  <span><i class="user icon"></i>Created by: <%= place.author.username %></span>
+                  <i class="user icon"></i>Created by: <%= place.author.username %>
                 </div>
               </div>
             </div>

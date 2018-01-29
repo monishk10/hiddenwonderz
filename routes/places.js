@@ -29,15 +29,32 @@ cloudinary.config({
 
 //INDEX - show all places
 router.get("/", function(req, res){
-  // Get all places from DB
-  Place.find({}, function(err, allPlaces){
-     if(err){
+  var noMatch;
+  // Search specific term
+  if(req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    Place.find({"location": regex}, function(err, allPlaces){
+       if(err){
         req.flash("error", "Something went wrong!! Try again!");
         res.redirect("/places");
-     } else {
-        res.render("places/index",{places:allPlaces});
-     }
-  });
+       } else {
+        if(allPlaces.length < 1){
+          noMatch = "No data found. Please search again."
+        }
+        res.render("places/index",{places:allPlaces, noMatch: noMatch});
+      }
+    });
+  } else {
+    // Get all places from DB
+    Place.find({}, function(err, allPlaces){
+       if(err){
+          req.flash("error", "Something went wrong!! Try again!");
+          res.redirect("/places");
+       } else {
+          res.render("places/index",{places:allPlaces, noMatch: noMatch});
+       }
+    });
+  }
 });
 
 //CREATE - add new place to DB
@@ -152,5 +169,8 @@ router.delete("/:id",middleware.checkPlaceOwnership, function(req, res){
   });
 });
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
