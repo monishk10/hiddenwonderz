@@ -47,6 +47,11 @@
   </div>
 </div>
 </div>
+<style>
+  #editor {
+    height: 250px;
+  }
+</style>
 <!-- Initialize Quill editor -->
 <script>
   var toolbarOptions = [
@@ -57,6 +62,7 @@
   ]
   var quill = new Quill('#editor', {
       modules: { toolbar: toolbarOptions },
+      placeholder: 'Description...',
     theme: 'snow'
   });
 
