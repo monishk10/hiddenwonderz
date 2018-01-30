@@ -42,12 +42,8 @@
 			nav = $('.sidenav'), 
 			nav_height = $('.topnav').outerHeight(),
 	  	look_offset = 20,
-	  	mobile_offset = 20;
+	  	mobile_offset = 10;
 	
-	if ($(window).width() < 991) {
-		var mobile_offset = 80;
-	}
-
 	$(window).on('scroll', function () {
 	  var cur_pos = $(this).scrollTop();
 	  

@@ -13,22 +13,19 @@
         <a class="noextra-underline" href="/login">Login</a>
         <a class="noextra-underline" href="/register">Register</a>
       <% } else { %>
-        <div class="mobileNavbarUser">
-          <div class="dropdown">
-            <button class="dropbtn">
-              <img class="ui avatar image" src="<%= currentUser.avatar %>">
-              <span style="font-size: 1.1em; font-weight: bold;"><%= currentUser.firstName %></span>
-            </button>
-            <div class="dropdown-content">
-              <a class="noextra-underline" href="/user/<%= currentUser._id %>">My Profile</a>
-              <a class="noextra-underline" href="/logout">Logout</a>
-            </div>
+        <div class="dropdown">
+          <button class="dropbtn">
+            <img class="ui avatar image" src="<%= currentUser.avatar %>">
+            <span style="font-size: 1.1em; font-weight: bold;"><%= currentUser.firstName %></span>
+          </button>
+          <div class="dropdown-content">
+            <a class="noextra-underline" href="/user/<%= currentUser._id %>">My Profile</a>
+            <a class="noextra-underline" href="/logout">Logout</a>
           </div>
         </div>
-      <% } %>
+    <% } %>
     </div>
   </div>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 </div>
 <div>
   <% if(error && error.length > 0) { %>
@@ -48,15 +45,6 @@
   <% } %>
 </div>
 <script>
-/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-        x.className += " responsive";
-    } else {
-        x.className = "topnav";
-    }
-}
 /* To make active class */
 $(document).ready( function(){
   var location = window.location.pathname;
@@ -96,9 +84,4 @@ $(document).ready( function(){
 $('.message').transition('fly down', '5s');
 
 $('.ui.dropdown').dropdown();
-var currentUserId = $('#currentUser').text();
-if(window.innerWidth < 990){
-  $('.mobileNavbarUser').html('<a class="noextra-underline" href="/user/' + currentUserId + '">My Profile</a><a class="noextra-underline" href="/logout">Logout</a>');
-}
-
 </script>
