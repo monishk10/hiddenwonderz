@@ -59,7 +59,8 @@
 <!-- ****************************************************** -->
 <div class="ui divider"></div>
 <section id="3">
-	<p><%- place.description %></p>
+  <div id="editor"></div>
+	<p style="display: none;" id="jsonDescription"><%- place.description %></p>
 </section>
 <!-- ****************************************************** -->
 <div class="ui divider"></div>
@@ -71,12 +72,27 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.6/js/lightgallery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-thumbnail/1.1.0/lg-thumbnail.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lg-fullscreen/1.0.1/lg-fullscreen.min.js"></script>
+<style>
+  .ql-container.ql-snow {
+    border: none;
+  }
+</style>
 <script>
 	$(document).ready(function(){
 		$("#lightgallery").lightGallery(); 
 
+    var quill = new Quill('#editor', {
+      modules: {
+        toolbar: false
+      },
+      theme: 'snow'
+    });
+    var descriptionContent = $('#jsonDescription').html();
+    quill.setContents(JSON.parse(descriptionContent));
+    quill.enable(false);
+
 		$("#delete-place-form-submit").click(function(){
-    	$('.mini.modal.delete-place')
+    	$('.mini.modal')
         .modal({
           onDeny    : function(){
               var e = jQuery.Event("keyup"); // or keypress/keydown

@@ -22,7 +22,10 @@
       </div>
       <div id="autocomplete-map"></div>
       <div class="field">
-        <textarea name="place[description]" placeholder="description"></textarea>
+        <!-- Create the toolbar container -->
+        <div id="toolbar"></div>
+        <div id="editor"></div>
+        <textarea style="display: none;" name="place[description]" id="description"></textarea>
       </div>
       <div class="field">
         <a id="new-place-form-submit" class="ui button">Submit!</a>
@@ -44,8 +47,19 @@
   </div>
 </div>
 </div>
-
+<!-- Initialize Quill editor -->
 <script>
+  var toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    [{ 'align': [] }]
+  ]
+  var quill = new Quill('#editor', {
+      modules: { toolbar: toolbarOptions },
+    theme: 'snow'
+  });
+
   $(document).ready(function(){
     $(".upload-text").css({
       "margin-left" : "2%"
@@ -65,6 +79,10 @@
 
     $(function() {
       $("#new-place-form-submit").click(function(){
+        var delta = quill.getContents();
+        var newSomething = JSON.stringify(delta);
+        console.log(newSomething);
+        $('#description').html(newSomething);
         $('.mini.modal')
           .modal({
             onDeny    : function(){

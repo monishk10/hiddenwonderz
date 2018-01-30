@@ -14,9 +14,11 @@
     <div class="ui grid">
       <div class="ten wide column">
         <form class="ui form" action="/places" method="GET">
-          <div class="inline field">
-            <input style="width: 50%;" type="text" name="search" placeholder="Search using location...">
-            <button class="ui blue button">Search</button>
+          <div class="ui search">
+            <div class="ui icon input">
+              <input style="width: 300px; border-radius: 1.2rem;" name="search" type="text" placeholder="Search locations...">
+              <i class="search icon"></i>
+            </div>
           </div>
         </form>
       </div>
@@ -46,7 +48,6 @@
                     (<%= place.location %>)
                   </div>
                   <div class="description">
-                    <p><%- place.description.substring(0, 100) %>...</p>
                     <a href="/places/<%= place._id %>" class="ui button full-width" data-tooltip="Click here for more info on <%= place.name %>" data-position="top left" data-inverted="">More Info</a>
                   </div>
                 </div>
