@@ -60,6 +60,26 @@ router.get("/", function(req, res){
 //CREATE - add new place to DB
 router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, res){
   geocoder.geocode(req.body.place.location, function (err, data) {
+    if (err || data.status === 'ZERO_RESULTS') {
+      req.flash('error', 'Invalid location address.. Try again');
+      return res.redirect('back');
+    }
+
+    if (err || data.status === 'REQUEST_DENIED') {
+      req.flash('error', 'Something Is Wrong, your Request Was Denied');
+      return res.redirect('back');
+    }
+    
+    if (err || data.status === 'OVER_QUERY_LIMIT') {
+      req.flash('error', 'All Requests Used Up');
+      return res.redirect('back');
+    }
+    
+    if(err || data.status === 'UNKNOWN_ERROR' || data.status === 'ERROR'){
+      req.flash('error', "Error");
+      return res.redirect("back");
+    }
+
     req.body.place.lat = data.results[0].geometry.location.lat;
     req.body.place.lng = data.results[0].geometry.location.lng;
     req.body.place.location = data.results[0].formatted_address;
