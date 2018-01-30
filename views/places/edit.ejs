@@ -57,6 +57,32 @@
     var descriptionContent = $('#jsonDescription').html();
     quill.setContents(JSON.parse(descriptionContent));
 
+    $('.ui.form')
+      .form({
+        inline : true,
+        on: 'blur',
+        fields: {
+          name: {
+            identifier: 'place[name]',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter location\'s name'
+              }
+            ]
+          },
+          location: {
+            identifier: 'place[location]',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a valid location'
+              }
+            ]
+          }
+        }
+      });
+
     $(function() {
       $("#edit-place-form-submit").click(function(){
         var delta = quill.getContents();
@@ -70,7 +96,11 @@
               $(document).trigger(e); // trigger it on document  
             },
             onApprove : function() {
-              $('form#edit-place-form').submit();
+              if(($('#description').text().length > 26)) {
+                $('form#edit-place-form').submit();
+              } else {
+                alert("No description entered...");
+              }
             },
             approve  : '.positive, .approve, .ok',
             deny     : '.negative, .deny, .cancel',
