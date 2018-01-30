@@ -11,7 +11,9 @@
             <input type="text" name="place[location]" id="location" value="<%= place.location %>">
         </div>
         <div class="field">
-            <textarea name="place[description]"><%= place.description %></textarea>
+          <div id="editor"></div>
+          <p style="display: none;" id="jsonDescription"><%- place.description %></p>
+          <textarea style="display: none;" name="place[description]" id="description"></textarea>
         </div>
         <div id="autocomplete-map"></div>
         <div class="field">
@@ -32,10 +34,34 @@
     </div>
   </div>
 </div>
+<style>
+  #editor {
+    height: 250px;
+  }
+</style>
 <script>
   $(document).ready(function(){
+    var toolbarOptions = [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'size': ['small', false, 'large', 'huge'] }],
+      [{ 'align': [] }]
+    ]
+    var quill = new Quill('#editor', {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      theme: 'snow'
+    });
+
+    var descriptionContent = $('#jsonDescription').html();
+    quill.setContents(JSON.parse(descriptionContent));
+
     $(function() {
       $("#edit-place-form-submit").click(function(){
+        var delta = quill.getContents();
+        var newSomething = JSON.stringify(delta);
+        $('#description').html(newSomething);
         $('.mini.modal')
           .modal({
             onDeny    : function(){
