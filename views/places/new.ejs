@@ -83,11 +83,37 @@
       $('.upload-loading').css('visibility', 'visible');
     });
 
+    $('.ui.form')
+      .form({
+        inline : true,
+        on: 'blur',
+        fields: {
+          name: {
+            identifier: 'place[name]',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter location\'s name'
+              }
+            ]
+          },
+          location: {
+            identifier: 'place[location]',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a valid location'
+              }
+            ]
+          }
+        }
+      });
+
     $(function() {
+      console.log($('#description').text().length);
       $("#new-place-form-submit").click(function(){
         var delta = quill.getContents();
         var newSomething = JSON.stringify(delta);
-        console.log(newSomething);
         $('#description').html(newSomething);
         $('.mini.modal')
           .modal({
@@ -97,7 +123,15 @@
                 $(document).trigger(e); // trigger it on document  
             },
             onApprove : function() {
-                $('form#new-place-form').submit();
+              if(($('input[type="file"]').val())) {
+                if(($('#description').text().length > 26)) {
+                  $('form#new-place-form').submit();
+                } else {
+                  alert("No description entered...");
+                }
+              } else {
+                alert("No image file selected...");
+              }
             },
             approve  : '.positive, .approve, .ok',
             deny     : '.negative, .deny, .cancel',
