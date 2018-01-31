@@ -76,14 +76,26 @@ router.get("/login", function(req, res){
 });
 
 //handling login logic
-router.post("/login", function (req, res, next) {
-  passport.authenticate("local", 
-    {
-      successRedirect: '/places',
-      successFlash: 'Welcome back, ' + req.body.username + '!',
-      failureRedirect: "/login",
-      failureFlash: "Please try again"
-    })(req, res);
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { 
+      req.flash("error", "Something went wrong!! Try again!");
+      return next(err); 
+    }
+    if (!user) { 
+      req.flash("error", "Invalid username/password. Try again!");
+      return res.redirect('/login'); 
+    }
+    req.logIn(user, function(err) {
+      if (err) { 
+        req.flash("error", "Something went wrong!! Try again!");
+        return next(err); 
+      }
+      var redirectTo = req.session.redirectTo ? req.session.redirectTo : '/places';
+      delete req.session.redirectTo;
+      res.redirect(redirectTo);
+    });
+  })(req, res, next);
 });
 
 // logout route
