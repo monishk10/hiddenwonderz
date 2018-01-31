@@ -33,7 +33,7 @@ router.get("/", function(req, res){
   // Search specific term
   if(req.query.search){
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-    Place.find({"location": regex}, function(err, allPlaces){
+    Place.find().or([{"location": regex}, {"name": regex}]).exec(function(err, allPlaces){
        if(err){
         req.flash("error", "Something went wrong!! Try again!");
         res.redirect("/places");
