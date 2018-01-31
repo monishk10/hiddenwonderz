@@ -30,29 +30,52 @@ cloudinary.config({
 //INDEX - show all places
 router.get("/", function(req, res){
   var noMatch;
+  var perPage = 8;
+  var pageQuery = parseInt(req.query.page);
+  var pageNumber = pageQuery ? pageQuery : 1;
   // Search specific term
   if(req.query.search){
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-    Place.find().or([{"location": regex}, {"name": regex}]).exec(function(err, allPlaces){
-       if(err){
-        req.flash("error", "Something went wrong!! Try again!");
-        res.redirect("/places");
-       } else {
-        if(allPlaces.length < 1){
-          noMatch = "No data found. Please search again."
+    Place.find().or([{"location": regex}, {"name": regex}]).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allPlaces){
+       Place.count().or([{"location": regex}, {"name": regex}]).exec(function (err, count) {
+         if(err){
+          req.flash("error", "Something went wrong!! Try again!");
+          res.redirect("back");
+         } else {
+          if(allPlaces.length < 1){
+            noMatch = "No data found. Please search again."
+          }
+          res.render("places/index",
+            {
+              places:allPlaces, 
+              noMatch: noMatch, 
+              current: pageNumber, 
+              pages: Math.ceil(count / perPage),
+              search: req.query.search
+            }
+          );
         }
-        res.render("places/index",{places:allPlaces, noMatch: noMatch});
-      }
+      });
     });
   } else {
     // Get all places from DB
-    Place.find({}, function(err, allPlaces){
-       if(err){
+    Place.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allPlaces){
+      Place.count().exec(function (err, count) {
+        if(err){
           req.flash("error", "Something went wrong!! Try again!");
           res.redirect("/places");
-       } else {
-          res.render("places/index",{places:allPlaces, noMatch: noMatch});
-       }
+        } else {
+          res.render("places/index",
+            {
+              places:allPlaces,
+              noMatch: noMatch,
+              current: pageNumber,
+              pages: Math.ceil(count / perPage),
+              search: false
+            }
+          );
+        }
+      });
     });
   }
 });
@@ -67,11 +90,6 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
 
     if (err || data.status === 'REQUEST_DENIED') {
       req.flash('error', 'Something Is Wrong, your Request Was Denied');
-      return res.redirect('back');
-    }
-    
-    if (err || data.status === 'OVER_QUERY_LIMIT') {
-      req.flash('error', 'All Requests Used Up');
       return res.redirect('back');
     }
     
