@@ -44,14 +44,25 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", upload.single('avatar'), function(req, res){
-  if(req.file !== undefined){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-      req.body.avatar = result.secure_url;
-    });
-  } else {
-    req.body.avatar = "../assets/avatar/default-avatar.png"
-  }
-  register_user();
+  User.find().or([{ username: req.body.username }, { email: req.body.email }]).exec(function (err, user) {
+    if(user.length > 0) {
+      if(user[0].username == req.body.username){
+        req.flash("error", "Username already exists");
+      } else if(user[0].email == req.body.email){
+        req.flash("error", "Email already exists");
+      }
+      res.redirect("/register");
+    } else {
+      if(req.file !== undefined){
+        cloudinary.uploader.upload(req.file.path, function(result) {
+          req.body.avatar = result.secure_url;
+        });
+      } else {
+        req.body.avatar = "../assets/avatar/default-avatar.png"
+      }
+      register_user();
+    }
+  });
   function register_user(){
     if(req.body.avatar){
       var newUser = new User({
@@ -63,8 +74,8 @@ router.post("/register", upload.single('avatar'), function(req, res){
       });
       User.register(newUser, req.body.password, function(err, user){
           if(err){
-              req.flash("error", "Something went wrong!! Try again!");
-              return res.render("users/register");
+            req.flash("error", "Something went wrong!! Try again!");
+            return res.render("users/register");
           }
           passport.authenticate("local")(req, res, function(){
             req.flash("success", "Successfully registered as: " + newUser.username);
