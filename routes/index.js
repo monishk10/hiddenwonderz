@@ -44,30 +44,37 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", upload.single('avatar'), function(req, res){
-  cloudinary.uploader.upload(req.file.path, function(result) {
-
-    req.body.avatar = result.secure_url;
-
-    var newUser = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      avatar: req.body.avatar,
-      email: req.body.email,
-      username: req.body.username
+  if(req.file !== undefined){
+    cloudinary.uploader.upload(req.file.path, function(result) {
+      req.body.avatar = result.secure_url;
     });
-    /*eval(require('locus'));*/
-    User.register(newUser, req.body.password, function(err, user){
-        if(err){
-            req.flash("error", "Something went wrong!! Try again!");
-            return res.render("users/register");
-        }
-        passport.authenticate("local")(req, res, function(){
-          console.log(user);
-          req.flash("success", "Successfully registered as: " + newUser.username);
-          res.redirect("/places"); 
-        });
-    });
-  });
+  } else {
+    req.body.avatar = "../assets/avatar/default-avatar.png"
+  }
+  register_user();
+  function register_user(){
+    if(req.body.avatar){
+      var newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        avatar: req.body.avatar,
+        email: req.body.email,
+        username: req.body.username
+      });
+      User.register(newUser, req.body.password, function(err, user){
+          if(err){
+              req.flash("error", "Something went wrong!! Try again!");
+              return res.render("users/register");
+          }
+          passport.authenticate("local")(req, res, function(){
+            req.flash("success", "Successfully registered as: " + newUser.username);
+            res.redirect("/places"); 
+          });
+      });
+    } else {
+      setTimeout(register_user, 500);
+    }
+  }
 });
 
 //show login form
