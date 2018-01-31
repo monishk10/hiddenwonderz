@@ -1,24 +1,36 @@
 <% include ../partials/header %> 
 <% include ../partials/navbar %> 
-
+<style>
+  body {
+    background: url(https://source.unsplash.com/KpBXAOs80YI) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+</style> 
 <div class="main">
 	<div class="ui container">
-		<div class="login-register-form">
-			<h1>Login</h1>
-			<form class="ui form" action="/login" method="POST">
-				<div class="field">
-				  <label>Username</label>
-				  <input type="text" name="username" placeholder="username">
+		<div class="ui centered grid">
+		    <div class="eight wide computer column">
+				<div class="login-register-form">
+					<h1>Login</h1>
+					<form class="ui form" action="/login" method="POST">
+						<div class="field">
+						  <label>Username</label>
+						  <input type="text" name="username" placeholder="username">
+						</div>
+					    <div class="field">
+					    <label>Password</label>
+					    <input type="password" name="password" placeholder="password">
+						</div>
+						<div style="display: inline-block;">
+							<button class="ui positive button" type="submit">Submit</button>
+							<a class="ui red button" href="/forgot">Forgot Password</a>
+						</div>
+					</form>
 				</div>
-			    <div class="field">
-			    <label>Password</label>
-			    <input type="password" name="password" placeholder="password">
-				</div>
-				<div style="display: inline-block;">
-					<button class="ui positive button" type="submit">Submit</button>
-					<a class="ui red button" href="/forgot">Forgot Password</a>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

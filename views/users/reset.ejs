@@ -1,32 +1,44 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
-
+<style>
+  body {
+    background: url(https://source.unsplash.com/KpBXAOs80YI) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+</style> 
 <div class="main">
 	<div class="ui container">
-		<div class="login-register-form">
-			<h1>Reset Password</h1>
-			<form id="reset-form" class="ui form" action="/reset/<%= token %>" method="POST">
-				<div class="field">
-			    <label>New Password</label>
-			    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
-				</div>
-				<div class="field">
-			    <label>Confirm Password</label>
-			    <input type="password" name="confirm" placeholder="Confirm password">
-				</div>
-        <a id="reset-form-submit" class="ui green button" type="submit">Reset Password</a>
-			</form>
-			<div class="ui mini modal">
-        <div class="header">Confirm reset</div>
-        <div class="content">
-          <p>Are you sure you want to reset the password?</p>
-        </div>
-        <div class="actions">
-          <div class="ui approve green button">Confirm</div>
-          <div class="ui cancel red button">Cancel</div>
-        </div>
+    <div class="ui centered grid">
+      <div class="eight wide computer column">
+    		<div class="login-register-form">
+    			<h1>Reset Password</h1>
+    			<form id="reset-form" class="ui form" action="/reset/<%= token %>" method="POST">
+    				<div class="field">
+    			    <label>New Password</label>
+    			    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
+    				</div>
+    				<div class="field">
+    			    <label>Confirm Password</label>
+    			    <input type="password" name="confirm" placeholder="Confirm password">
+    				</div>
+            <a id="reset-form-submit" class="ui green button" type="submit">Reset Password</a>
+    			</form>
+    			<div class="ui mini modal">
+            <div class="header">Confirm reset</div>
+            <div class="content">
+              <p>Are you sure you want to reset the password?</p>
+            </div>
+            <div class="actions">
+              <div class="ui approve green button">Confirm</div>
+              <div class="ui cancel red button">Cancel</div>
+            </div>
+          </div>
+    		</div>
       </div>
-		</div>
+    </div>
 	</div>
 </div>
 

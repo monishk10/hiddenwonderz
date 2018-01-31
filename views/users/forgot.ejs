@@ -1,17 +1,29 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
-
+<style>
+  body {
+    background: url(https://source.unsplash.com/KpBXAOs80YI) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+</style> 
 <div class="main">
 	<div class="ui container">
-		<div class="login-register-form">
-			<h1>Forgot Password</h1>
-			<form class="ui form" action="/forgot" method="POST">
-				<div class="field">
-				    <label>Email</label>
-				    <input type="email" name="email" autofocus>
+		<div class="ui centered grid">
+		    <div class="eight wide computer column">
+				<div class="login-register-form">
+					<h1>Forgot Password</h1>
+					<form class="ui form" action="/forgot" method="POST">
+						<div class="field">
+						    <label>Email</label>
+						    <input type="email" name="email" autofocus>
+						</div>
+					  <button class="ui positive button" type="submit">Reset Password</button>
+					</form>
 				</div>
-			  <button class="ui positive button" type="submit">Reset Password</button>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

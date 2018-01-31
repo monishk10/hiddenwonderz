@@ -5,6 +5,10 @@ body {
 	background-color: #FEFEFE;
 }
 
+.main {
+  min-height: calc(100vh - 308px);
+}
+
 /****************************************/
 /* Masonry grid */
 .masonry {
@@ -31,8 +35,9 @@ body {
 /* Login form */
 
 .login-register-form {
-  padding: 1.5% 2%;
-  margin: 15% 25%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding: 1.5% 3%;
   background-color: #fff;
   border: 1px solid #303030CC;
   border-radius: 3px;
