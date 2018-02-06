@@ -1,23 +1,4 @@
-	<!DOCTYPE html>
-	<html>
-	<head>
-		<!-- Title of the page -->
-		<title>Hidden Wonderz</title>
-
-		<!-- Stylesheets -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
-		<link rel="stylesheet" href="/css/form.css">
-		<!-- Scripts -->
-		<script type="text/javascript" src="/js/jQuery/jquery.min.js"></script>
-		<script type="text/javascript" src="/js/semantic/semantic.js"></script>
-	</head>
-	<body>
-	<div style="position: relative; z-index: 2;" class="ui left aligned basic segment">
-	    <a class="ui circular icon inverted button" href="/places">
-	      <i class="home icon"></i>
-	    </a>
-	</div>
+<% include ../partials/form %>
 	<div class="ui container">
 		<div class="ui centered grid">
 			<div class="five wide computer column">
@@ -50,5 +31,8 @@
 	<ul class="bg-form">
 	  <li></li>
 	</ul>
+	<script>
+		$('.message').transition('fly down', '5s');
+	</script>
 </body>
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Title of the page -->
+        <title>Hidden Wonderz</title>
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+        <link rel="stylesheet" href="/css/form.css">
+        <!-- Scripts -->
+        <script type="text/javascript" src="/js/jQuery/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/semantic/semantic.js"></script>
+    </head>
+    <body>
+    <div>
+	  <% if(error && error.length > 0) { %>
+	    <div class="ui compact message wrong">
+	      <div class="header">
+	        <p><%= error %></p>
+	      </div>
+	    </div>
+	  <% } %>
+	   
+	  <% if(success && success.length > 0) { %>
+	    <div class="ui compact message correct">
+	      <div class="header">
+	        <p><%= success %></p>
+	      </div>
+	    </div>
+	  <% } %>
+	</div>
+    <div style="position: relative; z-index: 2;" class="ui left aligned basic segment">
+	    <a class="ui circular icon inverted button" href="/places">
+	      <i class="home icon"></i>
+	    </a>
+	</div>

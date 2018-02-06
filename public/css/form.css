@@ -1,3 +1,31 @@
+.ui.compact.message {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  width: 500px;
+  margin-left: -250px;
+  text-align: center;
+  z-index: 100;
+}
+
+.ui.message {
+  color: rgba(255, 255, 255, 1);
+  border-radius: 0.28571429rem;
+  box-shadow: none;
+}
+
+.ui.message p {
+  opacity: 1;
+}
+
+.ui.message.correct {
+  background: #00C853;
+}
+
+.ui.message.wrong {
+  background: #e53935;
+}
+
 .ui.container {
 	z-index: 1;
 	position: relative;
