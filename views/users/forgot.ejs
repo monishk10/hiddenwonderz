@@ -1,31 +1,54 @@
-<% include ../partials/header %>
-<% include ../partials/navbar %>
-<style>
-  body {
-    background: url(https://source.unsplash.com/KpBXAOs80YI) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-</style> 
-<div class="main">
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<!-- Title of the page -->
+		<title>Hidden Wonderz</title>
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+		<link rel="stylesheet" href="/css/form.css">
+		<!-- Scripts -->
+		<script type="text/javascript" src="/js/jQuery/jquery.min.js"></script>
+		<script type="text/javascript" src="/js/semantic/semantic.js"></script>
+	</head>
+	<body>
+	<div style="position: relative; z-index: 2;" class="ui left aligned basic segment">
+	    <a class="ui circular icon inverted button" href="/places">
+	      <i class="home icon"></i>
+	    </a>
+	</div>
 	<div class="ui container">
 		<div class="ui centered grid">
-		    <div class="eight wide computer column">
-				<div class="login-register-form">
-					<h1>Forgot Password</h1>
-					<form class="ui form" action="/forgot" method="POST">
-						<div class="field">
-						    <label>Email</label>
-						    <input type="email" name="email" autofocus>
-						</div>
-					  <button class="ui positive button" type="submit">Reset Password</button>
-					</form>
+			<div class="five wide computer column">
+	    		<div id="left-box" class="ui segment">
+	    			<div style="text-align: center; color: white;">
+	    				<img style="padding-top: 30px;" class="ui tiny centered image" src="https://i.imgur.com/lOdXhuN.png">
+	    				<h3>Hidden Wonderz</h3>
+	    				<h1 style="font-family: 'Niconne', cursive; font-size: 4rem;">Forgot Password</h1>
+	    			</div>
+	    		</div>
+	    	</div>
+		    <div class="seven wide computer column">
+		    	<div id="right-box" class="ui segment">
+	    			<div class="form-layout">
+						<form style="margin-top: 20%;" class="ui form" action="/forgot" method="POST">
+							<div class="field">
+							    <label>Email</label>
+							    <input type="email" name="email" autofocus>
+							</div>
+							<button class="ui inverted blue button" type="submit">Reset Password</button>
+						  	<p>
+						  		<a href="/login">Login page</a>
+							</p>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<% include ../partials/footer %>
+	<ul class="bg-form">
+	  <li></li>
+	</ul>
+</body>
+</html>

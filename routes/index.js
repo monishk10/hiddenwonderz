@@ -33,7 +33,7 @@ router.get("/", function(req, res){
 });
 
 //root route
-router.get("/aboutme", function(req, res){
+router.get("/aboutMe", function(req, res){
     res.render("aboutme");
 });
 
@@ -111,6 +111,7 @@ router.post('/login', function(req, res, next) {
       }
       var redirectTo = req.session.redirectTo ? req.session.redirectTo : '/places';
       delete req.session.redirectTo;
+      req.flash("success", "Welcome back, " + req.body.username + "!");
       res.redirect(redirectTo);
     });
   })(req, res, next);

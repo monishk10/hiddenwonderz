@@ -53,26 +53,28 @@ $(document).ready( function(){
   $(window).scroll(function(){
     scrollTop = $(window).scrollTop();
     
-    if (scrollTop >= 100) {
+    if (scrollTop >= 90) {
       $('#myTopnav').addClass('scrolled-nav');
       $('.topnav').css({
         "padding": "5px 0 0 0",
-        "font-size": "14px"
+        "font-size": "14px",
+        "border-bottom": "8px solid #303030"
       });
       $('.topnav a').css({
-        "font-size": "17px"
+        "font-size": "17px",
       });
       $('.sidenav').css({
         "margin-top": "90px"
       });
-    } else if (scrollTop < 100) {
+    } else if (scrollTop < 90) {
       $('#myTopnav').removeClass('scrolled-nav');
       $('.topnav').css({
         "padding": "15px 0 0 0",
-        "font-size": "17px"
+        "font-size": "17px",
+        "border-bottom": "1px solid rgba(0,0,0,0.3)"
       });
       $('.topnav a').css({
-        "font-size": "20px"
+        "font-size": "20px",
       });
       $('.sidenav').css({
         "margin-top": "120px"

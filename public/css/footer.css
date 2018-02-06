@@ -3,6 +3,8 @@
 	background-color: #303031;
 	padding: 3em 2em 2px 2em;
 	color: #fff;
+	z-index: 1;
+	position: relative;
 }
 
 .footer .footer-center {

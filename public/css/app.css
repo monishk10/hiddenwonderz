@@ -7,6 +7,8 @@ body {
 
 .main {
   min-height: calc(100vh - 308px);
+  margin-top: 120px;
+  margin-bottom: 50px;
 }
 
 /****************************************/
@@ -18,37 +20,8 @@ body {
   grid-auto-rows: 20px;
 }
 
-/****************************************/
-/* Login form */
-
-.login-register-form {
-  margin-top: 5%;
-  margin-bottom: 5%;
-  padding: 1.5% 3%;
-  background-color: #fff;
-  border: 1px solid #303030CC;
-  border-radius: 3px;
-  box-shadow: 0 0 3px 1px #30303033;
-  max-width: 500px;
-}
-.ui.form input[type="text"].username,
-.ui.form input[type="password"],
-.ui.form input[type="email"]{
-  width: 100%;
-}
-
 /*******************************************/
 /* loading animation */
-#registeration-loading:before {
-  position: fixed;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #d63635;
-  top: 24%;
-  left: 43%;
-  content: "Registering user... ";
-}
-
 #gallery-images:before {
   position: fixed;
   font-size: 1.5em;

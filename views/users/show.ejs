@@ -2,7 +2,7 @@
 <% include ../partials/navbar %> 
 <div class="main">
 	<div class="ui container">
-		<img class="ui small image" src="<%= user.avatar %>">	
+		<img class="ui small circular image" src="<%= user.avatar %>">	
 		<h1><%= user.firstName %> <%= user.lastName %> (@<%= user.username %>)</h1>	
 		<p>Email id: <a href="mailto:<%= user.email %>"><%= user.email %></a></p>
 
@@ -46,17 +46,5 @@
 	$('.special.cards .image').dimmer({
 	  on: 'hover'
 	});
-	$('.special.cards .image').hover(
-		function(){
-			$('#place-header').css({
-				"display": "block"
-			});
-		},
-		function(){
-			$('#place-header').css({
-				"display": "none"
-			});
-		}
-	);
 </script>
 <% include ../partials/footer %>

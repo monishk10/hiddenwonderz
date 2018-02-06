@@ -1,47 +1,71 @@
-<% include ../partials/header %>
-<% include ../partials/navbar %>
-<style>
-  body {
-    background: url(https://source.unsplash.com/KpBXAOs80YI) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-</style> 
-<div class="main">
+<!DOCTYPE html>
+<html>
+  <head>
+      <!-- Title of the page -->
+      <title>Hidden Wonderz</title>
+
+      <!-- Stylesheets -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+      <link rel="stylesheet" href="/css/form.css">
+      <!-- Scripts -->
+      <script type="text/javascript" src="/js/jQuery/jquery.min.js"></script>
+      <script type="text/javascript" src="/js/semantic/semantic.js"></script>
+  </head>
+  <style>
+    [type=reset], [type=submit], button, html [type=button] {
+      -webkit-appearance: none;
+    }
+  </style>
+  <body>
+  <div style="position: relative; z-index: 2;" class="ui left aligned basic segment">
+    <a class="ui circular icon inverted button" href="/places">
+      <i class="home icon"></i>
+    </a>
+  </div>
 	<div class="ui container">
     <div class="ui centered grid">
-      <div class="eight wide computer column">
-    		<div class="login-register-form">
-    			<h1>Reset Password</h1>
-    			<form id="reset-form" class="ui form" action="/reset/<%= token %>" method="POST">
-    				<div class="field">
-    			    <label>New Password</label>
-    			    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
-    				</div>
-    				<div class="field">
-    			    <label>Confirm Password</label>
-    			    <input type="password" name="confirm" placeholder="Confirm password">
-    				</div>
-            <a id="reset-form-submit" class="ui green button" type="submit">Reset Password</a>
-    			</form>
-    			<div class="ui mini modal">
-            <div class="header">Confirm reset</div>
-            <div class="content">
-              <p>Are you sure you want to reset the password?</p>
-            </div>
-            <div class="actions">
-              <div class="ui approve green button">Confirm</div>
-              <div class="ui cancel red button">Cancel</div>
+      <div class="five wide computer column">
+        <div id="left-box" class="ui segment">
+          <div style="text-align: center; color: white;">
+            <img style="padding-top: 30px;" class="ui tiny centered image" src="https://i.imgur.com/lOdXhuN.png">
+            <h3>Hidden Wonderz</h3>
+            <h1 style="font-family: 'Niconne', cursive; font-size: 4rem;">Reset Password</h1>
+          </div>
+        </div>
+      </div>
+      <div class="seven wide computer column">
+    		<div id="right-box" class="ui segment">
+    			<div class="form-layout">
+      			<form style="margin-top: 15%;" id="reset-form" class="ui form" action="/reset/<%= token %>" method="POST">
+      				<div class="field">
+      			    <label>New Password</label>
+      			    <input type="password" name="password" placeholder="New password" autofocus="autofocus">
+      				</div>
+      				<div class="field">
+      			    <label>Confirm Password</label>
+      			    <input type="password" name="confirm" placeholder="Confirm password">
+      				</div>
+              <a id="reset-form-submit" class="ui inverted blue button" type="submit">Reset Password</a>
+      			</form>
+      			<div class="ui mini modal">
+              <div class="header">Confirm reset</div>
+              <div class="content">
+                <p>Are you sure you want to reset the password?</p>
+              </div>
+              <div class="actions">
+                <div class="ui approve green button">Confirm</div>
+                <div class="ui cancel red button">Cancel</div>
+              </div>
             </div>
           </div>
     		</div>
       </div>
     </div>
 	</div>
-</div>
-
+  <ul class="bg-form">
+    <li></li>
+  </ul>
 <script>
 	$(document).ready(function(){
     $(function() {
@@ -93,5 +117,3 @@
     }
   });
 </script>
-
-<% include ../partials/footer %>
