@@ -16,6 +16,9 @@
 	.ruby {
 		color: red;
 	}
+	#adminBar {
+		background-color: #db2828!important 
+	}
 </style>
 <div class="main">
 	<div class="ui container">
@@ -26,10 +29,17 @@
 					<h1><%= user.firstName %> <%= user.lastName %> (@<%= user.username %>)</h1>	
 					<p>Email id: <a href="mailto:<%= user.email %>"><%= user.email %></a></p>
 
-					<h3 class="ui <%= userScore.levelColor %> header"><i class="<%= userScore.vehicle %> icon"></i><%= userScore.level %></h3>
-					<div class="ui tiny <%= userScore.levelColor %> progress" data-value = "<%= userScore.dataValue %>" data-total= "<%= userScore.dataTotal %>" id="score">
-					  <div class="bar"></div>
-					  <div class="label"><%= userScore.value %> pts. (To Next Level: <%= userScore.left %>)</div>
+					<% if(!user.isAdmin) { %>
+						<h3 class="ui <%= userScore.levelColor %> header"><i class="<%= userScore.vehicle %> icon"></i><%= userScore.level %></h3>
+						<div class="ui tiny <%= userScore.levelColor %> progress" data-value = "<%= userScore.dataValue %>" data-total= "<%= userScore.dataTotal %>" id="score">
+							<div class="bar"></div>
+							<div class="label"><%= userScore.value %> pts. (To Next Level: <%= userScore.left %>)</div>
+					<% } else if(user.isAdmin) { %>
+						<h3 class="ui red header"><i class="rocket icon"></i>Admin</h3>
+						<div class="ui tiny red progress" data-value = "10" data-total= "10" id="score">
+							<div id="adminBar" class="bar"></div>
+							<div class="label"> 10,000pts. (On another level)</div>
+					<% } %>
 					</div>
 				</div>
 			</div>

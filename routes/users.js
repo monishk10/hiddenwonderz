@@ -66,7 +66,6 @@ router.get("/user/:id", function(req, res){
         userScore.dataValue = 9;
         userScore.left = "infinty"
       }
-      console.log(userScore);
       res.render("users/show", {user: foundUser, places: userPlaces, comments: userComments, userScore: userScore});
     }
   });
