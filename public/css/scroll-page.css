@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 .image-header { 
   width: 100%;
   height: 100vh;
@@ -47,11 +48,13 @@
 
 .hw-header h1 {
   font-size: 3rem;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .hw-header h3 {
   font-size: 1.8rem;
   text-align: center;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .scroll-down {
