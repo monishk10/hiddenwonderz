@@ -1,8 +1,61 @@
 <% include partials/header %>
 <% include partials/navbar %> 
+<style>
+	@import url('https://fonts.googleapis.com/css?family=Courgette|Josefin+Sans:300,400');
+
+	.teardrop {
+		border-bottom-left-radius: 10rem;
+		border-top-left-radius: 10rem;
+		border-top-right-radius: 10rem;
+		border-bottom-right-radius: 1rem;
+	}
+	.ui.segment h1 {
+		font-family: 'Courgette', cursive;
+	}
+
+	.ui.segment h1 {
+		font-size: 2.5rem;
+	}
+
+	.ui.segment p {
+		font-size: 1.1rem;
+		font-family: 'Josefin Sans', sans-serif;
+		font-weight: 300;
+	}
+</style>
 <div class="main">
 	<div class="ui container">
-		<h1>Monish Kapadia</h1>
+		<div class="ui centered grid">
+			<div class="ten wide computer column">
+				<div class="ui basic segment">
+					<h1>About Me</h1>
+					<p>My name is Monish Kapadia and I'm the one behind HiddenWonderz.</p>
+					<p>Since you are here, I'm predicting that you would want to know a little about me, huh? Well I'm not at all good at talking about myself but would try to give a quick overview of who I am..</p>
+					<p>I have done my Bachelor of Engineering in Electronics from D.J.Sanghvi College of Engineering, Mumbai. I love learning and working on technologies. Some of my hobbies include coding, playing games like cricket, carrom, table tennis and more... <br>Always <strong>ready</strong> for going on a trip with friends.</p>
+					<p>The whole idea behind hiddenwonderz is that every time we plan a trip, there is always a chaos about which place to go and will it be worth it? So, here you can not only have a great idea about your next trip, but can also share your experience. I believe that one day instead of Googling for some intersting place, you would visit HiddenWonderz and this one-stop platform would suffice your "Location searching needs".</p>
+					<h2>Source Code:</h2>
+					<a href="https://github.com/monishk10/hiddenwonderz" target="_blank" class="ui circular github-inverted icon button">
+						<i class="github icon"></i>
+						<span style="font-weight: bold;">Github</span>
+					</a>
+				</div>
+			</div>
+			<div class="five wide computer column">
+				<div id="example1" class="ui center aligned basic segment">
+					<img class="ui medium image teardrop" src="https://i.imgur.com/QqeeHBD.jpg">
+					<h1>Monish Kapadia</h1>
+					<h4>Any queries? Why not mail me</h4>
+					<a href="mailto:contact.hiddenwonderz@gmail.com">contact.hiddenwonderz@gmail.com</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+<script>
+	$('.ui.sticky')
+  .sticky({
+    context: '#example1'
+  })
+;
+</script>
 <% include partials/footer %>

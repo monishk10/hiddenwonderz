@@ -11,11 +11,11 @@
 				</a>
 			</p>
 			<% if(currentUser && place.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-				<a class="ui circular twitter icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
+				<a class="ui circular lightBlue icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
 					<i class="edit icon"></i>
 				</a>
 				<form id="delete-place-form" style="display: inline-block;" action="/places/<%= place._id %>?_method=DELETE" method="POST">
-          <a id="delete-place-form-submit" class="ui circular instagram icon button" data-tooltip="Permanently delete your post">
+          <a id="delete-place-form-submit" class="ui circular red icon button" data-tooltip="Permanently delete your post">
           	<i class="ban icon"></i>
         	</a>
         </form>

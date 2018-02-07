@@ -91,12 +91,12 @@
 				<% if (currentUser && currentUser._id.equals(comment.author.id) || currentUser && currentUser.isAdmin) { %>
 					<div class="ui accordion">
 						<div class="title">
-							<a style="margin: 0;" class="ui circular twitter icon button" data-tooltip="Edit your comment">
+							<a style="margin: 0;" class="ui circular lightBlue icon button" data-tooltip="Edit your comment">
 								<i class="edit icon"></i>
 								Edit your comment
 							</a>
 							<form class="delete-comment-form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline-block;">
-			    			<button style="margin: 0;" class="ui circular instagram icon button" data-tooltip="Permanently delete your comment">
+			    			<button style="margin: 0;" class="ui circular red icon button" data-tooltip="Permanently delete your comment">
 		            	<i class="ban icon"></i> Delete your comment
 		          	</button>
 			    		</form>
