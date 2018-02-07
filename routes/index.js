@@ -140,7 +140,8 @@ router.post('/forgot', function(req, res, next) {
     function(token, done) {
       User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
-          return res.redirect('users/forgot');
+          req.flash("error", "No user with the specified email found.")
+          return res.redirect('/forgot');
         }
 
         user.resetPasswordToken = token;
@@ -170,7 +171,6 @@ router.post('/forgot', function(req, res, next) {
           'From:\n' + 'Team Hidden Wonderz.'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
-        console.log('mail sent');
         req.flash("success", "Sent a password reset mail to: " + user.email);
         done(err, 'done');
       });
@@ -184,7 +184,8 @@ router.post('/forgot', function(req, res, next) {
 router.get('/reset/:token', function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
-      return res.redirect('users/forgot');
+      req.flash("error", "Something went wrong!! Try again!");
+      return res.redirect('/forgot');
     }
     res.render('users/reset', {token: req.params.token});
   });
