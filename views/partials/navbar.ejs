@@ -1,7 +1,5 @@
+<div class="pusher">
 <div class="topnav" id="myTopnav">
-  <% if(currentUser){ %>
-    <p id="currentUser" style="display: none;"><%= currentUser._id %></p>
-  <% } %>
   <a class="static-brand" href="/">
     <img class="logo-image" src="https://i.imgur.com/A23M1TR.png">
   </a>
@@ -10,8 +8,8 @@
     <a href="/aboutme">About</a>
     <div class="right">
       <% if(!currentUser){ %>
-        <a class="noextra-underline" href="/login">Login</a>
-        <a class="noextra-underline" href="/register">Register</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
       <% } else { %>
         <div class="dropdown">
           <button class="dropbtn">
@@ -19,13 +17,71 @@
             <span style="font-size: 1.1em; font-weight: bold;"><%= currentUser.firstName %></span>
           </button>
           <div class="dropdown-content">
-            <a class="noextra-underline" href="/user/<%= currentUser._id %>">My Profile</a>
-            <a class="noextra-underline" href="/logout">Logout</a>
+            <a href="/user/<%= currentUser._id %>">My Profile</a>
+            <a href="/logout">Logout</a>
           </div>
         </div>
     <% } %>
     </div>
   </div>
+</div>
+<div class="mobile-topnav" id="mobileNav">
+	<a class="mobile-static-brand" href="/">
+	    <img class="mobile-logo-image" src="https://i.imgur.com/A23M1TR.png">
+	</a>
+	<a href="javascript:void(0);" class="icon" onclick="navbarToggle()">&#9776;</a>
+	
+	<div class="ui top demo sidebar ui segment" style="">
+	  <div class="ui center aligned page grid">
+	    <div class="one column row">
+	      <div class="sixteen wide column">
+	        <h1 class="ui header">Menu</h1>
+	      </div>
+	    </div>
+	    <div class="two column divided row">
+	      <div class="column">
+	        <img style="margin-bottom: 20px;" class="ui small circular centered image" src="https://cdn0.iconfinder.com/data/icons/flat-designed-circle-icon-2/1000/house.png">
+	        <div class="ui center aligned page grid">
+	        	<div class="two column divided row">
+	      			<div class="column">
+	      				<a class="mobile-nav-item" href="/places">Home</a>
+	      			</div>
+	      			<div class="column">
+	      				<a class="mobile-nav-item" href="/aboutme">About</a>
+	      			</div>
+	      		</div>
+	        </div>
+	      </div>
+	      <div class="column">
+	      	<% if(!currentUser){ %>
+		        <img style="margin-bottom: 20px;" class="ui small circular centered image" src="https://i.imgur.com/f2yHUBU.png">
+		        <div class="ui center aligned page grid">
+		        	<div class="two column divided row">
+		      			<div class="column">
+		      				<a class="mobile-nav-item" href="/login">Login</a>
+		      			</div>
+		      			<div class="column">
+		      				<a class="mobile-nav-item" href="/register">Register</a>
+		      			</div>
+		      		</div>
+		        </div>
+		    <% } else { %>
+		    	<img style="margin-bottom: 20px;" class="ui small circular centered image" src="<%= currentUser.avatar %>">
+		        <div class="ui center aligned page grid">
+		        	<div class="two column divided row">
+		      			<div class="column">
+		      				<a class="mobile-nav-item" href="/user/<%= currentUser._id %>">My Profile</a>
+		      			</div>
+		      			<div class="column">
+		      				<a class="mobile-nav-item" href="/logout">Logout</a>
+		      			</div>
+		      		</div>
+		        </div>
+		    <% } %>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 <div>
   <% if(error && error.length > 0) { %>
@@ -44,6 +100,13 @@
     </div>
   <% } %>
 </div>
+<script>
+	function navbarToggle() {
+		$('.ui.sidebar')
+		.sidebar('setting', 'transition', 'push')
+		.sidebar('toggle');
+	}
+</script>
 <script>
 /* To make active class */
 $(document).ready( function(){
