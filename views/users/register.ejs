@@ -1,4 +1,7 @@
 <% include ../partials/form %>
+<div class="upload-loading">
+  <div id="avatar-images" ></div>
+</div>
 	<div class="ui container">
     <div class="ui centered grid">
       <div id="grid-noPadding" class="fifteen wide tablet five wide computer column">
@@ -126,5 +129,5 @@ $('input[type="file"]').change(function(e){
 $('.ui.form').submit(function() {
     $('.upload-loading').css('visibility', 'visible');
 });
-    $('.message').transition('fly down', '5s');
+$('.message').transition('fly down', '5s');
 </script>
