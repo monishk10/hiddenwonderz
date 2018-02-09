@@ -115,4 +115,47 @@
 	#pagination {
 		margin-top: 1%;
 	}
+	
+	/***********************************/
+	/* Forms */
+	#left-box {
+		height: unset;
+		border-top-left-radius: 0.25rem; 
+		border-top-right-radius: 0.25rem;
+		border-bottom-left-radius: unset;
+	}
+	#left-box h3{
+		display: none;
+	}
+	#left-box h5,#left-box a {
+		margin: unset;
+		margin-bottom: 5px;
+	}
+	#left-box h1 {
+		margin: unset;
+		padding-bottom: 5px;
+		font-size: 30px;
+	}
+
+	#right-box {
+		height: unset;
+		margin-bottom: 10%;
+		border-top-right-radius: unset; 
+		border-bottom-right-radius: 0.25rem;
+		border-bottom-left-radius: 0.25rem;
+	}
+
+	#grid-noPadding {
+		padding-top: unset; 
+		padding-bottom: unset;
+	}
+
+	#form-spacing, #reset-form {
+	  margin-top: unset;
+	}
+
+	.ui.container {
+		top: unset;
+		margin-top: 30px;
+	}
 }

@@ -1,19 +1,19 @@
 <% include ../partials/form %>
 	<div class="ui container">
 		<div class="ui centered grid">
-			<div class="five wide computer column">
+			<div id="grid-noPadding" class="fifteen wide tablet five wide computer column">
 	    		<div id="left-box" class="ui segment">
 	    			<div style="text-align: center; color: white;">
 	    				<img style="padding-top: 30px;" class="ui tiny centered image" src="https://i.imgur.com/lOdXhuN.png">
 	    				<h3>Hidden Wonderz</h3>
-	    				<h1 style="font-family: 'Niconne', cursive; font-size: 4rem;">Forgot Password</h1>
+	    				<h1 id="form-title">Forgot Password</h1>
 	    			</div>
 	    		</div>
 	    	</div>
-		    <div class="seven wide computer column">
+		    <div id="grid-noPadding" class="fifteen wide tablet seven wide computer column">
 		    	<div id="right-box" class="ui segment">
 	    			<div class="form-layout">
-						<form style="margin-top: 20%;" class="ui form" action="/forgot" method="POST">
+						<form id="form-spacing" class="ui form" action="/forgot" method="POST">
 							<div class="field">
 							    <label>Email</label>
 							    <input type="email" name="email" placeholder="joe@example.com" autofocus>
