@@ -7,8 +7,12 @@
 		display: block;
 	}
 
+	body {
+		font-size: 15px;
+	}
+
 	.mobile-topnav {
-		position: relative;
+		position: fixed;
 		background-color: #fff;
 		top: 0;
 		width: 100%;
@@ -17,11 +21,12 @@
 	    height: 80px;
 	}
 
-	.mobile-static-brand img{
-		margin: 17.5px 10px;
+	.pushable > .pusher:after {
+		background-color: rgba(0, 0, 0, 0);
 	}
 
-	.mobile-logo-image {
+	.mobile-static-brand img{
+		margin: 17.5px 10px;
 		height: 40px;
 	}
 
@@ -33,13 +38,15 @@
 		float: right;
 	}
 
-	.pushable > .pusher:after {
-		background-color: rgba(0, 0, 0, 0);
-	}
-
 	.mobile-nav-item {
 		font-size: 15px;
 		color: #0e1d28;
 		font-weight: bold;
+	}
+
+	.ui.compact.message {
+		left: 0;
+		width: 90%;
+		margin-left: 5%;
 	}
 }
