@@ -1,7 +1,7 @@
 <section id="1">
 	<img style="width: 100%; border-radius: 5px;" src="<%= place.images[0] %>">
 	<div style="margin: 1% 0" class="ui grid">
-		<div class="twelve wide column">
+		<div class="ten wide computer column">
 			<h1><%= place.name %></h1>
 			<p>
 				<i class="user icon"></i>
@@ -10,6 +10,13 @@
 					<%= place.author.username %>
 				</a>
 			</p>
+    </div>
+    <div class="six wide column">
+      <p style="font-weight: bold">Created on:</p>
+      <p style="margin: 0"><%= place.createdAtDate %></p>
+      <p><%= place.createdAtTime %></p>
+    </div>
+    <div class="sixteen wide column">
 			<% if(currentUser && place.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
 				<a class="ui circular lightBlue icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
 					<i class="edit icon"></i>
@@ -30,12 +37,7 @@
           </div>
 		    </div>
       <% } %>
-		</div>
-		<div class="four wide column">
-			<p style="font-weight: bold">Created on:</p>
-			<p style="margin: 0"><%= place.createdAtDate %></p>
-			<p><%= place.createdAtTime %></p>
-		</div>
+    </div>
 	</div>
 </section>
 <!-- ****************************************************** -->
