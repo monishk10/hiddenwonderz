@@ -17,17 +17,17 @@
 <div class="main" id="two">
   <div class="ui container">
     <div class="ui grid">
-      <div class="ten wide column">
+      <div class="sixteen wide tablet ten wide computer column">
         <form class="ui form" action="/places" method="GET">
           <div class="ui search">
             <div class="ui icon input">
-              <input style="width: 300px; border-radius: 1.2rem;" name="search" type="text" placeholder="Search via name or location...">
+              <input id="searchLocation" name="search" type="text" placeholder="Search via name or location...">
               <i class="search icon"></i>
             </div>
           </div>
         </form>
       </div>
-      <div class="right aligned six wide column">
+      <div class="right aligned sixteen wide tablet six wide computer column">
         <a class="ui labeled icon button" href="/places/new">
           <i class="plus icon"></i>
             <span class="add-button">Add new place</span>
@@ -66,7 +66,7 @@
       </div>
     </div>
     <!-- Pagination -->
-    <div class="ui center aligned grid">
+    <div id="pagination" class="ui center aligned grid">
       <div class="sixteen wide column">
         <% if (pages && pages > 0) { %>
         <div class="ui pagination menu">

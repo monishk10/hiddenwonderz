@@ -1,105 +1,105 @@
 <div class="pusher">
-<div class="topnav" id="myTopnav">
-  <a class="static-brand" href="/">
-    <img class="logo-image" src="https://i.imgur.com/A23M1TR.png">
-  </a>
-  <div class="navbar-items">
-    <a href="/places">Home</a>
-    <a href="/aboutme">About</a>
-    <div class="right">
-      <% if(!currentUser){ %>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-      <% } else { %>
-        <div class="dropdown">
-          <button class="dropbtn">
-            <img class="ui avatar image" src="<%= currentUser.avatar %>">
-            <span style="font-size: 1.1em; font-weight: bold;"><%= currentUser.firstName %></span>
-          </button>
-          <div class="dropdown-content">
-            <a href="/user/<%= currentUser._id %>">My Profile</a>
-            <a href="/logout">Logout</a>
-          </div>
-        </div>
-    <% } %>
-    </div>
-  </div>
-</div>
-<div class="mobile-topnav" id="mobileNav">
-	<a class="mobile-static-brand" href="/">
-	    <img class="mobile-logo-image" src="https://i.imgur.com/A23M1TR.png">
-	</a>
-	<a href="javascript:void(0);" class="navToggle-icon" onclick="navbarToggle()">&#9776;</a>
-	
-	<div class="ui top demo sidebar ui segment" style="">
-	  <div class="ui center aligned page grid">
-	    <div class="one column row">
-	      <div class="sixteen wide column">
-	        <h3 class="ui header">Menu</h3>
-	      </div>
-	    </div>
-	    <div class="two column divided row">
-	      <div class="column">
-	        <img style="margin-bottom: 20px;" class="ui small circular centered image" src="https://cdn0.iconfinder.com/data/icons/flat-designed-circle-icon-2/1000/house.png">
-	        <div class="ui center aligned page grid">
-	        	<div class="two column divided row">
-	      			<div class="column">
-	      				<a class="mobile-nav-item" href="/places">Home</a>
-	      			</div>
-	      			<div class="column">
-	      				<a class="mobile-nav-item" href="/aboutme">About</a>
-	      			</div>
-	      		</div>
+	<div class="topnav" id="myTopnav">
+		<a class="static-brand" href="/">
+			<img class="logo-image" src="https://i.imgur.com/A23M1TR.png">
+		</a>
+		<div class="navbar-items">
+	    <a href="/places">Home</a>
+	    <a href="/aboutme">About</a>
+	    <div class="right">
+	      <% if(!currentUser){ %>
+	        <a href="/login">Login</a>
+	        <a href="/register">Register</a>
+	      <% } else { %>
+	        <div class="dropdown">
+	          <button class="dropbtn">
+	            <img class="ui avatar image" src="<%= currentUser.avatar %>">
+	            <span style="font-size: 1.1em; font-weight: bold;"><%= currentUser.firstName %></span>
+	          </button>
+	          <div class="dropdown-content">
+	            <a href="/user/<%= currentUser._id %>">My Profile</a>
+	            <a href="/logout">Logout</a>
+	          </div>
 	        </div>
-	      </div>
-	      <div class="column">
-	      	<% if(!currentUser){ %>
-		        <img style="margin-bottom: 20px;" class="ui small circular centered image" src="https://i.imgur.com/f2yHUBU.png">
-		        <div class="ui center aligned page grid">
-		        	<div class="two column divided row">
-		      			<div class="column">
-		      				<a class="mobile-nav-item" href="/login">Login</a>
-		      			</div>
-		      			<div class="column">
-		      				<a class="mobile-nav-item" href="/register">Register</a>
-		      			</div>
-		      		</div>
-		        </div>
-		    <% } else { %>
-		    	<img style="margin-bottom: 20px;" class="ui small circular centered image" src="<%= currentUser.avatar %>">
-		        <div class="ui center aligned page grid">
-		        	<div class="two column divided row">
-		      			<div class="column">
-		      				<a class="mobile-nav-item" href="/user/<%= currentUser._id %>">My Profile</a>
-		      			</div>
-		      			<div class="column">
-		      				<a class="mobile-nav-item" href="/logout">Logout</a>
-		      			</div>
-		      		</div>
-		        </div>
-		    <% } %>
-	      </div>
+	    <% } %>
 	    </div>
 	  </div>
 	</div>
-</div>
-<div>
-  <% if(error && error.length > 0) { %>
-    <div class="ui compact message wrong">
-      <div class="header">
-        <p><%= error %></p>
-      </div>
-    </div>
-  <% } %>
-   
-  <% if(success && success.length > 0) { %>
-    <div class="ui compact message correct">
-      <div class="header">
-        <p><%= success %></p>
-      </div>
-    </div>
-  <% } %>
-</div>
+	<div class="mobile-topnav" id="mobileNav">
+		<a class="mobile-static-brand" href="/">
+		    <img class="mobile-logo-image" src="https://i.imgur.com/A23M1TR.png">
+		</a>
+		<a href="javascript:void(0);" class="navToggle-icon" onclick="navbarToggle()">&#9776;</a>
+		
+		<div class="ui top demo sidebar ui segment" style="">
+		  <div class="ui center aligned page grid">
+		    <div class="one column row">
+		      <div class="sixteen wide column">
+		        <h3 class="ui header">Menu</h3>
+		      </div>
+		    </div>
+		    <div class="two column divided row">
+		      <div class="column">
+		        <img style="margin-bottom: 20px;" class="ui small circular centered image" src="https://cdn0.iconfinder.com/data/icons/flat-designed-circle-icon-2/1000/house.png">
+		        <div class="ui center aligned page grid">
+		        	<div class="two column divided row">
+		      			<div class="column">
+		      				<a class="mobile-nav-item" href="/places">Home</a>
+		      			</div>
+		      			<div class="column">
+		      				<a class="mobile-nav-item" href="/aboutme">About</a>
+		      			</div>
+		      		</div>
+		        </div>
+		      </div>
+		      <div class="column">
+		      	<% if(!currentUser){ %>
+			        <img style="margin-bottom: 20px;" class="ui small circular centered image" src="https://i.imgur.com/f2yHUBU.png">
+			        <div class="ui center aligned page grid">
+			        	<div class="two column divided row">
+			      			<div class="column">
+			      				<a class="mobile-nav-item" href="/login">Login</a>
+			      			</div>
+			      			<div class="column">
+			      				<a class="mobile-nav-item" href="/register">Register</a>
+			      			</div>
+			      		</div>
+			        </div>
+			    <% } else { %>
+			    	<img style="margin-bottom: 20px;" class="ui small circular centered image" src="<%= currentUser.avatar %>">
+			        <div class="ui center aligned page grid">
+			        	<div class="two column divided row">
+			      			<div class="column">
+			      				<a class="mobile-nav-item" href="/user/<%= currentUser._id %>">My Profile</a>
+			      			</div>
+			      			<div class="column">
+			      				<a class="mobile-nav-item" href="/logout">Logout</a>
+			      			</div>
+			      		</div>
+			        </div>
+			    <% } %>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div>
+	  <% if(error && error.length > 0) { %>
+	    <div class="ui compact message wrong">
+	      <div class="header">
+	        <p><%= error %></p>
+	      </div>
+	    </div>
+	  <% } %>
+	   
+	  <% if(success && success.length > 0) { %>
+	    <div class="ui compact message correct">
+	      <div class="header">
+	        <p><%= success %></p>
+	      </div>
+	    </div>
+	  <% } %>
+	</div>
 <script>
 	function navbarToggle() {
 		$('.ui.sidebar')

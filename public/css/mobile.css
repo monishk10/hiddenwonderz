@@ -66,4 +66,53 @@
 	.image-header p {
 		margin-top: 90vh;
 	}
+	/***********************************/
+	/* Spacing for navbar */
+	.main {
+		margin-top: 90px;
+	}
+
+	/***********************************/
+	/* Header */
+	.image-header .hw-header{
+	  margin-top: 130px;
+	  left: 0;
+	  margin-left: 0;
+	  width: 100%;
+	  text-align: center;
+	}
+
+	.hw-header h1 {
+	  font-size: 1.6rem;
+	}
+
+	.hw-header h3 {
+	  font-size: 1.2rem;
+	}
+
+	/***********************************/
+	/* Main index page */
+	/***********************************/
+	/* Search & Add button */
+	#searchLocation {
+		width: 90vw;
+	}
+	.ui.grid>[class*="right aligned"].column.column{
+		text-align: left;
+	}
+
+	/***********************************/
+	/* Masonry grid */
+	.masonry {
+	  grid-auto-rows: unset;
+	}
+	.ui.card, .ui.cards>.card {
+		width: 100%;
+	}
+
+	/***********************************/
+	/* Pagination */
+	#pagination {
+		margin-top: 1%;
+	}
 }

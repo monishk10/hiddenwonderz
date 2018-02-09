@@ -41,3 +41,7 @@ body {
   background: url(../assets/loaders/upload-loading.gif) center no-repeat #fff;
   visibility: hidden;
 }
+#searchLocation {
+  width: 300px; 
+  border-radius: 1.2rem; 
+}
