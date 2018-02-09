@@ -158,4 +158,42 @@
 		top: unset;
 		margin-top: 30px;
 	}
+	/***********************************/
+	/* The sidebar menu */
+	.sidenav {
+	    width: 0px; /* Set the width of the sidebar */
+	}
+	.mobile-sidenav {
+		width: 100%;
+		height: 40px; 
+		position: fixed; 
+		top: 80px;
+		background: #fff;
+		text-align: center;
+		border-bottom: 1.5px solid #30303010;
+	}
+	.mobile-sidenav a {
+		color: #303030;
+	}
+	.mobile-item {
+	    display: inline-block;
+	    padding: 7px 5px;
+	    font-size: 10px;
+	}
+	a.active {
+		border-bottom: 3px solid #303030;
+		font-weight: bold;
+	}
+
+	/* Style page content */
+	.show-content {
+	    margin: 130px 15px; /* Same as the width of the sidebar */
+	    padding: 0px;
+	} 
+
+	.show-content .ui.segment {
+		padding: 0;
+	}
+
+
 }

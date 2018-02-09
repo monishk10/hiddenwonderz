@@ -41,8 +41,12 @@
 	var sections = $('section'), 
 			nav = $('.sidenav'), 
 			nav_height = $('.topnav').outerHeight(),
-	  	look_offset = 20,
-	  	mobile_offset = 10;
+		  	look_offset = 20,
+		  	mobile_offset = 10;
+	
+	if ($(window).width() < 991) {
+		mobile_offset = 20;
+	}
 	
 	$(window).on('scroll', function () {
 	  var cur_pos = $(this).scrollTop();
@@ -71,5 +75,11 @@
 	  
 	  return false;
 	});
+</script>
+<script>
+	if ($(window).width() < 991) {
+		$("#sidenav").removeClass("ui secondary vertical pointing menu").addClass("mobile-sidenav");
+		$("#sidenav a").removeClass("item").addClass("mobile-item");
+	}
 </script>
 <% include ../partials/footer %>
