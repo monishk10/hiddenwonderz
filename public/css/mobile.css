@@ -1,5 +1,11 @@
 /* Mobile */
 @media only screen and (max-width: 991px) {
+	body {
+		font-size: 15px;
+	}
+
+	/***********************************/
+	/*Set Mobile Nav*/
 	#myTopnav{
 		display: none;
 	}
@@ -7,10 +13,8 @@
 		display: block;
 	}
 
-	body {
-		font-size: 15px;
-	}
-
+	/***********************************/
+	/* mobile nav styling */
 	.mobile-topnav {
 		position: fixed;
 		background-color: #fff;
@@ -44,9 +48,22 @@
 		font-weight: bold;
 	}
 
+	/***********************************/
+	/* Flash messages */
 	.ui.compact.message {
 		left: 0;
 		width: 90%;
 		margin-left: 5%;
+	}
+
+	/* Fix styling error on opening navbar menu */
+	.scroll-down, .image-header p {
+		bottom: unset;
+	}
+	.scroll-down {
+		margin-top: 82vh;
+	}
+	.image-header p {
+		margin-top: 90vh;
 	}
 }
