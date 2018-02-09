@@ -25,7 +25,7 @@
 		height: 40px;
 	}
 
-	.icon {
+	.navToggle-icon {
 		color: #0e1d28;
 		text-align: center;
 		padding: 28px 16px;
@@ -38,7 +38,7 @@
 	}
 
 	.mobile-nav-item {
-		font-size: 20px;
+		font-size: 15px;
 		color: #0e1d28;
 		font-weight: bold;
 	}
