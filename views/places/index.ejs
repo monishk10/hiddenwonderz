@@ -37,6 +37,10 @@
     <div class="ui horizontal divider">BLOG POSTS</div>
     <% if(noMatch !== undefined) { %>
       <h3><%= noMatch %></h3>
+      <a style="margin-bottom: 10px;" class="ui blue button" href="/places">Reset Search</a>
+    <% } else if(search) { %>
+      <h3>Search results for: <span class="ui blue header"><%= search %></span></h3>
+      <a style="margin-bottom: 10px;" class="ui blue button" href="/places">Reset Search</a>
     <% } %>
     <div class="grid-structure">
       <div class="masonry">

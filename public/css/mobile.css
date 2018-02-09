@@ -95,7 +95,7 @@
 	/***********************************/
 	/* Search & Add button */
 	#searchLocation {
-		width: 90vw;
+		width: 60vw;
 	}
 	.ui.grid>[class*="right aligned"].column.column{
 		text-align: left;
