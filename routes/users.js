@@ -86,19 +86,27 @@ router.get("/user/:id/edit",middleware.checkUserOwnership, function(req, res){
 
 //Update user
 router.put("/user/:id",middleware.checkUserOwnership, function(req, res){
-  User.find().or([{ username: req.body.username }, { email: req.body.email }]).exec(function (err, user) {
+  User.find().or([{ username: req.body.user.username }, { email: req.body.user.email }]).exec(function (err, user) {
     if(err){
       req.flash("error", "User not found");
       res.redirect("/places");
     } else {
-      if(user.length > 0){
+      if(user.length == 1){
         if(user[0]._id == req.params.id){
           updateUser();
-        } else if(user[0].username == req.body.username){
-          req.flash("error", "Username already exists");
+        } else if(user[0].username == req.body.user.username){
+          req.flash("error", "username already exists");
           res.redirect("/user/" + req.params.id + "/edit");
-        } else if(user[0].email == req.body.email){
-          req.flash("error", "Email already exists");
+        } else if(user[0].email == req.body.user.email){
+          req.flash("error", "email already exists")
+          res.redirect("/user/" + req.params.id + "/edit");
+        }
+      } else if(user.length == 2){
+          if((user[0].username == req.body.user.username) || (user[1].username == req.body.user.username)){
+          req.flash("error", "username already exists")
+          res.redirect("/user/" + req.params.id + "/edit");
+        } else if((user[0].email == req.body.user.email) || (user[1].email == req.body.user.email)){
+          req.flash("error", "email already exists")
           res.redirect("/user/" + req.params.id + "/edit");
         }
       } else {
