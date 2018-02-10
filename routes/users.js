@@ -3,6 +3,7 @@ var router  = express.Router();
 var User = require("../models/user");
 var Place = require("../models/place");
 var Comment = require("../models/comment");
+var middleware = require("../middleware");
 
 // Get user profile
 router.get("/user/:id", function(req, res){
@@ -71,4 +72,51 @@ router.get("/user/:id", function(req, res){
   });
 });
 
+// Editing user
+router.get("/user/:id/edit",middleware.checkUserOwnership, function(req, res){
+  User.findById(req.params.id, function(err, foundUser){
+    if(err){
+      req.flash("error", "User not found");
+      res.redirect("/places");
+    } else {
+      res.render("users/edit", {user: foundUser});
+    }
+  });
+});
+
+//Update user
+router.put("/user/:id",middleware.checkUserOwnership, function(req, res){
+  User.find().or([{ username: req.body.username }, { email: req.body.email }]).exec(function (err, user) {
+    if(err){
+      req.flash("error", "User not found");
+      res.redirect("/places");
+    } else {
+      if(user.length > 0){
+        if(user[0]._id == req.params.id){
+          updateUser();
+        } else if(user[0].username == req.body.username){
+          req.flash("error", "Username already exists");
+          res.redirect("/user/" + req.params.id + "/edit");
+        } else if(user[0].email == req.body.email){
+          req.flash("error", "Email already exists");
+          res.redirect("/user/" + req.params.id + "/edit");
+        }
+      } else {
+        updateUser();
+      }
+    }
+  });
+  function updateUser(){
+    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
+      if(err){
+        req.flash("error", "Couldn't update user. Please try again");
+        res.redirect("/places");
+      } else {
+        //redirect
+        req.flash("success", "Updated!!");
+        res.redirect("/user/" + req.params.id);
+      }
+    });
+  }
+});
 module.exports = router;

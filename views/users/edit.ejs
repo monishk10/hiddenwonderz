@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+<% include ../partials/navbar %>
+<div class="main">
+	<div class="ui container">
+		<img class="ui medium circular image" src="<%= user.avatar %>">
+		<form class="ui form" action="/user/<%= user._id %>?_method=PUT" method="POST">
+			<div class="fields">
+				<div class="field">
+			    <label>Name</label>
+			    <input type="text" name="user[firstName]" value="<%= user.firstName %>">
+				</div>
+				<div class="field">
+			    <label>Last Name</label>
+			    <input type="text" name="user[lastName]" value="<%= user.lastName %>">
+				</div>
+			</div>
+			<div class="field">
+		    <label>Email</label>
+		    <input type="email" name="email" value="<%= user.email %>">
+			</div>
+			<div class="field">
+		    <label>Username</label>
+		    <input type="text" name="username" value="<%= user.username %>">
+			</div>
+			<button class="ui button">Submit</button>
+		</form>
+	</div>
+</div>
+<% include ../partials/footer %>

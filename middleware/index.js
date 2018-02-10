@@ -1,5 +1,6 @@
 var Place   = require("../models/place");
 var Comment = require("../models/comment");
+var User    = require("../models/user");
 
 // all the middleare goes here
 var middlewareObj = {};
@@ -49,6 +50,29 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
   } else {
     req.flash("error", "You are not the owner of this post!");
     res.redirect("back");
+  }
+}
+
+middlewareObj.checkUserOwnership = function(req, res, next) {
+  // Is the user logged in?(authenticated)
+  if(req.isAuthenticated()){
+    // Find the comment to be altered
+    User.findById(req.params.id, function(err, foundUser){
+      if(err){
+        req.flash("error", "Something went wrong!!. Try again!");
+        res.redirect("/places");
+      } else {
+        if(foundUser._id.equals(req.user._id) || req.user.isAdmin) {
+          next();
+        } else {
+          req.flash("error", "You don't have the permission to do that!");
+          res.redirect("/places");
+        }
+      }
+    });
+  } else {
+    req.flash("error", "You are not the owner!");
+    res.redirect("/places");
   }
 }
 

@@ -60,6 +60,12 @@
 			</div>
 		</div>
 
+		<% if (currentUser) { %>
+			<% if (user.username == currentUser.username || currentUser.isAdmin) { %>
+				<a class="ui blue button" href="/user/<%= user.id %>/edit">Edit</a>
+			<% } %>
+		<% } %>	
+
 		<h1 style="padding: 10px 0">Posts by <%= user.firstName %>:</h1>
 		<% if (places.length === 0) { %>
 			<em style="color: grey;">No posts yet.</em>

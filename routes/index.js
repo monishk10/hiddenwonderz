@@ -58,7 +58,7 @@ router.post("/register", upload.single('avatar'), function(req, res){
           req.body.avatar = result.secure_url;
         });
       } else {
-        req.body.avatar = "../assets/avatar/default-avatar.png"
+        req.body.avatar = "http://res.cloudinary.com/hiddenwonderz/image/upload/v1518273154/default-avatar-ginger-guy_f5ejm8.png"
       }
       register_user();
     }
