@@ -9,7 +9,7 @@
     <h1>Create a New Place</h1>
     <form id="new-place-form" class="ui form" action="/places" method="POST" enctype="multipart/form-data">
       <div class="field">
-        <input type="text" name="place[name]" placeholder="name">
+        <input type="text" name="place[name]" placeholder="Cheerful Mumbai">
       </div>
       <div id="image-type-selector" class="field">
         <label for="images" class="custom-image-upload">
@@ -18,7 +18,7 @@
         <input type="file" id="images" name="images" accept="image/*" required multiple>
       </div>
       <div class="field">
-        <input type="text" name="place[location]" id="location" placeholder="Alibaug">
+        <input type="text" name="place[location]" id="location" placeholder="Mumbai">
       </div>
       <div id="autocomplete-map"></div>
       <div class="field">
