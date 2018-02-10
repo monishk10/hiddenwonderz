@@ -23,49 +23,47 @@
 <div class="main">
 	<div class="ui container">
 		<div class="ui grid">
-		    <div class="row">
-				<div class="sixteen wide tablet eight wide computer column">
-					<div class="ui basic segment">
-						<img class="ui small circular image" src="<%= user.avatar %>">	
-						<h1><%= user.firstName %> <%= user.lastName %> (@<%= user.username %>)</h1>	
-						<p>Email id: <a href="mailto:<%= user.email %>"><%= user.email %></a></p>
-
-						<% if(!user.isAdmin) { %>
-							<h3 style="display: inline-block;" class="ui <%= userScore.levelColor %> header"><i class="<%= userScore.vehicle %> icon"></i><%= userScore.level %></h3>
-							<div style="display: inline-block;" class="userLevelDescription">
-								<sup style="font-size: unset;"><i style="color: #7a7a7a;" class="help circle icon"></i></sup>
-							</div>
-							<div class="ui fluid popup transition hidden">
-								<h3>Level Chart:</h1>
-								<h5>1 post = 5pts : 1 comment = 1pt</h5>
-								<h4 class="ui grey header"><i class="bicycle icon"></i>Newbie - 0pts</h4>
-								<h4 class="ui brown header"><i class="motorcycle icon"></i>Beginner - 5pts</h4>
-								<h4 class="ui teal header"><i class="car icon"></i>Casual Traveller - 15pts</h4>
-								<h4 class="ui yellow header"><i class="plane icon"></i>Avid Traveller - 30pts</h4>
-								<h4 class="ui red header"><i class="rocket icon"></i>Traveller for life - 50pts</h4>
-							</div>
-							<div class="ui tiny <%= userScore.levelColor %> progress" data-value = "<%= userScore.dataValue %>" data-total= "<%= userScore.dataTotal %>" id="score">
-								<div class="bar"></div>
-								<div class="label"><%= userScore.value %> pts. (To Next Level: <%= userScore.left %>)</div>
-						<% } else if(user.isAdmin) { %>
-							<h3 class="ui red header"><i class="rocket icon"></i>Admin</h3>
-							<div class="ui tiny red progress" data-value = "10" data-total= "10" id="score">
-								<div id="adminBar" class="bar"></div>
-								<div class="label"> 10,000pts. (On another level)</div>
+			<div class="fourteen wide tablet eight wide computer column">
+				<div class="ui basic segment">
+					<img class="ui small circular image" src="<%= user.avatar %>">	
+					<h1><%= user.firstName %> <%= user.lastName %> (@<%= user.username %>)</h1>	
+					<p>Email id: <a href="mailto:<%= user.email %>"><%= user.email %></a></p>
+					<p>
+					<% if (currentUser) { %>
+						<% if (user.username == currentUser.username || currentUser.isAdmin) { %>
+							<a class="ui blue button" href="/user/<%= user.id %>/edit">Edit Profile</a>
 						<% } %>
-							</div>
+					<% } %>	
+					</p>
+
+					<% if(!user.isAdmin) { %>
+						<h3 style="display: inline-block;" class="ui <%= userScore.levelColor %> header"><i class="<%= userScore.vehicle %> icon"></i><%= userScore.level %></h3>
+						<div style="display: inline-block;" class="userLevelDescription">
+							<sup style="font-size: unset;"><i style="color: #7a7a7a;" class="help circle icon"></i></sup>
 						</div>
-					</div>
+						<div class="ui fluid popup transition hidden">
+							<h3>Level Chart:</h3>
+							<h5>1 post = 5pts : 1 comment = 1pt</h5>
+							<h4 class="ui grey header"><i class="bicycle icon"></i>Newbie - 0pts</h4>
+							<h4 class="ui brown header"><i class="motorcycle icon"></i>Beginner - 5pts</h4>
+							<h4 class="ui teal header"><i class="car icon"></i>Casual Traveller - 15pts</h4>
+							<h4 class="ui yellow header"><i class="plane icon"></i>Avid Traveller - 30pts</h4>
+							<h4 class="ui red header"><i class="rocket icon"></i>Traveller for life - 50pts</h4>
+						</div>
+						<div class="ui tiny <%= userScore.levelColor %> progress" data-value = "<%= userScore.dataValue %>" data-total= "<%= userScore.dataTotal %>" id="score">
+							<div class="bar"></div>
+							<div class="label"><%= userScore.value %> pts. (To Next Level: <%= userScore.left %>)</div>
+						</div>
+					<% } else if(user.isAdmin) { %>
+						<h3 class="ui red header"><i class="rocket icon"></i>Admin</h3>
+						<div class="ui tiny red progress" data-value = "10" data-total= "10" id="score">
+							<div id="adminBar" class="bar"></div>
+							<div class="label"> 10,000pts. (On another level)</div>
+						</div>
+					<% } %>
 				</div>
 			</div>
 		</div>
-
-		<% if (currentUser) { %>
-			<% if (user.username == currentUser.username || currentUser.isAdmin) { %>
-				<a class="ui blue button" href="/user/<%= user.id %>/edit">Edit</a>
-			<% } %>
-		<% } %>	
-
 		<h1 style="padding: 10px 0">Posts by <%= user.firstName %>:</h1>
 		<% if (places.length === 0) { %>
 			<em style="color: grey;">No posts yet.</em>

@@ -113,7 +113,7 @@ router.put("/user/:id",middleware.checkUserOwnership, function(req, res){
         res.redirect("/places");
       } else {
         //redirect
-        req.flash("success", "Updated!!");
+        req.flash("success", "Updated your profile!!");
         res.redirect("/user/" + req.params.id);
       }
     });
