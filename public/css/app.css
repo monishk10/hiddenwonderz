@@ -46,3 +46,8 @@ body {
   width: 300px; 
   border-radius: 1.2rem; 
 }
+#updateUserForm {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
