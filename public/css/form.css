@@ -126,7 +126,7 @@
 }
 
 #right-box {
-  height: 462px; 
+  height: unset; 
   border-top-right-radius: 0.25rem; 
   border-bottom-right-radius: 0.25rem;
 }
