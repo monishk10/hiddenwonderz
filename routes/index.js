@@ -44,6 +44,7 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", upload.single('avatar'), function(req, res){
+  //eval(require('locus'));
   User.find().or([{ username: req.body.username }, { email: req.body.email }]).exec(function (err, user) {
     if(user.length > 0) {
       if(user[0].username == req.body.username){
@@ -53,8 +54,8 @@ router.post("/register", upload.single('avatar'), function(req, res){
       }
       res.redirect("/register");
     } else {
-      if(req.file !== undefined){
-        cloudinary.uploader.upload(req.file.path, function(result) {
+      if(req.body.avatarData){
+        cloudinary.uploader.upload(req.body.avatarData, function(result) {
           req.body.avatar = result.secure_url;
         });
       } else {
