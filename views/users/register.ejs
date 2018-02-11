@@ -18,14 +18,19 @@
         </div>
         <div class="content">
           <div class="ui grid">
-            <div class="ten wide column">
+            <div class="sixteen wide column">
               <div class="ui basic segment">
-                <img class="ui circular centered small image" src="../assets/avatar/default-avatar.png" id="change-profile-pic">
+                <img class="ui circular small image" src="../assets/avatar/default-avatar.png" id="change-profile-pic">
                 <input type="file" accept="image/*" id="profile-file-input" onchange="loadFile(event)">
                 <a id="select-cropped-image" class="ui blue button">Upload</a>
+                <p id="uploading-text"></p>
               </div>
             </div>
           </div>
+        </div>
+        <div class="actions">
+          <div class="ui approve green button">Save</div>
+          <div class="ui cancel button">Default</div>
         </div>
       </div>
       <div id="grid-noPadding" class="fifteen wide tablet five wide computer column">
@@ -91,6 +96,22 @@
 <script>
   $('#image-upload-modal').click(function(){
     $('.ui.small.modal')
+        .modal({
+            onDeny    : function(){
+              $('#profile-result').html('<img src="../assets/avatar/default-avatar.png" class="ui circular tiny image">');
+              $('#avatar').html('<input style="display: none;" type="text" name="avatarData" value="">')
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document  
+            },
+            onApprove : function() {
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document 
+            },
+            approve  : '.positive, .approve, .ok',
+            deny     : '.negative, .deny, .cancel',
+          })
       .modal('setting', 'transition', 'scale')
       .modal('show');
   });
@@ -170,8 +191,18 @@ $('.message').transition('fly down', '5s');
         var imageData = $(this).cropper('getImageData');
         var croppedCanvas = $(this).cropper('getCroppedCanvas');
         $('#select-cropped-image').click(function(){
-            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL('image/jpeg') +'" class="ui circular tiny image">');
-            $('#avatar').html('<input style="display: none;" type="text" name="avatarData" value="' + croppedCanvas.toDataURL('image/jpeg') +'">')
+          function avatarSetting(){
+            var promise = new Promise (function(fulfill, reject) {
+              $('#profile-result').html('<img src="' + croppedCanvas.toDataURL('image/jpeg') +'" class="ui circular tiny image">');
+              $('#avatar').html('<input style="display: none;" type="text" name="avatarData" value="' + croppedCanvas.toDataURL('image/jpeg') +'">')
+              fulfill();
+            });
+            promise.then(function(){
+              $('#uploading-text').text("Uploaded");
+            });
+          }
+          $('#uploading-text').text("Uploading... (Do no refresh. Might take some time)");
+          setTimeout(avatarSetting, 100);
         });
       }
     })
