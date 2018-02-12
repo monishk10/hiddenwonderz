@@ -159,6 +159,10 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
               function uploading_updating() {
                 if(req.body.user.avatarId){
                   // after avatar is updated, update the user details
+                  Comment.find().where('author.id').equals(foundUser._id).exec(function(err, comments){
+                    comments.author.avatar = req.body.user.avatar;
+                    comments.author.firstName = req.body.user.firstName;
+                  });
                   updateUserData();
                 } else {
                   setTimeout(uploading_updating, 200);
