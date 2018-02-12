@@ -159,7 +159,7 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
               function uploading_updating() {
                 if(req.body.user.avatarId){
                   // after avatar is updated, update the user details
-                  updateUser();
+                  updateUserData();
                 } else {
                   setTimeout(uploading_updating, 200);
                 }
@@ -188,10 +188,10 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
       });
     // if the user didn't request for updating, just update the user with any other details
     } else {
-      updateUser();
+      updateUserData();
     }
     // Updating user function
-    function updateUser(){
+    function updateUserData(){
       User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
         if(err){
           req.flash("error", "Couldn't update user. Please try again");

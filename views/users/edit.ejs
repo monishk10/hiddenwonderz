@@ -85,15 +85,18 @@
           function avatarSetting(){
             var promise = new Promise (function(fulfill, reject) {
               $('#image-update-modal').html('<img src="' + croppedCanvas.toDataURL('image/jpeg') +'" class="ui centered medium circular image">');
-              $('#avatarUpdate').html('<input style="display: none;" type="text" name="user[avatarUpdateData]" value="' + croppedCanvas.toDataURL('image/jpeg') +'">')
+              $('#avatarUpdate').html('<input style="display: none;" type="text" name="user[avatarUpdateData]" value="' + croppedCanvas.toDataURL('image/jpeg') +'">');
               fulfill();
             });
             promise.then(function(){
-              $('#uploading-text').text("Uploaded");
+              function uploadedText(){
+              	$('#uploading-text').text("Uploaded");
+              }
+              setTimeout(uploadedText, 150);
             });
           }
-          $('#uploading-text').text("Uploading... (Do no refresh. Might take some time)");
-          setTimeout(avatarSetting, 100);
+          $('#uploading-text').text("Uploading... (Do not refresh the browser. Might take some time)");
+          setTimeout(avatarSetting, 10);
         });
       }
     })
