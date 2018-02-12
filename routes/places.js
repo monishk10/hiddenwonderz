@@ -120,7 +120,7 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
         // add author to place
         req.body.place.author = {
           id: req.user._id,
-          username: req.user.username
+          firstName: req.user.firstName
         }
         // add time
         req.body.place.createdAtDate = moment().tz('Asia/Kolkata').format("Do MMM YY");
