@@ -127,10 +127,10 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
         }
       } else if(user.length == 2){
           if((user[0].username == req.body.user.username) || (user[1].username == req.body.user.username)){
-          req.flash("error", "username already exists")
+          req.flash("error", "email/username already exists")
           res.redirect("/user/" + req.params.id + "/edit");
         } else if((user[0].email == req.body.user.email) || (user[1].email == req.body.user.email)){
-          req.flash("error", "email already exists")
+          req.flash("error", "email/username already exists")
           res.redirect("/user/" + req.params.id + "/edit");
         }
       } else {
