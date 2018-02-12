@@ -208,6 +208,11 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
               comment.author.firstName = req.body.user.firstName;
             });
           });
+          Place.find().where('author.id').equals(updatedUser._id).exec(function(err, places){
+            places.forEach(function(place){
+              place.author.firstName = req.body.user.firstName;
+            });
+          });
           req.flash("success", "Updated your profile!!");
           res.redirect("/user/" + req.params.id);
         }
