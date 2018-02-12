@@ -170,11 +170,7 @@ router.post('/forgot', function(req, res, next) {
         to: user.email,
         from: 'contact.hiddenwonderz@gmail.com',
         subject: 'Hidden Wonderz: Password Reset',
-        text: 'You are receiving this because you (or someone else) has requested the reset of the password for your account.\n\n' +
-          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-          'If you did not request this, please ignore this email and your password will remain unchanged.\n\n\n' + 
-          'From:\n' + 'Team Hidden Wonderz.'
+        html: '<link href="https://fonts.googleapis.com/css?family=Mukta+Mahee" rel="stylesheet"><style>body{font-family: "Mukta Mahee", sans-serif;color: #303030;}</style><div style="border: 5px solid #0e1d28; border-radius: 5px; padding: 7% 14%; background: #0e1d28;"><div style="background: white; padding: 7%;"><div style="border-bottom: 1px solid rgba(211,211,211,0.4); padding: 10px;"><img src="https://i.imgur.com/A23M1TR.png" style="max-height: 40px;"></div><div><p> Hi ' + user.firstName + ',</p><p>You are receiving this because you (or someone else) has requested the reset of the password for your account.</p><p>Please click on the following link</p><a style="cursor: pointer;display: inline-block;min-height: 1em;outline: none;border: none;background-color: #0e1d28;color: #FFFFFF;margin: 0em 0.25em 0em 0em;padding: 0.78571429em 1.5em 0.78571429em;line-height: 1em;text-decoration: none;text-align: center;border-radius: 0.28571429rem;" href="' + 'http://' + req.headers.host + '/reset/' + token + '">Click</a><p>If you did not request this, please ignore this email and your password will remain unchanged</p><p>From:</p><p>Team Hidden Wonderz</p></div></div></div>'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         req.flash("success", "Sent a password reset mail to: " + user.email);
@@ -234,8 +230,7 @@ router.post('/reset/:token', function(req, res) {
         to: user.email,
         from: 'contact.hiddenwonderz@mail.com',
         subject: 'Your password has been changed',
-        text: 'Hello ' + user.firstName +',\n\n' +
-          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+        html: '<link href="https://fonts.googleapis.com/css?family=Mukta+Mahee" rel="stylesheet"><style>body{font-family: "Mukta Mahee", sans-serif;color: #303030;}</style><div style="border: 5px solid #0e1d28; border-radius: 5px; padding: 7% 14%; background: #0e1d28;"><div style="background: white; padding: 7%;"><div style="border-bottom: 1px solid rgba(211,211,211,0.4); padding: 10px;"><img src="https://i.imgur.com/A23M1TR.png" style="max-height: 40px;"></div><div><p> Hi ' + user.firstName + ',</p><p>This is a confirmation that the password for your account ' + user.email + ' has just been changed.</p><p>From:</p><p>Team Hidden Wonderz</p></div></div></div>'
       };
       smtpTransport.sendMail(mailOptions, function(err) {
         done(err);

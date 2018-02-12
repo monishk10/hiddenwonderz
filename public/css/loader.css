@@ -20,6 +20,26 @@
   margin-left: -74px;
   content: "Updating User... ";
 }
+#forgot-password:before {
+  position: fixed;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  top: 35%;
+  left: 50%;
+  margin-left: -105px;
+  content: "Sending you an email... ";
+}
+#reset-password:before {
+  position: fixed;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  top: 35%;
+  left: 50%;
+  margin-left: -123px;
+  content: "Resetting your password... ";
+}
 #new-place:before {
   position: fixed;
   font-size: 1.5em;

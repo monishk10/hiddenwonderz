@@ -1,4 +1,8 @@
 <% include ../partials/form %>
+<div class="upload-loading">
+  <span id="reset-password"></span>
+  <span class="loader"><span class="loader-inner"></span></span>
+</div>
 	<div class="ui container">
     <div class="ui centered grid">
       <div id="grid-noPadding" class="fifteen wide tablet five wide computer column">
@@ -93,6 +97,9 @@
     }
   });
   $('.message').transition('fly down', '5s');
+  $('.ui.form').submit(function() {
+    $('.upload-loading').css('visibility', 'visible');
+});
 </script>
 <script>
 $(document).ready(function(){
