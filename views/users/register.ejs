@@ -8,7 +8,8 @@
   }
 </style>
 <div class="upload-loading">
-  <div id="avatar-images" ></div>
+  <span id="register-user"></span>
+  <span class="loader"><span class="loader-inner"></span></span>
 </div>
 	<div class="ui container">
     <div class="ui centered grid">
@@ -173,7 +174,6 @@ $('.ui.form')
     }
   })
 ;
-
 $('.ui.form').submit(function() {
     $('.upload-loading').css('visibility', 'visible');
 });

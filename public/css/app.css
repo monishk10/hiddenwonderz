@@ -20,28 +20,6 @@ body {
   grid-auto-rows: 20px;
 }
 
-/*******************************************/
-/* loading animation */
-#gallery-images:before {
-  position: fixed;
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #d63635;
-  top: 30%;
-  left: 50%;
-  margin-left: -90px;
-  content: "Uploading images... ";
-}
-.upload-loading {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background: url(../assets/loaders/upload-loading.gif) center no-repeat #fff;
-  visibility: hidden;
-}
 #searchLocation {
   width: 300px; 
   border-radius: 1.2rem; 
