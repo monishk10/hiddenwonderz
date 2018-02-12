@@ -4,7 +4,7 @@
 	<div class="ui container">
 		<h1 style="text-align: center;">Update User Profile</h1>
 		<img class="ui centered medium circular image" src="<%= user.avatar %>">
-		<form id="updateUserForm" class="ui form" action="/user/<%= user._id %>?_method=PUT" method="POST">
+		<form onsubmit="lowerCase()" id="updateUserForm" class="ui form" action="/user/<%= user._id %>?_method=PUT" method="POST">
 			<div class="field">
 			    <label>Name</label>
 			    <input type="text" name="user[firstName]" value="<%= user.firstName %>">
@@ -19,10 +19,16 @@
 			</div>
 			<div class="field">
 			    <label>Username</label>
-			    <input type="text" name="user[username]" value="<%= user.username %>">
+			    <input id="username" type="text" name="user[username]" value="<%= user.username %>">
 			</div>
 			<button class="ui button">Submit</button>
 		</form>
 	</div>
 </div>
+<script>
+	function lowerCase() {
+		var inputUsername = document.getElementById('username').value.toLowerCase();
+		document.getElementById('username').value = inputUsername;
+	}
+</script>
 <% include ../partials/footer %>

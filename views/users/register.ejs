@@ -48,7 +48,7 @@
       <div id="grid-noPadding" class="fifteen wide tablet seven wide computer column">
     		<div id="right-box" class="ui segment">
           <div class="form-layout">
-      			<form class="ui form" action="/register" method="POST" enctype="multipart/form-data">
+      			<form onsubmit="lowerCase()" class="ui form" action="/register" method="POST" enctype="multipart/form-data">
       				<div class="equal width fields">
       					<div class="field">
       				    <label>Name</label>
@@ -72,7 +72,7 @@
       				</div>
       				<div class="field">
       			    <label>Username</label>
-      			    <input style="width: 100%;" class="username" type="text" name="username" placeholder="username">
+      			    <input id="username" style="width: 100%;" class="username" type="text" name="username" placeholder="username">
       				</div>
               <div class="equal width fields">
         			  <div class="field">
@@ -95,6 +95,10 @@
     <li></li>
   </ul>
 <script>
+  function lowerCase() {
+      var inputUsername = document.getElementById('username').value.toLowerCase();
+      document.getElementById('username').value = inputUsername;
+    }
   $('#image-upload-modal').click(function(){
     $('.ui.small.modal')
         .modal({
