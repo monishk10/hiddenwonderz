@@ -11,8 +11,9 @@
 	            <div class="sixteen wide column">
 	              <div class="ui basic segment">
 	                <img class="ui circular small image" src="<%= user.avatar %>" id="change-profile-pic">
-	                <input style="display: inline-block;" type="file" accept="image/*" id="profile-file-input" onchange="loadFile(event)">
+	                <input style="display: inline-block;" type="file" accept="image/*" id="profile-file-input">
 	                <a style="display: inline-block;" id="select-cropped-image" class="ui blue button">Upload</a>
+	                <p>File size limit: 1.5MB</p>
 	                <p id="uploading-text"></p>
 	              </div>
 	            </div>
@@ -68,9 +69,18 @@
           })
 		.modal('setting', 'transition', 'scale')
 		.modal('show');
-  });
-</script>
-<script>
+	});
+	$('#profile-file-input').change(function(){
+		var file = document.getElementById('profile-file-input').files[0];
+		var file_limit = 1650000; // Size limit to approx 1.5MB
+		var file_size = file.size;
+		if(file_size > file_limit){
+			alert("File size: " + Math.round(file_size * 100/1048576)/100 + "MB. Limit: 1.5MB");
+			$('#profile-file-input').val("");
+		} else {
+			loadFile(event);
+		}
+	});
   var loadFile = function(event){
     var output = document.getElementById('change-profile-pic');
     output.src = URL.createObjectURL(event.target.files[0]);
