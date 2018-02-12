@@ -1,5 +1,27 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
+<style>
+	#dimmer {
+		position: relative;
+	}
+	#dimmer:hover > a > img {
+		filter: brightness(50%);
+		-webkit-filter: brightness(50%);
+		-moz-filter: brightness(50%);
+		-o-filter: brightness(50%);
+	}
+	.info {
+	  display: none;
+	  position: absolute;
+	  top: 150px;
+	  left: 50%;
+	  margin-left: -43.5px;
+	  text-align: center;
+	  font-size: 2rem;
+	  font-weight: bold;
+	  color: #fff;
+	}
+</style>
 <div class="upload-loading">
   <span id="update-user"></span>
   <span class="loader"><span class="loader-inner"></span></span>
@@ -29,9 +51,14 @@
 	        </div>
 	    </div>
 		<h1 style="text-align: center;">Update User Profile</h1>
-		<a id="image-update-modal">
-			<img class="ui centered medium circular image" src="<%= user.avatar %>">
-		</a>
+		<div id="dimmer">
+			<a style="cursor: pointer;position: relative;" id="image-update-modal">
+				<img class="ui centered medium circular image" src="<%= user.avatar %>">
+			</a>
+			<div class="info">
+				<i class="write icon"></i>Edit
+			</div>
+		</div>
 		<form onsubmit="lowerCase()" id="updateUserForm" class="ui form" action="/user/<%= user._id %>?_method=PUT" method="POST">
 			<div class="field">
 			    <label>Name</label>
@@ -118,6 +145,12 @@
   $('.ui.form').submit(function() {
     $('.upload-loading').css('visibility', 'visible');
   });
+  $("#dimmer").hover(
+  function(){
+  		$(".info").css("display", "block");
+	}, function(){
+  		$(".info").css("display", "none");
+});
 </script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.js"></script>
