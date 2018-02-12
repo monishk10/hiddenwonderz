@@ -139,33 +139,58 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
     }
   });
   function updateUser(){
+    // Check if user has updated avatar
     if(req.body.user.avatarUpdateData){
+      // Find user details
       User.findById(req.params.id, function(err, foundUser){
         if(err){
           req.flash("error", "Couldnt find the user. try again");
           res.redirect("/places");
         } else {
+          // uploadAvatar() -> upload the avatar
           function uploadAvatar() {
             cloudinary.uploader.upload(req.body.user.avatarUpdateData, function(result) {
               req.body.user.avatar = result.secure_url;
               req.body.user.avatarId = result.public_id;
+              // delete the base64 image data
               delete req.body.user.avatarUpdateData;
-              setTimeout(updateUser, 2000);
+              uploading_updating();
+              // Wait until the file is uploaded
+              function uploading_updating() {
+                if(req.body.user.avatarId){
+                  // after avatar is updated, update the user details
+                  updateUser();
+                } else {
+                  setTimeout(uploading_updating, 200);
+                }
+              }
             });
           }
+          // if the user had an avatar previously
           if(foundUser.avatarId){
+            // destroy the previous avatar
             cloudinary.uploader.destroy(foundUser.avatarId, function(result) {
-              console.log(result);
+              delete_check();
+              // check if it's deleted or no
+              function delete_check(){
+                if(result.result == 'ok'){
+                  uploadAvatar();
+                } else {
+                  setTimeout(delete_check, 10);
+                }
+              }
             });
-            setTimeout(uploadAvatar, 300);
+            // if the user didn't have an avatar directly upload avatar
           } else {
             uploadAvatar();
           }
         }
-      })
+      });
+    // if the user didn't request for updating, just update the user with any other details
     } else {
-      updatedUser();
+      updateUser();
     }
+    // Updating user function
     function updateUser(){
       User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
         if(err){
