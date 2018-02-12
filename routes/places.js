@@ -1,7 +1,7 @@
 var express = require("express");
 var router  = express.Router();
 var Place = require("../models/place");
-var moment = require("moment");
+var moment = require('moment-timezone');
 var middleware = require("../middleware");
 var geocoder = require('geocoder');
 var multer = require('multer');
@@ -123,8 +123,8 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
           username: req.user.username
         }
         // add time
-        req.body.place.createdAtDate = moment().format("Do MMM YY");
-        req.body.place.createdAtTime = moment().format("hh:mm:ss a");
+        req.body.place.createdAtDate = moment().tz('Asia/Kolkata').format("Do MMM YY");
+        req.body.place.createdAtTime = moment().tz('Asia/Kolkata').format("hh:mm:ss a");
         if(req.body.place.images.length)
         // Create a new place and save to DB
         Place.create(req.body.place, function(err, newlyCreated){
