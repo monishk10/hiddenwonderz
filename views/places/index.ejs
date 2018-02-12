@@ -4,6 +4,9 @@
   .topnav {
     background-color: rgba(0,0,0,0);
   }
+  .scroll-down {
+    cursor: pointer;
+  }
 </style>
 <ul class="image-header" id="one">
   <li></li>
@@ -12,7 +15,7 @@
     <h3>A start to a beautiful memory...</h3>
   </div>
   <p>Scroll Down</p>
-  <a href="#" class="scroll-down"></a>
+  <a class="scroll-down"></a>
 </ul>
 <div class="main" id="two">
   <div class="ui container">
@@ -116,6 +119,9 @@
   </div>
 </div>
 <script>
+  $('.scroll-down').click(function(){
+    $("html, body").animate({ scrollTop: $(window).height()}, 1000);
+  });
   /*masonry grid*/
   function resizeGridItem(item){
     grid = document.getElementsByClassName("masonry")[0];
