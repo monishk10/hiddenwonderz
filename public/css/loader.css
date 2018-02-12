@@ -10,6 +10,16 @@
   margin-left: -84px;
   content: "Registering User... ";
 }
+#update-user:before {
+  position: fixed;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  top: 35%;
+  left: 50%;
+  margin-left: -74px;
+  content: "Updating User... ";
+}
 #new-place:before {
   position: fixed;
   font-size: 1.5em;

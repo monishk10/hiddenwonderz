@@ -1,5 +1,9 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
+<div class="upload-loading">
+  <span id="update-user"></span>
+  <span class="loader"><span class="loader-inner"></span></span>
+</div>
 <div class="main">
 	<div class="ui container">
 		<div class="ui small modal">
@@ -111,6 +115,9 @@
       }
     })
   }
+  $('.ui.form').submit(function() {
+    $('.upload-loading').css('visibility', 'visible');
+  });
 </script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.js"></script>
