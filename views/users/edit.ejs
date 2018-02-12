@@ -2,8 +2,30 @@
 <% include ../partials/navbar %>
 <div class="main">
 	<div class="ui container">
+		<div class="ui small modal">
+	        <div class="header">
+	          Upload Avatar
+	        </div>
+	        <div class="content">
+	          <div class="ui grid">
+	            <div class="sixteen wide column">
+	              <div class="ui basic segment">
+	                <img class="ui circular small image" src="<%= user.avatar %>" id="change-profile-pic">
+	                <input style="display: inline-block;" type="file" accept="image/*" id="profile-file-input" onchange="loadFile(event)">
+	                <a style="display: inline-block;" id="select-cropped-image" class="ui blue button">Upload</a>
+	                <p id="uploading-text"></p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="actions">
+	          <div class="ui approve green button">Save</div>
+	        </div>
+	    </div>
 		<h1 style="text-align: center;">Update User Profile</h1>
-		<img class="ui centered medium circular image" src="<%= user.avatar %>">
+		<a id="image-update-modal">
+			<img class="ui centered medium circular image" src="<%= user.avatar %>">
+		</a>
 		<form onsubmit="lowerCase()" id="updateUserForm" class="ui form" action="/user/<%= user._id %>?_method=PUT" method="POST">
 			<div class="field">
 			    <label>Name</label>
@@ -13,6 +35,7 @@
 			    <label>Last Name</label>
 			    <input type="text" name="user[lastName]" value="<%= user.lastName %>">
 			</div>
+			<div id="avatarUpdate"></div>
 			<div class="field">
 			    <label>Email</label>
 			    <input type="email" name="user[email]" value="<%= user.email %>">
@@ -31,4 +54,50 @@
 		document.getElementById('username').value = inputUsername;
 	}
 </script>
+<script>
+	$('#image-update-modal').click(function(){
+    $('.ui.small.modal')
+    	.modal({
+            onApprove : function() {
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document 
+            },
+            approve  : '.positive, .approve, .ok'
+          })
+		.modal('setting', 'transition', 'scale')
+		.modal('show');
+  });
+</script>
+<script>
+  var loadFile = function(event){
+    var output = document.getElementById('change-profile-pic');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    $('#change-profile-pic').cropper("destroy");
+
+    $('#change-profile-pic').cropper({
+      aspectRatio: 1 / 1,
+      crop: function(e) {
+        var imageData = $(this).cropper('getImageData');
+        var croppedCanvas = $(this).cropper('getCroppedCanvas');
+        $('#select-cropped-image').click(function(){
+          function avatarSetting(){
+            var promise = new Promise (function(fulfill, reject) {
+              $('#image-update-modal').html('<img src="' + croppedCanvas.toDataURL('image/jpeg') +'" class="ui centered medium circular image">');
+              $('#avatarUpdate').html('<input style="display: none;" type="text" name="user[avatarUpdateData]" value="' + croppedCanvas.toDataURL('image/jpeg') +'">')
+              fulfill();
+            });
+            promise.then(function(){
+              $('#uploading-text').text("Uploaded");
+            });
+          }
+          $('#uploading-text').text("Uploading... (Do no refresh. Might take some time)");
+          setTimeout(avatarSetting, 100);
+        });
+      }
+    })
+  }
+</script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.js"></script>
 <% include ../partials/footer %>

@@ -33,7 +33,7 @@ mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
 
 // ********************************************************************
 // Setting up the environment
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));

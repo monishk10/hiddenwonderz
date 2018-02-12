@@ -4,6 +4,30 @@ var User = require("../models/user");
 var Place = require("../models/place");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, 
+                      fileFilter: imageFilter, 
+                      limits: { fieldSize: 25 * 1024 * 1024 }
+            });
+
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'hiddenwonderz', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // Get user profile
 router.get("/user/:id", function(req, res){
@@ -85,7 +109,7 @@ router.get("/user/:id/edit",middleware.checkUserOwnership, function(req, res){
 });
 
 //Update user
-router.put("/user/:id",middleware.checkUserOwnership, function(req, res){
+router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), function(req, res){
   User.find().or([{ username: req.body.user.username }, { email: req.body.user.email }]).exec(function (err, user) {
     if(err){
       req.flash("error", "User not found");
@@ -115,16 +139,45 @@ router.put("/user/:id",middleware.checkUserOwnership, function(req, res){
     }
   });
   function updateUser(){
-    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
-      if(err){
-        req.flash("error", "Couldn't update user. Please try again");
-        res.redirect("/places");
-      } else {
-        //redirect
-        req.flash("success", "Updated your profile!!");
-        res.redirect("/user/" + req.params.id);
-      }
-    });
+    if(req.body.user.avatarUpdateData){
+      User.findById(req.params.id, function(err, foundUser){
+        if(err){
+          req.flash("error", "Couldnt find the user. try again");
+          res.redirect("/places");
+        } else {
+          function uploadAvatar() {
+            cloudinary.uploader.upload(req.body.user.avatarUpdateData, function(result) {
+              req.body.user.avatar = result.secure_url;
+              req.body.user.avatarId = result.public_id;
+              delete req.body.user.avatarUpdateData;
+              setTimeout(updateUser, 2000);
+            });
+          }
+          if(foundUser.avatarId){
+            cloudinary.uploader.destroy(foundUser.avatarId, function(result) {
+              console.log(result);
+            });
+            setTimeout(uploadAvatar, 300);
+          } else {
+            uploadAvatar();
+          }
+        }
+      })
+    } else {
+      updatedUser();
+    }
+    function updateUser(){
+      User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
+        if(err){
+          req.flash("error", "Couldn't update user. Please try again");
+          res.redirect("/places");
+        } else {
+          //redirect
+          req.flash("success", "Updated your profile!!");
+          res.redirect("/user/" + req.params.id);
+        }
+      });
+    }
   }
 });
 module.exports = router;
