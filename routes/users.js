@@ -158,13 +158,12 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
               // Wait until the file is uploaded
               function uploading_updating() {
                 if(req.body.user.avatarId){
-                  // after avatar is updated, update the user details
                   Comment.find().where('author.id').equals(foundUser._id).exec(function(err, comments){
                     comments.forEach(function(comment){
                       comment.author.avatar = req.body.user.avatar;
-                      comment.author.firstName = req.body.user.firstName;
                     });
                   });
+                  // after avatar is updated, update the user details
                   updateUserData();
                 } else {
                   setTimeout(uploading_updating, 200);
@@ -204,6 +203,11 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
           res.redirect("/places");
         } else {
           //redirect
+          Comment.find().where('author.id').equals(updatedUser._id).exec(function(err, comments){
+            comments.forEach(function(comment){
+              comment.author.firstName = req.body.user.firstName;
+            });
+          });
           req.flash("success", "Updated your profile!!");
           res.redirect("/user/" + req.params.id);
         }
