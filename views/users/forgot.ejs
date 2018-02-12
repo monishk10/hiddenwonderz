@@ -34,5 +34,22 @@
 	<script>
 		$('.message').transition('fly down', '5s');
 	</script>
+	<script>
+$(document).ready(function(){
+  if($(window).width() > 991){
+    window.setInterval(alignment_box, 200);
+    function alignment_box(){
+      var right=$('#right-box').outerHeight();
+      var left=$('#left-box').outerHeight();
+      if(left>right) {
+        $('#right-box').outerHeight(left)
+      }
+      else {
+        $('#left-box').outerHeight(right)
+      }
+    }
+  }
+});
+</script>
 </body>
 </html>
