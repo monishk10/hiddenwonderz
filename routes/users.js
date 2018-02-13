@@ -161,6 +161,7 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
                   Comment.find().where('author.id').equals(foundUser._id).exec(function(err, comments){
                     comments.forEach(function(comment){
                       comment.author.avatar = req.body.user.avatar;
+                      comment.save();
                     });
                   });
                   // after avatar is updated, update the user details
@@ -206,11 +207,13 @@ router.put("/user/:id",middleware.checkUserOwnership, upload.single('avatar'), f
           Comment.find().where('author.id').equals(updatedUser._id).exec(function(err, comments){
             comments.forEach(function(comment){
               comment.author.firstName = req.body.user.firstName;
+              comment.save();
             });
           });
           Place.find().where('author.id').equals(updatedUser._id).exec(function(err, places){
             places.forEach(function(place){
               place.author.firstName = req.body.user.firstName;
+              place.save();
             });
           });
           req.flash("success", "Updated your profile!!");
