@@ -74,8 +74,13 @@
 
 	/***********************************/
 	/* Header */
+	.image-header li{
+		background-position: center top;
+	}
+
 	.image-header .hw-header{
-	  margin-top: 130px;
+	  bottom: unset;
+	  margin-top: 65vh;
 	  left: 0;
 	  margin-left: 0;
 	  width: 100%;
@@ -83,11 +88,11 @@
 	}
 
 	.hw-header h1 {
-	  font-size: 1.6rem;
+	  font-size: 1.8rem;
 	}
 
 	.hw-header h3 {
-	  font-size: 1.2rem;
+	  font-size: 1.5rem;
 	}
 
 	/***********************************/
