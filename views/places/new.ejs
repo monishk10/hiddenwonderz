@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 <% include ../partials/navbar %>
 <div class="upload-loading">
-  <span id="new-place"></span>
+  <span id="new-place"></span><span id="wait-till-upload"></span>
   <span class="loader"><span class="loader-inner"></span></span>
 </div>
 
@@ -14,7 +14,7 @@
       </div>
       <div id="image-type-selector" class="field">
         <label for="images" class="custom-image-upload">
-            <span style="font-weight: 700;">Image Upload:</span> <span class="ui blue button">Upload</span> <span class="upload-text"> Upload a file</span>
+            <span style="font-weight: 700;">Image Upload:</span> <span class="ui blue button">Upload</span> <span class="upload-text"> Upload files (File limit: Max 10 files, Total size limit: 25MB)</span>
         </label>
         <input type="file" id="images" name="images" accept="image/*" required multiple>
       </div>
@@ -67,6 +67,27 @@
     theme: 'snow'
   });
 
+  $(function(){
+    $('#images').change(function(){
+      if(this.files.length > 10){
+        alert("Files selected:" + this.files.length + ". File limit:10");
+      } else {
+        var combinedSize = 0;
+        for(var i=0;i<this.files.length;i++) {
+            combinedSize += (this.files[i].size||this.files[i].fileSize);
+        }
+        // 25MB=26214400 limit
+        if(combinedSize > 26214400){
+          alert(combinedSize/(1024*1024) + "MB: Limit 25MB");
+          $('#images')[0].value = "";
+          $(".upload-text").html("Upload files (File limit: Max 10 files, Total size limit: 25MB)");
+        } else {
+          $(".upload-text").html("Files are ready to upload");
+        }
+      }
+    });
+  });
+
   $(document).ready(function(){
     $(".upload-text").css({
       "margin-left" : "2%"
@@ -76,10 +97,6 @@
       "margin-left" : "1%"
     });
 
-    $('input[type="file"]').change(function(e){
-      var fileName = e.target.files[0].name;
-      $(".upload-text").html("Files are ready for upload");
-    });
     $('.ui.form').submit(function() {
       $('.upload-loading').css('visibility', 'visible');
     });

@@ -45,10 +45,20 @@
   font-size: 1.5em;
   font-weight: bold;
   color: #fff;
-  top: 35%;
+  top: 33%;
   left: 50%;
   margin-left: -84px;
   content: "Uploading images... ";
+}
+#wait-till-upload:before {
+  position: fixed;
+  font-size: 1em;
+  font-weight: bold;
+  color: #fff;
+  top: 40%;
+  left: 50%;
+  margin-left: -155px;
+  content: "Don't refresh the browser. Might take some time...";
 }
 .upload-loading {
   position: fixed;
