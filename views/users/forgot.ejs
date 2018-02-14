@@ -55,7 +55,10 @@ $(document).ready(function(){
   }
 });
 $('.ui.form').submit(function() {
-    $('.upload-loading').css('visibility', 'visible');
+    $('.upload-loading').css({
+      'visibility': 'visible',
+      'opacity' : '1'
+    });
 });
 </script>
 </body>

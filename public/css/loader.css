@@ -69,6 +69,7 @@
   z-index: 9999;
   background-color: #242F3F;
   visibility: hidden;
+  opacity: 0;
 }
 .loader {
   display: inline-block;

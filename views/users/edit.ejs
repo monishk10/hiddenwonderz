@@ -143,7 +143,10 @@
     })
   }
   $('.ui.form').submit(function() {
-    $('.upload-loading').css('visibility', 'visible');
+    $('.upload-loading').css({
+      'visibility': 'visible',
+      'opacity' : '1'
+    });
   });
   $("#dimmer").hover(
   function(){

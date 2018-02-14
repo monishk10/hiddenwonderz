@@ -183,7 +183,10 @@ $('.ui.form')
   })
 ;
 $('.ui.form').submit(function() {
-    $('.upload-loading').css('visibility', 'visible');
+    $('.upload-loading').css({
+      'visibility': 'visible',
+      'opacity' : '1'
+    });
 });
 $('.message').transition('fly down', '5s');
 </script>
