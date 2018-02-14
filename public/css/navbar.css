@@ -80,13 +80,13 @@
 }
 
 /* The dropdown container */
-.dropdown {
+.dropdownNav {
   float: left;
   overflow: hidden;
 }
 
 /* Dropdown button */
-.dropdown .dropbtn {
+.dropdownNav .dropbtn {
   border: none;
   outline: none;
   color: #0e1d28;
@@ -97,12 +97,12 @@
 }
 
 /* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .dropdownNav:hover .dropbtn {
   color: #0e1d28;
 }
 
 /* Dropdown content (hidden by default) */
-.dropdown-content {
+.dropdownNav-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -112,7 +112,7 @@
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdownNav-content a {
   float: none;
   color: #0e1d28;
   padding: 12px 16px;
@@ -122,12 +122,12 @@
 }
 
 /* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
+.dropdownNav-content a:hover {
   background-color: #ddd;
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+.dropdownNav:hover .dropdownNav-content {
   display: block;
 }
 

@@ -11,12 +11,12 @@
 	        <a href="/login">Login</a>
 	        <a href="/register">Register</a>
 	      <% } else { %>
-	        <div class="dropdown">
+	        <div class="dropdownNav">
 	          <button class="dropbtn">
 	            <img class="ui avatar image" src="<%= currentUser.avatar %>">
 	            <span style="font-size: 1.1em; font-weight: bold;"><%= currentUser.firstName %></span>
 	          </button>
-	          <div class="dropdown-content">
+	          <div class="dropdownNav-content">
 	            <a href="/user/<%= currentUser._id %>">My Profile</a>
 	            <a href="/logout">Logout</a>
 	          </div>
@@ -147,6 +147,4 @@ $(document).ready( function(){
 });
 
 $('.message').transition('fly down', '5s');
-
-$('.ui.dropdown').dropdown();
 </script>
