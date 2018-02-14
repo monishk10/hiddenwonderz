@@ -51,7 +51,8 @@ router.get("/", function(req, res){
               noMatch: noMatch, 
               current: pageNumber, 
               pages: Math.ceil(count / perPage),
-              search: req.query.search
+              search: req.query.search,
+              placeType: false
             }
           );
         }
@@ -73,7 +74,8 @@ router.get("/", function(req, res){
               noMatch: noMatch, 
               current: pageNumber, 
               pages: Math.ceil(count / perPage),
-              search: req.query.search
+              search: false,
+              placeType: req.query.placeType
             }
           );
         }
@@ -93,7 +95,8 @@ router.get("/", function(req, res){
               noMatch: noMatch,
               current: pageNumber,
               pages: Math.ceil(count / perPage),
-              search: false
+              search: false,
+              placeType: false
             }
           );
         }
