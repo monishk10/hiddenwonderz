@@ -57,6 +57,28 @@ router.get("/", function(req, res){
         }
       });
     });
+  } else if(req.query.placeType){
+    Place.find({"placeType" : {$elemMatch: { $all: req.query.placeType}}}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allPlaces){
+       Place.count({"placeType" : {$elemMatch: { $all: req.query.placeType}}}).exec(function (err, count) {
+         if(err){
+          req.flash("error", "Something went wrong!! Try again!");
+          res.redirect("back");
+         } else {
+          if(allPlaces.length < 1){
+            noMatch = "No data found. Please search again."
+          }
+          res.render("places/index",
+            {
+              places:allPlaces, 
+              noMatch: noMatch, 
+              current: pageNumber, 
+              pages: Math.ceil(count / perPage),
+              search: req.query.search
+            }
+          );
+        }
+      });
+    });
   } else {
     // Get all places from DB
     Place.find({}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allPlaces){
