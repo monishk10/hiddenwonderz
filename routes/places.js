@@ -107,9 +107,14 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
 
     // loop through the no of images to upload one by one
     for(var i=0; i<req.files.length; i++) {
+      var imageObject = {};
       cloudinary.uploader.upload(req.files[i].path, function(result) {
         // add cloudinary url for the image to the place object under image property
-        req.body.place.images.push(result.secure_url);
+        imageObject = {
+          imageURL: result.secure_url,
+          imageID: result.public_id
+        }
+        req.body.place.images.push(imageObject);
       });
     }
 
@@ -196,15 +201,27 @@ router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
 
 // DESTROY PLACE ROUTE
 router.delete("/:id",middleware.checkPlaceOwnership, function(req, res){
-  Place.findByIdAndRemove(req.params.id, function(err){
+  Place.findById(req.params.id, function(err, foundUser){
     if(err){
       req.flash("error", "Something went wrong!! Try again!");
       res.redirect("/places");
     } else {
-      req.flash("success", "Deleted the place successfully");
-      res.redirect("/places");
+      for(var i=0; i < foundUser.images.length; i++){
+        cloudinary.uploader.destroy(foundUser.images[i].imageID, function(result){
+          console.log(result);
+        });
+      }
+      Place.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+          req.flash("error", "Something went wrong!! Try again!");
+          res.redirect("/places");
+        } else {
+          req.flash("success", "Deleted the place successfully");
+          res.redirect("/places");
+        }
+      });
     }
-  });
+  })
 });
 
 function escapeRegex(text) {

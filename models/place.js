@@ -2,11 +2,10 @@ var mongoose = require("mongoose");
 
 var placeSchema = new mongoose.Schema({
    name: String,
-   images: [
-      {
-         type: String
-      }
-   ],
+   images: [{
+      imageURL: String,
+      imageID: String
+   }],
    description: String,
    createdAtDate: String,
    createdAtTime: String,
