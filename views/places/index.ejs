@@ -56,11 +56,16 @@
                 </div>
                 <div class="content">
                   <div class="header">
-                    <%= place.name %> <br>
-                    (<%= place.location %>)
+                    <%= place.name %>
                   </div>
                   <div class="description">
-                    <a href="/places/<%= place._id %>" class="ui button full-width" data-tooltip="Click here for more info on <%= place.name %>" data-position="top left">More Info</a>
+                    <h4 style="margin: 0 0 1em 0">(<%= place.location %>)</h4>
+                    <a href="/places/<%= place._id %>" class="ui blue button full-width" data-tooltip="Click here for more info on <%= place.name %>" data-position="top left">More Info</a>
+                    <p style="margin-top: 1em;"> Tags:
+                      <% place.placeType.forEach(function(placeType){ %>
+                        <span style="font-size: 0.8rem; margin-top: 0.25em; padding: 0.5em;" class="mini ui button"><%= placeType %></span>
+                      <% }); %>
+                    </p>
                   </div>
                 </div>
                 <div class="extra content">

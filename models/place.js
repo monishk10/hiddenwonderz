@@ -7,6 +7,11 @@ var placeSchema = new mongoose.Schema({
       imageID: String
    }],
    description: String,
+   placeType: [
+      {
+         type: String
+      }
+   ],
    createdAtDate: String,
    createdAtTime: String,
    location: String, 

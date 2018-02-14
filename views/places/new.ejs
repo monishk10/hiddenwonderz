@@ -19,6 +19,21 @@
         <input type="file" id="images" name="images" accept="image/*" required multiple>
       </div>
       <div class="field">
+        <select multiple="" name="place[placeType]" class="ui fluid normal dropdown">
+          <option value="">Place Type</option>
+          <option value="One-Day Trip">One-Day Trip</option>
+          <option value="Multiple-Day Trip">Multiple-Day Trip</option>
+          <option value="Road Trip">Road Trip</option>
+          <option value="Night Local Trip">Night Local Trip</option>
+          <option value="Night Trip">Night Trip</option>
+          <option value="Night Life">Night Life</option>
+          <option value="Chill">Chill</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Trekking">Trekking</option>
+          <option value="Party">Party</option>
+        </select>
+      </div>
+      <div class="field">
         <input type="text" name="place[location]" id="location" placeholder="Mumbai">
       </div>
       <div id="autocomplete-map"></div>
@@ -53,8 +68,15 @@
     height: 250px;
   }
 </style>
-<!-- Initialize Quill editor -->
 <script>
+  $(document).ready(function(){
+    $('.ui.normal.dropdown').dropdown({
+        maxSelections: 5
+      });
+  })
+</script>
+<script>
+<!-- Initialize Quill editor -->
   var toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],
     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
