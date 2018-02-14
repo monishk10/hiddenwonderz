@@ -20,7 +20,7 @@ body {
   grid-auto-rows: 20px;
 }
 
-#searchLocation {
+#searchLocation, #checkDisableByTag > div {
   width: 300px; 
   border-radius: 1.2rem; 
 }

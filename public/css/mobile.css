@@ -99,9 +99,10 @@
 	/* Main index page */
 	/***********************************/
 	/* Search & Add button */
-	#searchLocation {
-		width: 60vw;
+	#searchLocation, #checkDisableByTag > div {
+		width: 65vw;
 	}
+
 	.ui.grid>[class*="right aligned"].column.column{
 		text-align: left;
 	}

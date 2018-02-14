@@ -19,20 +19,38 @@
 </ul>
 <div class="main" id="two">
   <div class="ui container">
+    <div class="ui form">
+      <div class="inline fields">
+        <label>Search via:</label>
+        <div class="field">
+          <div id="searchCheckbox" class="ui radio checkbox">
+            <input type="radio" name="frequency">
+            <label>Name/Location</label>
+          </div>
+        </div>
+        <div class="field">
+          <div id="tagSearchCheckbox" class="ui radio checkbox">
+            <input type="radio" name="frequency">
+            <label>Tags</label>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="ui grid">
       <div class="sixteen wide tablet five wide computer column">
         <form class="ui form" action="/places" method="GET">
           <div class="ui search">
-            <div class="ui icon input">
+            <div id="checkDisableBySearch" class="ui disabled icon input">
               <input id="searchLocation" name="search" type="text" placeholder="Search via name or location...">
               <i class="search icon"></i>
             </div>
           </div>
+          <button style="margin-top: 0.25em;" class="ui tiny button">Search</button>
         </form>
       </div>
-      <div class="eight wide tablet five wide computer column">
-        <form class="ui form" action="/places" method="GET">
-          <select multiple="" name="placeType" class="ui fluid normal dropdown">
+      <div class="sixteen wide tablet five wide computer column">
+        <form id="checkDisableByTag" class="ui form" action="/places" method="GET">
+          <select multiple="" name="placeType" class="ui fluid normal disabled dropdown">
             <option value="">Place Type</option>
             <option value="One-Day Trip">One-Day Trip</option>
             <option value="Multiple-Day Trip">Multiple-Day Trip</option>
@@ -45,10 +63,10 @@
             <option value="Trekking">Trekking</option>
             <option value="Party">Party</option>
           </select>
-          <button style="margin-top: 0.25em;" class="ui tiny button">Submit</button>
+          <button style="margin-top: 0.25em;" class="ui tiny button">Search</button>
         </form>
       </div>
-      <div class="right aligned eight wide tablet five wide computer column">
+      <div class="right aligned sixteen wide tablet five wide computer column">
         <a class="ui labeled icon button" href="/places/new">
           <i class="plus icon"></i>
             <span class="add-button">Add new place</span>
@@ -152,6 +170,24 @@
     </div>
   </div>
 </div>
+<script>
+  $('#searchCheckbox')
+  .checkbox({
+    // check all children
+    onChecked: function() {
+      $('#checkDisableBySearch').removeClass("disabled");
+      $("#checkDisableByTag > div").removeClass("disabled").addClass("disabled");
+    }
+  });
+  $('#tagSearchCheckbox')
+  .checkbox({
+    // check all children
+    onChecked: function() {
+      $("#checkDisableByTag > div").removeClass("disabled");
+      $('#checkDisableBySearch').removeClass("disabled").addClass("disabled");
+    }
+  });
+</script>
 <script>
   $('.scroll-down').click(function(){
     $("html, body").animate({ scrollTop: $(window).height()}, 1000);
