@@ -18,14 +18,18 @@
             <option value="">Place Type</option>
             <option value="One-Day Trip">One-Day Trip</option>
             <option value="Multiple-Day Trip">Multiple-Day Trip</option>
+            <option value="Drive">Drive</option>
             <option value="Road Trip">Road Trip</option>
             <option value="Local: Night Drive">Local: Night Drive</option>
-            <option value="Night Life">Night Life</option>
             <option value="Trekking">Trekking</option>
             <option value="Adventure">Adventure</option>
             <option value="Chill">Chill</option>
+            <option value="Nature">Nature</option>
+            <option value="Heaven on Earth">Heaven On Earth</option>
+            <option value="Camping">Camping</option>
             <option value="Party">Party</option>
             <option value="Fest">Fest</option>
+            <option value="Night Life">Night Life</option>
           </select>
         </div>
         <div class="field">
@@ -75,6 +79,11 @@
         name: 'Multiple-Day Trip'
       },
       {
+        value: 'Drive',
+        text: 'Drive',
+        name: 'Drive'
+      },
+      {
         value: 'Road Trip',
         text: 'Road Trip',
         name: 'Road Trip'
@@ -83,11 +92,6 @@
         value: 'Local: Night Drive',
         text: 'Local: Night Drive',
         name: 'Local: Night Drive'
-      },
-      {
-        value: 'Night Life',
-        text: 'Night Life',
-        name: 'Night Life'
       },
       {
         value: 'Trekking',
@@ -105,6 +109,21 @@
         name: 'Chill'
       },
       {
+        value: 'Nature',
+        text: 'Nature',
+        name: 'Nature'
+      },
+      {
+        value: 'Heaven on Earth',
+        text: 'Heaven on Earth',
+        name: 'Heaven on Earth'
+      },
+      {
+        value: 'Camping',
+        text: 'Camping',
+        name: 'Camping'
+      },
+      {
         value: 'Party',
         text: 'Party',
         name: 'Party'
@@ -114,6 +133,11 @@
         text: 'Fest',
         name: 'Fest'
       },
+      {
+        value: 'Night Life',
+        text: 'Night Life',
+        name: 'Night Life'
+      }
     ]
   })
   .dropdown('set selected', placeTypeArray)
