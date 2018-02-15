@@ -1,6 +1,7 @@
 var express = require("express");
 var router  = express.Router();
 var Place = require("../models/place");
+var Comment = require("../models/comment");
 var moment = require('moment-timezone');
 var middleware = require("../middleware");
 var geocoder = require('geocoder');
@@ -226,16 +227,22 @@ router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
 
 // DESTROY PLACE ROUTE
 router.delete("/:id",middleware.checkPlaceOwnership, function(req, res){
-  Place.findById(req.params.id, function(err, foundUser){
+  Place.findById(req.params.id, function(err, foundPlace){
     if(err){
       req.flash("error", "Something went wrong!! Try again!");
       res.redirect("/places");
     } else {
-      for(var i=0; i < foundUser.images.length; i++){
-        cloudinary.uploader.destroy(foundUser.images[i].imageID, function(result){
-          console.log(result);
+      //Deleting the images associated with the place
+      for(var i=0; i < foundPlace.images.length; i++){
+        cloudinary.uploader.destroy(foundPlace.images[i].imageID, function(result){
         });
       }
+      //Deleting the comments associated with the place
+      for(var i=0; i < foundPlace.comments.length; i++){
+        Comment.findByIdAndRemove(foundPlace.comments[i], function(err){
+        });
+      }
+      //Deleting the place
       Place.findByIdAndRemove(req.params.id, function(err){
         if(err){
           req.flash("error", "Something went wrong!! Try again!");
