@@ -47,7 +47,6 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", upload.single('avatar'), function(req, res){
-  //eval(require('locus'));
   User.find().or([{ username: req.body.username }, { email: req.body.email }]).exec(function (err, user) {
     if(user.length > 0) {
       if(user[0].username == req.body.username){
@@ -63,7 +62,11 @@ router.post("/register", upload.single('avatar'), function(req, res){
           req.body.avatarId = result.public_id;
         });
       } else {
-        req.body.avatar = "http://res.cloudinary.com/hiddenwonderz/image/upload/v1518273154/default-avatar-ginger-guy_f5ejm8.png"
+        if(req.body.gender == 'male'){
+          req.body.avatar = "http://res.cloudinary.com/hiddenwonderz/image/upload/v1518273154/default-avatar-ginger-guy_f5ejm8.png"
+        } else if(req.body.gender == 'female') {
+          req.body.avatar = "http://res.cloudinary.com/hiddenwonderz/image/upload/v1518679305/default-avatar-girl_d6zrdr.jpg"
+        }
       }
       register_user();
     }

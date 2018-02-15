@@ -13,7 +13,7 @@
           <div class="ui grid">
             <div class="sixteen wide column">
               <div class="ui basic segment">
-                <img class="ui circular small image" src="../assets/avatar/default-avatar.png" id="change-profile-pic">
+                <img class="ui circular small image" src="../assets/avatar/default-boy-avatar.png" id="change-profile-pic">
                 <input type="file" accept="image/*" id="profile-file-input">
                 <a id="select-cropped-image" class="ui blue button">Upload</a>
                 <p>File size limit 1.5MB</p>
@@ -52,8 +52,23 @@
       				    <input style="width: 100%;" type="text" name="lastName" placeholder="Enter Last Name">
       					</div>
       				</div>
+              <div class="inline fields">
+                <label>Gender:</label>
+                <div class="field">
+                  <div id="maleCheckbox" class="ui radio checkbox">
+                    <input type="radio" name="gender" value="male" checked="checked">
+                    <label>Male</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div id="femaleCheckbox" class="ui radio checkbox">
+                    <input type="radio" name="gender" value="female">
+                    <label>Female</label>
+                  </div>
+                </div>
+              </div>
               <div id="profile-result" class="field">
-                <img src="../assets/avatar/default-avatar.png" class="ui circular tiny image">
+                <img src="../assets/avatar/default-boy-avatar.png" class="ui circular tiny image">
               </div>
               <div class="field">
                 <a id="image-upload-modal" class="ui blue button">Upload Avatar</a>
@@ -88,6 +103,22 @@
     <li></li>
   </ul>
 <script>
+ $('#maleCheckbox')
+  .checkbox({
+    onChecked: function() {
+      $('#profile-result').html('<img src="../assets/avatar/default-boy-avatar.png" class="ui circular tiny image">');
+      $('#change-profile-pic').attr("src", "../assets/avatar/default-boy-avatar.png");
+    }
+  });
+  $('#femaleCheckbox')
+  .checkbox({
+    onChecked: function() {
+      $('#profile-result').html('<img src="../assets/avatar/default-girl-avatar.jpg" class="ui circular tiny image">');
+      $('#change-profile-pic').attr("src", "../assets/avatar/default-girl-avatar.jpg");
+    }
+  }); 
+</script>
+<script>
   function lowerCase() {
       var inputUsername = document.getElementById('username').value.toLowerCase();
       document.getElementById('username').value = inputUsername;
@@ -96,7 +127,18 @@
     $('.ui.small.modal')
         .modal({
             onDeny    : function(){
-              $('#profile-result').html('<img src="../assets/avatar/default-avatar.png" class="ui circular tiny image">');
+              $('#maleCheckbox')
+              .checkbox({
+                onChecked: function() {
+                  $('#profile-result').html('<img src="../assets/avatar/default-boy-avatar.png" class="ui circular tiny image">');
+                }
+              });
+              $('#femaleCheckbox')
+              .checkbox({
+                onChecked: function() {
+                  $('#profile-result').html('<img src="../assets/avatar/default-girl-avatar.jpg" class="ui circular tiny image">');
+                }
+              });
               $('#avatar').html('<input style="display: none;" type="text" name="avatarData" value="">')
               var e = jQuery.Event("keyup"); // or keypress/keydown
               e.keyCode = 27; // for Esc
