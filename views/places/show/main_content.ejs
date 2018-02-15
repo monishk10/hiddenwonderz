@@ -16,13 +16,20 @@
       <p style="margin: 0"><%= place.createdAtDate %></p>
       <p><%= place.createdAtTime %></p>
     </div>
+    <div style="padding: 0" class="sixteen wide column">
+      <p style="margin-top: 0em;"> Tags:
+        <% place.placeType.forEach(function(placeType){ %>
+          <span style="font-size: 0.8rem; margin-top: 0.25em; padding: 0.5em;" class="mini ui button"><%= placeType %></span>
+        <% }); %>
+      </p>
+    </div>
     <div class="sixteen wide column">
 			<% if(currentUser && place.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
-				<a class="ui circular lightBlue icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
+				<a style="margin-bottom: 0;" class="ui circular lightBlue icon button" href="/places/<%= place._id %>/edit" data-tooltip="Edit your post">
 					<i class="edit icon"></i>
 				</a>
 				<form id="delete-place-form" style="display: inline-block;" action="/places/<%= place._id %>?_method=DELETE" method="POST">
-          <a id="delete-place-form-submit" class="ui circular red icon button" data-tooltip="Permanently delete your post">
+          <a style="margin-bottom: 0;" id="delete-place-form-submit" class="ui circular red icon button" data-tooltip="Permanently delete your post">
           	<i class="ban icon"></i>
         	</a>
         </form>
