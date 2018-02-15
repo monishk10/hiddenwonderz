@@ -20,10 +20,15 @@ body {
   grid-auto-rows: 20px;
 }
 
+/****************************************/
+/* Search bar UI */
 #searchLocation, #checkDisableByTag > div {
   width: 300px; 
   border-radius: 1.2rem; 
 }
+
+/****************************************/
+/* User update form */
 #updateUserForm {
   margin-left: auto;
   margin-right: auto;

@@ -37,12 +37,14 @@ router.get("/", function(req, res){
   // Search specific term
   if(req.query.search){
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    // search via location or name with Regular Expressions(regex)
     Place.find().or([{"location": regex}, {"name": regex}]).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allPlaces){
-       Place.count().or([{"location": regex}, {"name": regex}]).exec(function (err, count) {
-         if(err){
+      // count the places
+      Place.count().or([{"location": regex}, {"name": regex}]).exec(function (err, count) {
+        if(err){
           req.flash("error", "Something went wrong!! Try again!");
           res.redirect("back");
-         } else {
+        } else {
           if(allPlaces.length < 1){
             noMatch = "No data found. Please search again."
           }
@@ -59,13 +61,15 @@ router.get("/", function(req, res){
         }
       });
     });
-  } else if(req.query.placeType){
+  } 
+  // Search via tags
+  else if(req.query.placeType){
     Place.find({"placeType" : { $all: req.query.placeType}}).skip((perPage * pageNumber) - perPage).limit(perPage).exec(function(err, allPlaces){
-       Place.count({"placeType" : { $all: req.query.placeType}}).exec(function (err, count) {
-         if(err){
+      Place.count({"placeType" : { $all: req.query.placeType}}).exec(function (err, count) {
+        if(err){
           req.flash("error", "Something went wrong!! Try again!");
           res.redirect("back");
-         } else {
+        } else {
           if(allPlaces.length < 1){
             noMatch = "No data found. Please search again."
           }
@@ -109,21 +113,22 @@ router.get("/", function(req, res){
 //CREATE - add new place to DB
 router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, res){
   geocoder.geocode(req.body.place.location, function (err, data) {
+    // if location was not found redirect to new page
     if (err || data.status === 'ZERO_RESULTS') {
       req.flash('error', 'Invalid location address.. Try again');
       return res.redirect('back');
     }
-
+    // if request was denied
     if (err || data.status === 'REQUEST_DENIED') {
       req.flash('error', 'Something Is Wrong, your Request Was Denied');
       return res.redirect('back');
     }
-    
+    // if some unknown error
     if(err || data.status === 'UNKNOWN_ERROR' || data.status === 'ERROR'){
       req.flash('error', "Error");
       return res.redirect("back");
     }
-
+    // else allot lat, long, location value
     req.body.place.lat = data.results[0].geometry.location.lat;
     req.body.place.lng = data.results[0].geometry.location.lng;
     req.body.place.location = data.results[0].formatted_address;
@@ -176,7 +181,7 @@ router.post("/", middleware.isLoggedIn, upload.array('images'), function(req, re
 
 //NEW - show form to create new place
 router.get("/new", middleware.isLoggedIn, function(req, res){
-   res.render("places/new"); 
+  res.render("places/new"); 
 });
 
 // SHOW - shows more info about one place
@@ -208,6 +213,22 @@ router.get("/:id/edit",middleware.checkPlaceOwnership, function(req, res){
 // UPDATE PLACE ROUTE
 router.put("/:id",middleware.checkPlaceOwnership, function(req, res){
   geocoder.geocode(req.body.place.location, function (err, data) {
+    // if location was not found redirect to edit page
+    if (err || data.status === 'ZERO_RESULTS') {
+      req.flash('error', 'Invalid location address.. Try again');
+      return res.redirect('back');
+    }
+    // if request was denied
+    if (err || data.status === 'REQUEST_DENIED') {
+      req.flash('error', 'Something Is Wrong, your Request Was Denied');
+      return res.redirect('back');
+    }
+    // if some unknown error
+    if(err || data.status === 'UNKNOWN_ERROR' || data.status === 'ERROR'){
+      req.flash('error', "Error");
+      return res.redirect("back");
+    }
+    
     req.body.place.lat = data.results[0].geometry.location.lat;
     req.body.place.lng = data.results[0].geometry.location.lng;
     req.body.place.location = data.results[0].formatted_address;

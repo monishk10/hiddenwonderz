@@ -35,30 +35,29 @@ router.post("/",middleware.isLoggedIn,function(req, res){
 
 // COMMENT UPDATE
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
-   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
-      if(err){
-        req.flash("error", "Something went wrong!! Try again!");
-        res.redirect("back");
-      } else {
-        console.log(updatedComment);
-        req.flash("success", "Successfully updated the comment!");
-        res.redirect("/places/" + req.params.id );
-      }
-   });
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
+    if(err){
+      req.flash("error", "Something went wrong!! Try again!");
+      res.redirect("back");
+    } else {
+      req.flash("success", "Successfully updated the comment!");
+      res.redirect("/places/" + req.params.id );
+    }
+  });
 });
 
 // COMMENT DESTROY ROUTE
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
-    //findByIdAndRemove
-    Comment.findByIdAndRemove(req.params.comment_id, function(err){
-       if(err){
-        req.flash("error", "Something went wrong!! Try again!");
-        res.redirect("back");
-       } else {
-        req.flash("success", "Deleted the comment!!!");
-        res.redirect("/places/" + req.params.id);
-       }
-    });
+  //findByIdAndRemove
+  Comment.findByIdAndRemove(req.params.comment_id, function(err){
+    if(err){
+      req.flash("error", "Something went wrong!! Try again!");
+      res.redirect("back");
+    } else {
+      req.flash("success", "Deleted the comment!!!");
+      res.redirect("/places/" + req.params.id);
+    }
+  });
 });
 
 module.exports = router;
