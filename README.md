@@ -15,3 +15,8 @@
 <ul>
 	<li>Google Maps Updated</li>
 </ul>
+
+<p>v1.2</p>
+<ul>
+	<li>Added new place tags</li>
+</ul>
