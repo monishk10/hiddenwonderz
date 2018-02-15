@@ -10,3 +10,8 @@
 	<li>Add/Edit comments</li>
 	<li>...much more</li>
 </ul>
+
+<p>v1.1</p>
+<ul>
+	<li>Google Maps Updated</li>
+</ul>
