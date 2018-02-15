@@ -98,10 +98,12 @@
   });
   $('.message').transition('fly down', '5s');
   $('.ui.form').submit(function() {
+    if($('.ui.form').form('is valid')){
       $('.upload-loading').css({
         'visibility': 'visible',
         'opacity' : '1'
       });
+    }
   });
 </script>
 <script>

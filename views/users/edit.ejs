@@ -142,11 +142,50 @@
       }
     })
   }
+  $('.ui.form')
+  .form({
+    inline : true,
+    on: 'blur',
+    fields: {
+      firstName: {
+        identifier: 'user[firstName]',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter your name'
+          }
+        ]
+      },
+      email: {
+        identifier: 'user[email]',
+        rules: [{
+          type: 'empty',
+          prompt: 'Please enter an email id'
+        },
+        {
+          type: 'email',
+          prompt: 'Please enter a valid email id'
+        }]
+      },
+      username: {
+        identifier: 'user[username]',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter a username'
+          }
+        ]
+      }
+    }
+  })
+;
   $('.ui.form').submit(function() {
-    $('.upload-loading').css({
-      'visibility': 'visible',
-      'opacity' : '1'
-    });
+	if($('.ui.form').form('is valid')){
+		$('.upload-loading').css({
+		  'visibility': 'visible',
+		  'opacity' : '1'
+		});
+	}
   });
   $("#dimmer").hover(
   function(){

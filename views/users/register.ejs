@@ -183,12 +183,14 @@ $('.ui.form')
       },
       email: {
         identifier: 'email',
-        rules: [
-          {
-            type   : 'email',
-            prompt : 'Please enter a valid email'
-          }
-        ]
+        rules: [{
+          type: 'empty',
+          prompt: 'Please enter an email id'
+        },
+        {
+          type: 'email',
+          prompt: 'Please enter a valid email id'
+        }]
       },
       username: {
         identifier: 'username',
@@ -225,10 +227,12 @@ $('.ui.form')
   })
 ;
 $('.ui.form').submit(function() {
+  if($('.ui.form').form('is valid')){
     $('.upload-loading').css({
       'visibility': 'visible',
       'opacity' : '1'
     });
+  }
 });
 $('.message').transition('fly down', '5s');
 </script>

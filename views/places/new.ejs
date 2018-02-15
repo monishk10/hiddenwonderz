@@ -120,10 +120,12 @@
     });
 
     $('.ui.form').submit(function() {
+      if($('.ui.form').form('is valid')){
         $('.upload-loading').css({
           'visibility': 'visible',
           'opacity' : '1'
         });
+      }
     });
 
     $('.ui.form')
@@ -148,12 +150,20 @@
                 prompt : 'Please enter a valid location'
               }
             ]
+          },
+          placeType: {
+            identifier: 'place[placeType]',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter atleast one tag'
+              }
+            ]
           }
         }
       });
 
     $(function() {
-      console.log($('#description').text().length);
       $("#new-place-form-submit").click(function(){
         var delta = quill.getContents();
         var newSomething = JSON.stringify(delta);
