@@ -19,13 +19,13 @@
             <option value="One-Day Trip">One-Day Trip</option>
             <option value="Multiple-Day Trip">Multiple-Day Trip</option>
             <option value="Road Trip">Road Trip</option>
-            <option value="Night Local Trip">Night Local Trip</option>
-            <option value="Night Trip">Night Trip</option>
+            <option value="Local: Night Drive">Local: Night Drive</option>
             <option value="Night Life">Night Life</option>
-            <option value="Chill">Chill</option>
-            <option value="Adventure">Adventure</option>
             <option value="Trekking">Trekking</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Chill">Chill</option>
             <option value="Party">Party</option>
+            <option value="Fest">Fest</option>
           </select>
         </div>
         <div class="field">
@@ -80,14 +80,9 @@
         name: 'Road Trip'
       },
       {
-        value: 'Night Local Trip',
-        text: 'Night Local Trip',
-        name: 'Night Local Trip'
-      },
-      {
-        value: 'Night Trip',
-        text: 'Night Trip',
-        name: 'Night Trip'
+        value: 'Local: Night Drive',
+        text: 'Local: Night Drive',
+        name: 'Local: Night Drive'
       },
       {
         value: 'Night Life',
@@ -95,9 +90,9 @@
         name: 'Night Life'
       },
       {
-        value: 'Chill',
-        text: 'Chill',
-        name: 'Chill'
+        value: 'Trekking',
+        text: 'Trekking',
+        name: 'Trekking'
       },
       {
         value: 'Adventure',
@@ -105,15 +100,20 @@
         name: 'Adventure'
       },
       {
-        value: 'Trekking',
-        text: 'Trekking',
-        name: 'Trekking'
+        value: 'Chill',
+        text: 'Chill',
+        name: 'Chill'
       },
       {
         value: 'Party',
         text: 'Party',
         name: 'Party'
-      }
+      },
+      {
+        value: 'Fest',
+        text: 'Fest',
+        name: 'Fest'
+      },
     ]
   })
   .dropdown('set selected', placeTypeArray)
