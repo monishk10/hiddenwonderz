@@ -103,7 +103,7 @@
     <li></li>
   </ul>
 <script>
- $('#maleCheckbox')
+  $('#maleCheckbox')
   .checkbox({
     onChecked: function() {
       $('#profile-result').html('<img src="../assets/avatar/default-boy-avatar.png" class="ui circular tiny image">');
@@ -117,12 +117,25 @@
       $('#change-profile-pic').attr("src", "../assets/avatar/default-girl-avatar.jpg");
     }
   }); 
-</script>
-<script>
   function lowerCase() {
       var inputUsername = document.getElementById('username').value.toLowerCase();
       document.getElementById('username').value = inputUsername;
+  }
+  $(document).ready(function(){
+    if($(window).width() > 991){
+      window.setInterval(alignment_box, 200);
+      function alignment_box(){
+        var right=$('#right-box').outerHeight();
+        var left=$('#left-box').outerHeight();
+        if(left>right) {
+          $('#right-box').outerHeight(left)
+        }
+        else {
+          $('#left-box').outerHeight(right)
+        }
+      }
     }
+  });
   $('#image-upload-modal').click(function(){
     $('.ui.small.modal')
         .modal({
@@ -167,7 +180,7 @@
     }
   });
     
-$('.ui.form')
+  $('.ui.form')
   .form({
     inline : true,
     on: 'blur',
@@ -224,19 +237,15 @@ $('.ui.form')
         ]
       }
     }
-  })
-;
-$('.ui.form').submit(function() {
-  if($('.ui.form').form('is valid')){
-    $('.upload-loading').css({
-      'visibility': 'visible',
-      'opacity' : '1'
-    });
-  }
-});
-$('.message').transition('fly down', '5s');
-</script>
-<script>
+  });
+  $('.ui.form').submit(function() {
+    if($('.ui.form').form('is valid')){
+      $('.upload-loading').css({
+        'visibility': 'visible',
+        'opacity' : '1'
+      });
+    }
+  });
   var loadFile = function(event){
     var output = document.getElementById('change-profile-pic');
     output.src = URL.createObjectURL(event.target.files[0]);
@@ -270,20 +279,3 @@ $('.message').transition('fly down', '5s');
 </script>
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cropper/3.1.4/cropper.min.js"></script>
-<script>
-$(document).ready(function(){
-  if($(window).width() > 991){
-    window.setInterval(alignment_box, 200);
-    function alignment_box(){
-      var right=$('#right-box').outerHeight();
-      var left=$('#left-box').outerHeight();
-      if(left>right) {
-        $('#right-box').outerHeight(left)
-      }
-      else {
-        $('#left-box').outerHeight(right)
-      }
-    }
-  }
-});
-</script>

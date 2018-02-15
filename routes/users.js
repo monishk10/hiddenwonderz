@@ -274,7 +274,7 @@ router.get("/user/:id", function(req, res){
   User.findById(req.params.id, function(err, foundUser){
     if(err){
       req.flash("error", "User not found!!");
-      console.log(err);
+      res.redirect("/places")
     }
     var userPlaces, userComments;
     // find places posted by the user

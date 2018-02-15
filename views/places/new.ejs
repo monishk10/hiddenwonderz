@@ -74,8 +74,6 @@
         maxSelections: 5
       });
   })
-</script>
-<script>
  /*Initialize Quill editor*/
   var toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],
@@ -163,34 +161,33 @@
         }
       });
 
-    $(function() {
-      $("#new-place-form-submit").click(function(){
-        var delta = quill.getContents();
-        var newSomething = JSON.stringify(delta);
-        $('#description').html(newSomething);
-        $('.mini.modal')
-          .modal({
-            onDeny    : function(){
-                var e = jQuery.Event("keyup"); // or keypress/keydown
-                e.keyCode = 27; // for Esc
-                $(document).trigger(e); // trigger it on document  
-            },
-            onApprove : function() {
-              if(($('input[type="file"]').val())) {
-                if(($('#description').text().length > 26)) {
-                  $('form#new-place-form').submit();
-                } else {
-                  alert("No description entered...");
-                }
+    
+    $("#new-place-form-submit").click(function(){
+      var delta = quill.getContents();
+      var newSomething = JSON.stringify(delta);
+      $('#description').html(newSomething);
+      $('.mini.modal')
+        .modal({
+          onDeny    : function(){
+              var e = jQuery.Event("keyup"); // or keypress/keydown
+              e.keyCode = 27; // for Esc
+              $(document).trigger(e); // trigger it on document  
+          },
+          onApprove : function() {
+            if(($('input[type="file"]').val())) {
+              if(($('#description').text().length > 26)) {
+                $('form#new-place-form').submit();
               } else {
-                alert("No image file selected...");
+                alert("No description entered...");
               }
-            },
-            approve  : '.positive, .approve, .ok',
-            deny     : '.negative, .deny, .cancel',
-          }).modal('setting', 'transition', 'scale')
-          .modal('show');
-      });
+            } else {
+              alert("No image file selected...");
+            }
+          },
+          approve  : '.positive, .approve, .ok',
+          deny     : '.negative, .deny, .cancel',
+        }).modal('setting', 'transition', 'scale')
+        .modal('show');
     });
   });
 

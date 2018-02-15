@@ -1,4 +1,5 @@
 <div class="pusher">
+	<!-- Desktop navbar -->
 	<div class="topnav" id="myTopnav">
 		<a class="static-brand" href="/">
 			<img class="logo-image" src="https://i.imgur.com/A23M1TR.png">
@@ -7,6 +8,7 @@
 	    <a href="/places">Home</a>
 	    <a href="/aboutme">About</a>
 	    <div class="right">
+	    	<!-- if no user logged in -->
 	      <% if(!currentUser){ %>
 	        <a href="/login">Login</a>
 	        <a href="/register">Register</a>
@@ -21,7 +23,7 @@
 	            <a href="/logout">Logout</a>
 	          </div>
 	        </div>
-	    <% } %>
+	    	<% } %>
 	    </div>
 	  </div>
 	</div>
@@ -29,7 +31,7 @@
 		<a class="mobile-static-brand" href="/">
 		    <img class="mobile-logo-image" src="https://i.imgur.com/A23M1TR.png">
 		</a>
-		<a href="javascript:void(0);" class="navToggle-icon" onclick="navbarToggle()">&#9776;</a>
+		<a href="javascript:void(0);" class="navToggle-icon" onclick="navbarMobileToggle()">&#9776;</a>
 		
 		<div class="ui top demo sidebar ui segment" style="">
 		  <div class="ui center aligned page grid">
@@ -101,50 +103,52 @@
 	  <% } %>
 	</div>
 <script>
-	function navbarToggle() {
+	/* open close navbar menu */
+	function navbarMobileToggle() {
 		$('.ui.sidebar')
 		.sidebar('setting', 'transition', 'push')
 		.sidebar('toggle');
 	}
-</script>
-<script>
-/* To make active class */
-$(document).ready( function(){
-  var location = window.location.pathname;
-  $("a[href='"+location+"']").addClass("active");
-  var scrollTop = 0;
-  $(window).scroll(function(){
-    scrollTop = $(window).scrollTop();
-    
-    if (scrollTop >= 90) {
-      $('#myTopnav').addClass('scrolled-nav');
-      $('.topnav').css({
-        "padding": "5px 0 0 0",
-        "font-size": "14px",
-        "border-bottom": "8px solid #0e1d28"
-      });
-      $('.topnav a').css({
-        "font-size": "17px",
-      });
-      $('.sidenav').css({
-        "margin-top": "90px"
-      });
-    } else if (scrollTop < 90) {
-      $('#myTopnav').removeClass('scrolled-nav');
-      $('.topnav').css({
-        "padding": "15px 0 0 0",
-        "font-size": "17px",
-        "border-bottom": "1px solid rgba(0,0,0,0.3)"
-      });
-      $('.topnav a').css({
-        "font-size": "20px",
-      });
-      $('.sidenav').css({
-        "margin-top": "120px"
-      });
-    }  
-  }); 
-});
 
-$('.message').transition('fly down', '5s');
+	$(document).ready( function(){
+		/* To make active class */
+	  var location = window.location.pathname;
+	  $("a[href='"+location+"']").addClass("active");
+	  /* Scrolling navbar changes */
+	  var scrollTop = 0;
+	  $(window).scroll(function(){
+	    scrollTop = $(window).scrollTop();
+	    
+	    if (scrollTop >= 90) {
+	      $('#myTopnav').addClass('scrolled-nav');
+	      $('.topnav').css({
+	        "padding": "5px 0 0 0",
+	        "font-size": "14px",
+	        "border-bottom": "8px solid #0e1d28"
+	      });
+	      $('.topnav a').css({
+	        "font-size": "17px",
+	      });
+	      $('.sidenav').css({
+	        "margin-top": "90px"
+	      });
+	    } else if (scrollTop < 90) {
+	      $('#myTopnav').removeClass('scrolled-nav');
+	      $('.topnav').css({
+	        "padding": "15px 0 0 0",
+	        "font-size": "17px",
+	        "border-bottom": "1px solid rgba(0,0,0,0.3)"
+	      });
+	      $('.topnav a').css({
+	        "font-size": "20px",
+	      });
+	      $('.sidenav').css({
+	        "margin-top": "120px"
+	      });
+	    }  
+	  }); 
+	});
+
+	/* Flash messages display transition */
+	$('.message').transition('fly down', '5s');
 </script>

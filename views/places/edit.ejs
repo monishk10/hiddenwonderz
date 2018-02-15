@@ -58,11 +58,7 @@
   }
 </style>
 <script>
-  $(document).ready(function(){
-    $('.ui.normal.dropdown').dropdown({
-        maxSelections: 5
-      });
-  })
+  // Dropdown setup
   var placeTypeStr = $('#placeType').val();
   var placeTypeArray = placeTypeStr.split(',');
   $('.dropdown')
@@ -121,15 +117,20 @@
     ]
   })
   .dropdown('set selected', placeTypeArray)
-</script>
-<script>
+
   $(document).ready(function(){
+    // max dropdown selections
+    $('.ui.normal.dropdown').dropdown({
+        maxSelections: 5
+    });
+    // Quill toolbar
     var toolbarOptions = [
       ['bold', 'italic', 'underline', 'strike'],
       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
       [{ 'size': ['small', false, 'large', 'huge'] }],
       [{ 'align': [] }]
     ]
+    // Quill initialization
     var quill = new Quill('#editor', {
       modules: {
         toolbar: toolbarOptions
@@ -137,9 +138,11 @@
       theme: 'snow'
     });
 
+    // JSONDescription to quill object type
     var descriptionContent = $('#jsonDescription').html();
     quill.setContents(JSON.parse(descriptionContent));
 
+    // Form validator
     $('.ui.form')
       .form({
         inline : true,
@@ -175,51 +178,49 @@
         }
       });
 
-    $(function() {
-      $("#edit-place-form-submit").click(function(){
-        var delta = quill.getContents();
-        var newSomething = JSON.stringify(delta);
-        $('#description').html(newSomething);
-        $('.mini.modal')
-          .modal({
-            onDeny    : function(){
-              var e = jQuery.Event("keyup"); // or keypress/keydown
-              e.keyCode = 27; // for Esc
-              $(document).trigger(e); // trigger it on document  
-            },
-            onApprove : function() {
-              if(($('#description').text().length > 26)) {
-                $('form#edit-place-form').submit();
-              } else {
-                alert("No description entered...");
-              }
-            },
-            approve  : '.positive, .approve, .ok',
-            deny     : '.negative, .deny, .cancel',
-          }).modal('setting', 'transition', 'scale')
-          .modal('show');
-      });
+    $("#edit-place-form-submit").click(function(){
+      var delta = quill.getContents();
+      var newSomething = JSON.stringify(delta);
+      $('#description').html(newSomething);
+      $('.mini.modal')
+        .modal({
+          onDeny    : function(){
+            var e = jQuery.Event("keyup"); // or keypress/keydown
+            e.keyCode = 27; // for Esc
+            $(document).trigger(e); // trigger it on document  
+          },
+          onApprove : function() {
+            if(($('#description').text().length > 26)) {
+              $('form#edit-place-form').submit();
+            } else {
+              alert("No description entered...");
+            }
+          },
+          approve  : '.positive, .approve, .ok',
+          deny     : '.negative, .deny, .cancel',
+        }).modal('setting', 'transition', 'scale')
+        .modal('show');
     });
   });
 
-function initMap() {
-  var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
-    zoom: 13
-  });
-  var input = document.getElementById('location');
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('autocomplete-map'), {
+      zoom: 13
+    });
+    var input = document.getElementById('location');
 
-  var autocomplete = new google.maps.places.Autocomplete(input);
+    var autocomplete = new google.maps.places.Autocomplete(input);
 
-  autocomplete.addListener('place_changed', function() {
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
-      window.alert("No details available for input:");
-      return;
-    }
-  });
-}
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input:");
+        return;
+      }
+    });
+  }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPQobcx-8jUUZqhJp5ffqSLfAbAIVxm-Y&&libraries=places&callback=initMap" async defer>
 </script>

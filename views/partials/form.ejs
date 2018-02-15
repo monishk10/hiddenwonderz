@@ -29,14 +29,14 @@
         <meta name="msapplication-square310x310logo" content="../assets/logo/mstile-310x310.png" />
         
         <!-- Stylesheets -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
         <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
         <link rel="stylesheet" href="/css/form.css">
         <link rel="stylesheet" href="/css/loader.css">
         <link rel="stylesheet" href="/css/mobile.css">
         <!-- Scripts -->
-        <script type="text/javascript" src="/js/jQuery/jquery.min.js"></script>
-        <script type="text/javascript" src="/js/semantic/semantic.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.js"></script>
     </head>
     <body>
     <div>
@@ -56,6 +56,9 @@
 	    </div>
 	  <% } %>
 	</div>
+    <script>
+        $('.message').transition('fly down', '5s');
+    </script>
     <div style="position: relative; z-index: 2; padding-bottom: unset;" class="ui left aligned basic segment">
 	    <a class="ui circular icon inverted button" href="/places">
 	      <i class="home icon"></i>

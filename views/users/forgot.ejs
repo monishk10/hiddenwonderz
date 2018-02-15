@@ -36,49 +36,46 @@
 	  <li></li>
 	</ul>
 	<script>
-		$('.message').transition('fly down', '5s');
-	</script>
-	<script>
-$(document).ready(function(){
-  if($(window).width() > 991){
-    window.setInterval(alignment_box, 200);
-    function alignment_box(){
-      var right=$('#right-box').outerHeight();
-      var left=$('#left-box').outerHeight();
-      if(left>right) {
-        $('#right-box').outerHeight(left)
-      }
-      else {
-        $('#left-box').outerHeight(right)
-      }
-    }
-  }
-});
-$('.ui.form').form({
-    inline : true,
-    on: 'blur',
-    fields: {
-      email: {
-        identifier: 'email',
-        rules: [{
-          type: 'empty',
-          prompt: 'Please enter an email id'
-        },
-        {
-          type: 'email',
-          prompt: 'Please enter a valid email id'
-        }]
-      }
-    }
-});
-$('.ui.form').submit(function() {
-	if($('.ui.form').form('is valid')){
-		$('.upload-loading').css({
-		  'visibility': 'visible',
-		  'opacity' : '1'
+		$(document).ready(function(){
+		  if($(window).width() > 991){
+		    window.setInterval(alignment_box, 200);
+		    function alignment_box(){
+		      var right=$('#right-box').outerHeight();
+		      var left=$('#left-box').outerHeight();
+		      if(left>right) {
+		        $('#right-box').outerHeight(left)
+		      }
+		      else {
+		        $('#left-box').outerHeight(right)
+		      }
+		    }
+		  }
 		});
-	}
-});
-</script>
+		$('.ui.form').form({
+		    inline : true,
+		    on: 'blur',
+		    fields: {
+		      email: {
+		        identifier: 'email',
+		        rules: [{
+		          type: 'empty',
+		          prompt: 'Please enter an email id'
+		        },
+		        {
+		          type: 'email',
+		          prompt: 'Please enter a valid email id'
+		        }]
+		      }
+		    }
+		});
+		$('.ui.form').submit(function() {
+			if($('.ui.form').form('is valid')){
+				$('.upload-loading').css({
+				  'visibility': 'visible',
+				  'opacity' : '1'
+				});
+			}
+		});
+	</script>
 </body>
 </html>

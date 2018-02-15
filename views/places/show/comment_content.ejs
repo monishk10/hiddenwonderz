@@ -17,28 +17,28 @@
             </div>
             <div class="rating-widget">
 	          	<!-- Rating Stars Box -->
-				<div class='rating-stars text-center'>
-				    <ul style="font-size: 7px;" id='stars'>
-				      <li class='star' title='Poor' data-value='1'>
-				        <i class='fa fa-star fa-fw'></i>
-				      </li>
-				      <li class='star' title='Fair' data-value='2'>
-				        <i class='fa fa-star fa-fw'></i>
-				      </li>
-				      <li class='star' title='Good' data-value='3'>
-				        <i class='fa fa-star fa-fw'></i>
-				      </li>
-				      <li class='star' title='Excellent' data-value='4'>
-				        <i class='fa fa-star fa-fw'></i>
-				      </li>
-				      <li class='star' title='WOW!!!' data-value='5'>
-				        <i class='fa fa-star fa-fw'></i>
-				      </li>
-				    </ul>
-				</div>
-	        </div>
-	        <!-- To store star rating value -->
-	        <textarea style="display: none;" id="rating-value" name="comment[rating]"></textarea>
+							<div class='rating-stars text-center'>
+						    <ul style="font-size: 7px;" id='stars'>
+						      <li class='star' title='Poor' data-value='1'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='Fair' data-value='2'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='Good' data-value='3'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='Excellent' data-value='4'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						      <li class='star' title='WOW!!!' data-value='5'>
+						        <i class='fa fa-star fa-fw'></i>
+						      </li>
+						    </ul>
+							</div>
+		        </div>
+		        <!-- To store star rating value -->
+		        <textarea style="display: none;" id="rating-value" name="comment[rating]"></textarea>
             <div class="field">
               <textarea name="comment[text]" placeholder="Write your comment..." rows="5" cols="70"></textarea>
             </div>
@@ -88,34 +88,34 @@
 					</div>
 				</div>
 				<p>
-				<% if (currentUser && currentUser._id.equals(comment.author.id) || currentUser && currentUser.isAdmin) { %>
-					<div class="ui accordion">
-						<div class="title">
-							<a style="margin: 0;" class="ui circular lightBlue icon button" data-tooltip="Edit your comment">
-								<i class="edit icon"></i>
-								Edit your comment
-							</a>
-							<form class="delete-comment-form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline-block;">
-			    			<button style="margin: 0;" class="ui circular red icon button" data-tooltip="Permanently delete your comment">
-		            	<i class="ban icon"></i> Delete your comment
-		          	</button>
-			    		</form>
+					<% if (currentUser && currentUser._id.equals(comment.author.id) || currentUser && currentUser.isAdmin) { %>
+						<div class="ui accordion">
+							<div class="title">
+								<a style="margin: 0;" class="ui circular lightBlue icon button" data-tooltip="Edit your comment">
+									<i class="edit icon"></i>
+									Edit your comment
+								</a>
+								<form class="delete-comment-form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST" style="display: inline-block;">
+				    			<button style="margin: 0;" class="ui circular red icon button" data-tooltip="Permanently delete your comment">
+			            	<i class="ban icon"></i> Delete your comment
+			          	</button>
+				    		</form>
+							</div>
+							<div class="content">
+								<form class="ui form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+	                <div class="field">
+	                  <input type="text" disabled value="<%= currentUser.username %>">
+	                </div>
+	                <div class="field">
+	                  <textarea name="comment[text]" rows="5" cols="70"><%= comment.text %></textarea>
+	                </div>
+	        				<div class="field">
+			              <button class="ui blue button">Edit Comment</button>
+			            </div>
+		  					</form>
+							</div>
 						</div>
-						<div class="content">
-							<form class="ui form" action="/places/<%= place._id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
-                <div class="field">
-                  <input type="text" disabled value="<%= currentUser.username %>">
-                </div>
-                <div class="field">
-                  <textarea name="comment[text]" rows="5" cols="70"><%= comment.text %></textarea>
-                </div>
-        				<div class="field">
-		              <button class="ui blue button">Edit Comment</button>
-		            </div>
-	  					</form>
-						</div>
-					</div>
-				<% } %>
+					<% } %>
 				</p>
 			<% }); %>
 		</div>

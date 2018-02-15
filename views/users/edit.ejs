@@ -86,8 +86,6 @@
 		var inputUsername = document.getElementById('username').value.toLowerCase();
 		document.getElementById('username').value = inputUsername;
 	}
-</script>
-<script>
 	$('#image-update-modal').click(function(){
     $('.ui.small.modal')
     	.modal({
@@ -112,7 +110,7 @@
 			loadFile(event);
 		}
 	});
-  var loadFile = function(event){
+  	var loadFile = function(event){
     var output = document.getElementById('change-profile-pic');
     output.src = URL.createObjectURL(event.target.files[0]);
     $('#change-profile-pic').cropper("destroy");
@@ -177,8 +175,7 @@
         ]
       }
     }
-  })
-;
+  });
   $('.ui.form').submit(function() {
 	if($('.ui.form').form('is valid')){
 		$('.upload-loading').css({
