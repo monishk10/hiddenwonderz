@@ -25,3 +25,9 @@
 <ul>
 	<li>Remove Scrolling on index page</li>
 </ul>
+
+<p>v1.4</p>
+<ul>
+	<li>Upload avatar: Limit increased to 2MB</li>
+	<li>User name on mobileNav</li>
+</ul>
