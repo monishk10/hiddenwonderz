@@ -20,3 +20,8 @@
 <ul>
 	<li>Added new place tags</li>
 </ul>
+
+<p>v1.3</p>
+<ul>
+	<li>Remove Scrolling on index page</li>
+</ul>
