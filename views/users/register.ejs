@@ -16,7 +16,7 @@
                 <img class="ui circular small image" src="../assets/avatar/default-boy-avatar.png" id="change-profile-pic">
                 <input type="file" accept="image/*" id="profile-file-input">
                 <a id="select-cropped-image" class="ui blue button">Upload</a>
-                <p>File size limit 1.5MB</p>
+                <p>File size limit 2MB</p>
                 <p id="uploading-text"></p>
               </div>
             </div>
@@ -170,10 +170,10 @@
   });
   $('#profile-file-input').change(function(){
     var file = document.getElementById('profile-file-input').files[0];
-    var file_limit = 1650000; // Size limit to approx 1.5MB
+    var file_limit = 2097152; // Size limit to approx 2MB
     var file_size = file.size;
     if(file_size > file_limit){
-      alert("File size: " + Math.round(file_size * 100/1048576)/100 + "MB. Limit: 1.5MB");
+      alert("File size: " + Math.round(file_size * 100/1048576)/100 + "MB. Limit: 2MB");
       $('#profile-file-input').val("");
     } else {
       loadFile(event);
